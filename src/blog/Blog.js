@@ -10,7 +10,6 @@ import DatabaseAnimatedCard from './cards/DatabaseAnimatedCard';
 import FrontEndAnimatedCard from './cards/FrontEndAnimatedCard';
 //import FeaturedPost from "./FeaturedPost";
 import Footer from "./Footer";
-import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
 
 
@@ -100,7 +99,7 @@ export default function Blog() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header />
+        {/* <Header /> */}
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
