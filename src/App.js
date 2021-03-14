@@ -101,6 +101,7 @@ function App(props) {
           </Toolbar>
 
           <Route exact path="/" component={Blog} />
+          <Route exact path="/build" component={Blog} />
           <Route path="/login" component={LoginPage} />
         </Router>
       </div>
