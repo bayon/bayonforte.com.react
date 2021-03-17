@@ -4,3 +4,17 @@ host:
 
 repo: 
 https://github.com/bayon/bayonforte.com.react.git
+
+
+
+
+
+http://www.bayonforte.com/
+NOT FINDING: 
+http://www.bayonforte.com/build/static/js/2.91ebb971.chunk.js
+
+
+Digital Ocean Hosting does not require 
+  "homepage": "http://www.bayonforte.com/build",
+ 
+ 
