@@ -4,7 +4,7 @@ import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./App.css";
@@ -33,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
 function App(props) {
   const classes = useStyles();
 
+  const hasToken = localStorage.getItem("forteworksToken");
+  const [isAuth,setIsAuth] = useState(false)
+  // if(hasToken != ""){
+  //   return (
+  //     <div>user is logged in...</div>
+  //   )
+  // }
+  // useEffect(() => {
+  //   setIsAuth(inProgress);
+  // }, inProgress);
+ 
   return (
     <Provider store={store}>
       <div className="App">
@@ -88,12 +99,15 @@ function App(props) {
                   >
                     home
                   </Link>
-                  <Link
+                  {!hasToken ? <Link
                     to="/login"
                     style={{ textDecoration: "none", color: "#333",padding:"15px",margin:"15px" }}
                   >
                     login
-                  </Link>
+                  </Link> : <div>Poop</div>
+                  
+                  }
+                  
                   
                 </div>
               </Grid>
