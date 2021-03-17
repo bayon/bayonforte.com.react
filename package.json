@@ -1,7 +1,7 @@
 {
   "name": "bloggy",
   "version": "0.1.0",
-  "homepage": "http://www.forteworks.com/build",
+  "homepage": "http://www.bayonforte.com/build",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
