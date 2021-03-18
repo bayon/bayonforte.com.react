@@ -1,3 +1,4 @@
+import Paper from "@material-ui/core/Paper";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -19,6 +20,7 @@ const ProfilePage = (props) => {
 
   return (
     <div>
+      <Paper></Paper>
       <div>ProfilePage</div>
       <ul>
         <li>CRUD: a business card: name,phone,email,website, logo, zipcode, distance willing to travel,activate/deactivate.</li>

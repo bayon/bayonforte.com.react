@@ -1,7 +1,7 @@
 import { Card, CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
+import logo from "../assets/img/pexels-pixabay-159201.jpg";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -27,28 +28,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const formSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().required().min(6),
 });
 //end  part 1
 
-
 function ButtonComponent(props) {
   const { onClick, loading } = props;
   return (
-    <Button variant="contained" onClick={onClick} disabled={loading} style={{ marginTop: "15px",marginBottom:"15px" }}>
+    <Button
+      variant="contained"
+      onClick={onClick}
+      disabled={loading}
+      style={{ marginTop: "15px", marginBottom: "15px" }}
+    >
       {loading && <CircularProgress size={14} />}
-      {!loading && 'Log In'}
+      {!loading && "Log In"}
     </Button>
   );
 }
 
-
 export default function LoginPage(props) {
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const { ...rest } = props;
 
@@ -63,11 +65,24 @@ export default function LoginPage(props) {
   if (!inProgress) {
     return (
       <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="lg">
-          <div>
-            <div justify="center">
-              <div xs={12} sm={12} md={4}>
+       
+       <Grid
+              container
+              spacing={0}
+              align="center"
+              justify="center"
+              direction="column"
+               
+            >
+          <Paper
+            style={{
+              backgroundImage: `url(${logo})`,
+              backgroundSize: "cover",
+              height: "400px",
+            }}
+          >
+          
+              <Grid item xs={12} sm={6} style={{marginTop:"15px" }}>
                 {/* //FORM AND REDUX  part 3 JSX*/}
                 <Formik
                   initialValues={{
@@ -78,12 +93,12 @@ export default function LoginPage(props) {
                   onSubmit={(values) => {
                     console.log("values:", values);
                     setInProgress(true);
-                    setLoading(true)
+                    setLoading(true);
                     dispatch(authAction.loginUser(values))
                       .then(async (result) => {
                         console.log("result:", result);
                         localStorage.setItem("forteworksToken", result.token);
-                        setTimeout(() =>  setLoading(false), 3000);
+                        setTimeout(() => setLoading(false), 3000);
                         if (result.success) {
                           setInProgress(true);
                           //setLoading(false)
@@ -93,9 +108,7 @@ export default function LoginPage(props) {
                   }}
                 >
                   {(props) => (
-                    
                     <Card>
-                      
                       <div>
                         <div style={{ textAlign: "center" }}>
                           <input
@@ -131,7 +144,10 @@ export default function LoginPage(props) {
                             {props.touched.password && props.errors.password}
                           </div>
 
-                          <ButtonComponent onClick={props.handleSubmit} loading={loading}  />
+                          <ButtonComponent
+                            onClick={props.handleSubmit}
+                            loading={loading}
+                          />
                         </div>
                       </div>
                     </Card>
@@ -139,10 +155,11 @@ export default function LoginPage(props) {
                 </Formik>
 
                 {/* //end  part 3*/}
-              </div>
-            </div>
-          </div>
-        </Container>
+              </Grid>
+           
+          </Paper>
+          </Grid>
+        
       </React.Fragment>
     );
   } else {
@@ -198,4 +215,3 @@ export default function LoginPage(props) {
     );
   }
 }
- 

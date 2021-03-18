@@ -1,3 +1,4 @@
+import Paper from "@material-ui/core/Paper";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -12,6 +13,7 @@ const SearchPage = (props) => {
 
   return (
     <div>
+      <Paper></Paper>
       <div>SearchPage</div>
       <div>List of All Records that Match Filter</div>
     </div>
