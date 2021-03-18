@@ -1,23 +1,14 @@
-import { Card, CircularProgress, Grid } from "@material-ui/core";
+import { Card, CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"; //useSelector?
-//KEEP:
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
-///
-import ProfilePage from "./ProfilePage";
-import SearchPage from "./SearchPage";
-
-//
-
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -36,10 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// import Icon from "@material-ui/core/Icon";
-// import { makeStyles } from "@material-ui/core/styles";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
+
 
 const formSchema = yup.object({
   email: yup.string().email().required(),
@@ -47,32 +35,20 @@ const formSchema = yup.object({
 });
 //end  part 1
 
-// const useStyles = makeStyles(styles);
 
 function ButtonComponent(props) {
   const { onClick, loading } = props;
   return (
-    <Button variant="contained" onClick={onClick} disabled={loading}>
+    <Button variant="contained" onClick={onClick} disabled={loading} style={{ marginTop: "15px",marginBottom:"15px" }}>
       {loading && <CircularProgress size={14} />}
-      {!loading && 'Click Me'}
+      {!loading && 'Log In'}
     </Button>
   );
 }
 
 
 export default function LoginPage(props) {
-  // const classes = useStyles();
   const [loading,setLoading] = useState(false)
-  const onClick = () => {
-    setLoading(true)
-    setTimeout(() =>  setLoading(false), 3000); //3 seconds
-  };
-
-  
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function () {
-    setCardAnimation("");
-  }, 700);
   const classes = useStyles();
   const { ...rest } = props;
 
@@ -117,11 +93,9 @@ export default function LoginPage(props) {
                   }}
                 >
                   {(props) => (
-                    //className={classes[cardAnimaton]}
+                    
                     <Card>
-                      {/* <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
-                    </CardHeader> */}
+                      
                       <div>
                         <div style={{ textAlign: "center" }}>
                           <input
@@ -157,14 +131,7 @@ export default function LoginPage(props) {
                             {props.touched.password && props.errors.password}
                           </div>
 
-                          {/* <Button
-                            style={{ marginTop: "15px" }}
-                            onClick={props.handleSubmit}
-                          >
-                            <div>Login</div>
-                          </Button> */}
-                          {/* <ButtonComponent onClick={onClick} loading={loading} /> */}
-                          <ButtonComponent onClick={props.handleSubmit} loading={loading} />
+                          <ButtonComponent onClick={props.handleSubmit} loading={loading}  />
                         </div>
                       </div>
                     </Card>
@@ -181,7 +148,8 @@ export default function LoginPage(props) {
   } else {
     return (
       <div>
-        <Router>
+        <p>no longer needed submenu</p>
+        {/* <Router>
           <Toolbar className={classes.toolbar}>
             <Grid container>
               <Grid item xs={12} sm={2}>
@@ -223,54 +191,11 @@ export default function LoginPage(props) {
               </Grid>
             </Grid>
           </Toolbar>
-          <Route path="/profile" component={ProfilePage} />
+          <Route path="/profile" component={ProfilePage} data={"string of data"}/>
           <Route path="/search" component={SearchPage} />
-        </Router>
+        </Router> */}
       </div>
     );
   }
 }
-
-/*
-import React from 'react';
-import { render } from 'react-dom';
-import { CircularProgress, Button } from '@material-ui/core';
-import ColoredLinearProgress from './LineProgress';
-
-function ButtonComponent(props) {
-  const { onClick, loading } = props;
-  return (
-    <Button variant="contained" onClick={onClick} disabled={loading}>
-      {loading && <CircularProgress size={14} />}
-      {!loading && 'Click Me'}
-    </Button>
-  );
-}
-
-class LoadingButton extends React.Component {
-  constructor() {
-    super();
-    this.state = { loading: false };
-  }
-
-  onClick = () => {
-    this.setState({ loading: true });
-    setTimeout(() => this.setState({ loading: false }), 3000); //3 seconds
-  };
-
-  render() {
-    return (
-      <React.Fragment>
-        {this.state.loading && <ColoredLinearProgress />}
-        <br />
-        <ButtonComponent onClick={this.onClick} loading={this.state.loading} />
-      </React.Fragment>
-    );
-  }
-}
-
-const rootElement = document.querySelector('#root');
-if (rootElement) {
-  render(<LoadingButton />, rootElement);
-}
-*/
+ 

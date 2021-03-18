@@ -18,3 +18,11 @@ Digital Ocean Hosting does not require
   "homepage": "http://www.bayonforte.com/build",
  
  
+
+
+ BUG ISSUES: 
+ After I am logged in, say on the Profile page or the Search page. 
+ IF I hit refresh the page refreshes with the same 'slug' but the page is empty and I have to 're-login' to see them.
+
+ HOME PAGE needs the NAvigation Layer. 
+ 

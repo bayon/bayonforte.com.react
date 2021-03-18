@@ -3,6 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import { useSelector } from "react-redux";
 import logo from "./assets/img/pexels-pixabay-159201.jpg";
 import BackendAnimatedCard from './cards/BackendAnimatedCard';
 import DatabaseAnimatedCard from './cards/DatabaseAnimatedCard';
@@ -94,12 +95,15 @@ const mainFeaturedPost = {
 
 export default function Blog() {
   const classes = useStyles();
+  var auth = useSelector((state) => state.auth.authorized);
+
   //sections={sections}
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
         {/* <Header /> */}
+        
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>

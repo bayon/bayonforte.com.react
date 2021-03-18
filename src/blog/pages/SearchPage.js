@@ -20,6 +20,3 @@ const SearchPage = (props) => {
 
 export default SearchPage;
 
-// Colby Palmer6:56 PM
-// https://withkoji.com/community
-// colby@withkoji.com
