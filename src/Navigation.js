@@ -13,6 +13,7 @@ import "./App.css";
 import Blog from "./blog/Blog";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
+import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import * as authAction from "./redux/actions/authAction";
 
@@ -118,6 +119,7 @@ function Navigation(props) {
 
 
               {!auth ? (
+                <>
                 <Link
                   to="/login"
                   style={{
@@ -129,6 +131,18 @@ function Navigation(props) {
                 >
                   login
                 </Link>
+                 <Link
+                 to="/register"
+                 style={{
+                   textDecoration: "none",
+                   color: "#333",
+                   padding: "15px",
+                   margin: "15px",
+                 }}
+               >
+                 register
+               </Link>
+               </>
               ) : (
                 <Link
                   to="/logout"
@@ -165,6 +179,7 @@ function Navigation(props) {
       <Route exact path="/" component={Blog} />
       <Route exact path="/build" component={Blog} />
       <Route path="/login" component={LoginPage} />
+      <Route path="/register" component={RegisterPage} />
       <Route path="/profile" component={ProfilePage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/logout" component={Blog} />
