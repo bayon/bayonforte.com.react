@@ -1,6 +1,4 @@
-import {
-  LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS, USER_PROFILE_FAIL, USER_PROFILE_SUCCESS
-} from "../actions/authAction";
+import { ALL_USERS_FAIL, ALL_USERS_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS, LOGOUT_USER_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS } from "../actions/authAction";
 
 const initialState = {
   authorized:false,
@@ -30,7 +28,7 @@ export default function (state = initialState, action) {
           authorized: false
         };
         break;
-    case USER_PROFILE_SUCCESS:
+    case ALL_USERS_SUCCESS:
           return {
             ...state,
             user: action.payload,
@@ -49,7 +47,7 @@ export default function (state = initialState, action) {
           errors: true,
         };
         break;
-    case USER_PROFILE_FAIL:
+    case ALL_USERS_FAIL:
       return {
         ...state,
         errors: true,

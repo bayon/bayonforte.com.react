@@ -15,15 +15,10 @@ const SearchPage = (props) => {
   }
 const doSomething = () => {
   console.log('well goooollly!')
-  dispatch(authAction.userProfile())
+  dispatch(authAction.allUsers())
   .then(async (result) => {
     console.log("result:", result);
-     
-    if (result.success) {
-      //setInProgress(true);
-      //setLoading(false)
-      console.log('result success..')
-    }
+    
   })
   .catch((err) => console.log(err));
 }
