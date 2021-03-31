@@ -11,8 +11,8 @@ export const LOGOUT_USER_FAIL = "LOGOUT_USER_FAIL";
 export const ALL_USERS_SUCCESS = "ALL_USERS_SUCCESS";
 export const ALL_USERS_FAIL = "ALL_USERS_FAIL";
 
-const BASE_URL = "http://localhost:4000/api";
-//const BASE_URL = "https://nameless-refuge-42185.herokuapp.com";
+//const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = "https://nameless-refuge-42185.herokuapp.com";
 
 export const registerUser = (authData) => {
   const { fullName, email, password } = authData;
