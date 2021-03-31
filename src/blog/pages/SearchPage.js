@@ -1,9 +1,12 @@
 import Paper from "@material-ui/core/Paper";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as authAction from "../../redux/actions/authAction";
+
 
 const SearchPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
+  const dispatch = useDispatch();
 
   console.log("Search Page reached or what? props:", props);
 
@@ -12,7 +15,19 @@ const SearchPage = (props) => {
   }
 const doSomething = () => {
   console.log('well goooollly!')
+  dispatch(authAction.userProfile())
+  .then(async (result) => {
+    console.log("result:", result);
+     
+    if (result.success) {
+      //setInProgress(true);
+      //setLoading(false)
+      console.log('result success..')
+    }
+  })
+  .catch((err) => console.log(err));
 }
+
   return (
     <div>
       <Paper></Paper>

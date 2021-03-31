@@ -7,7 +7,9 @@ export const LOGIN_USER_FAIL = "LOGIN_USER_FAIL";
 export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
 export const LOGOUT_USER_FAIL = "LOGOUT_USER_FAIL";
 
-
+//
+export const USER_PROFILE_SUCCESS = "USER_PROFILE_SUCCESS";
+export const USER_PROFILE_FAIL = "USER_PROFILE_FAIL";
 
 //const BASE_URL = "http://localhost:3000/api";
 const BASE_URL = "https://nameless-refuge-42185.herokuapp.com";
@@ -85,6 +87,33 @@ export const loginUser = (authData) => {
       }
       return resultData; //Why?:  so that we have access to it in the dispatch to the action from loginScreen.
     //
+    
+  };
+};
+
+
+export const userProfile = () => {
+  return async (dispatch) => {
+    const result = await fetch(`${BASE_URL}/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+     
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: USER_PROFILE_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: USER_PROFILE_FAIL,
+          });
+      }
+      return resultData;  
     
   };
 };
