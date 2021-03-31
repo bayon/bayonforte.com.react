@@ -1,13 +1,14 @@
 import Paper from "@material-ui/core/Paper";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import PlainCard from "../cards/PlainCard";
 
 const ProfilePage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  var user = useSelector((state) => state.auth.user);
-  var haveUser = useSelector((state) => state.auth.haveUser);
+  const [ user, setUser] = useState({})
+  //var user = useSelector((state) => state.auth.user);
+  //var haveUser = useSelector((state) => state.auth.haveUser);
   const dispatch = useDispatch();
 
   console.log("Search Page reached ...props:", props);
@@ -19,6 +20,7 @@ const ProfilePage = (props) => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
         console.log("result:", result);
+        setUser(result.data)
       })
       .catch((err) => console.log(err));
   };
