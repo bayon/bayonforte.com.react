@@ -2,72 +2,53 @@ import Paper from "@material-ui/core/Paper";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
-
+import PlainCard from "../cards/PlainCard";
 
 const SearchPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
+  var users = useSelector((state) => state.auth.users)
+  var haveUsers = useSelector((state) => state.auth.haveUsers)
   const dispatch = useDispatch();
 
-  console.log("Search Page reached or what? props:", props);
+  //console.log("Search Page reached or what? props:", props);
 
   if(!auth){
     return(<div>not authorized.</div>)
   }
-const doSomething = () => {
-  console.log('well goooollly!')
-  dispatch(authAction.allUsers())
+const getAllUsers = () => {
+   dispatch(authAction.allUsers())
   .then(async (result) => {
-    console.log("result:", result);
+    //console.log("result:", result);
+    //we get the result here as well but we store it in the reducer...and retrieve it from state.
     
   })
   .catch((err) => console.log(err));
 }
 
+
+  const userDetails = (args) => {
+    console.log('userDetails args:',args)
+     
+  }
+//TODO: When 'user' clicks 'edit' need to redirect to a record specific page for CRUD operations.
   return (
     <div>
-      <Paper></Paper>
+      <Paper>
       <div>SearchPage</div>
       <div>List of All Records that Match Filter</div>
-      <button onClick={doSomething}>do something Gomer</button>
+      <button onClick={getAllUsers}>do something Gomer</button>
+      {haveUsers && 
+     (  
+       users.map( (user, i) => (
+         <PlainCard user={user} details={userDetails}></PlainCard>
+       )) 
+     )
+      }
+      
+        </Paper>
     </div>
+  
   );
 };
 
 export default SearchPage;
-
-
-/*
-Need something like this BUT with the users/profiles endpoint on the heroku api side ... 
-
-from index.js on API
-app.get('/api/users/profile', verifyToken, (req,res) => {
-    //console.log(req.user)//because it got added in the 'verifyToken' middleware...
-    //res.send('This is the PROTECTED user profile')
-    res.send({success:true,data: req.user })
-})
-
-
-from Login.js Page 
-  onSubmit={(values) => {
-                    console.log("values:", values);
-                    setInProgress(true);
-                    setLoading(true);
-                    dispatch(authAction.loginUser(values))
-                      .then(async (result) => {
-                        console.log("result:", result);
-                        localStorage.setItem("forteworksToken", result.token);
-                        setTimeout(() => setLoading(false), 3000);
-                        if (result.success) {
-                          setInProgress(true);
-                          //setLoading(false)
-                        }
-                      })
-                      .catch((err) => console.log(err));
-                  }}
-                  */
-
-// ! DISPATCH ACTION is locatedd in redux...auth actions. 
-// ! reducer just deciding which action to be taken. 
-
-
-// dependencies we need to import: 

@@ -103,7 +103,7 @@ export const allUsers = () => {
       });
   
       const resultData = await result.json();
-      if(resultData.success){
+      if(resultData){
         dispatch({
             type: ALL_USERS_SUCCESS,
             payload: resultData,

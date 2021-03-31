@@ -20,14 +20,14 @@ const ProfilePage = (props) => {
 
   return (
     <div>
-      <Paper></Paper>
+      <Paper>      </Paper>
+
       <div>ProfilePage</div>
       <ul>
         <li>CRUD: a business card: name,phone,email,website, logo, zipcode, distance willing to travel,activate/deactivate.</li>
         <li>additional preferences: willing to join forces, cowboy contractor only, etc....</li>
         <li>Type: Providing a Service, Hiring a Service.</li>
       </ul>
-
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { ALL_USERS_FAIL, ALL_USERS_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_SUCCESS,
 
 const initialState = {
   authorized:false,
+  haveUsers:false,
+  users:[],
   user: {},
   errors: {},
 };
@@ -11,7 +13,7 @@ export default function (state = initialState, action) {
     case REGISTER_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload,
+        users: action.payload,
         authorized: true
       };
       break;
@@ -31,8 +33,8 @@ export default function (state = initialState, action) {
     case ALL_USERS_SUCCESS:
           return {
             ...state,
-            user: action.payload,
-            // authorized: true
+            users: action.payload,
+            haveUsers: true
           };
           break;
     case LOGIN_USER_FAIL:
