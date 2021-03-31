@@ -10,27 +10,20 @@ const SearchPage = (props) => {
   var haveUsers = useSelector((state) => state.auth.haveUsers)
   const dispatch = useDispatch();
 
-  //console.log("Search Page reached or what? props:", props);
+  console.log("Search Page reached ...props:", props);
 
   if(!auth){
     return(<div>not authorized.</div>)
   }
 const getAllUsers = () => {
-   dispatch(authAction.allUsers())
+  dispatch(authAction.allUsers())
   .then(async (result) => {
-    //console.log("result:", result);
-    //we get the result here as well but we store it in the reducer...and retrieve it from state.
+    console.log("result:", result);
     
   })
   .catch((err) => console.log(err));
 }
 
-
-  const userDetails = (args) => {
-    console.log('userDetails args:',args)
-     
-  }
-//TODO: When 'user' clicks 'edit' need to redirect to a record specific page for CRUD operations.
   return (
     <div>
       <Paper>
@@ -40,11 +33,12 @@ const getAllUsers = () => {
       {haveUsers && 
      (  
        users.map( (user, i) => (
-         <PlainCard user={user} details={userDetails}></PlainCard>
+         
+         <PlainCard user={user} ></PlainCard>
        )) 
      )
-      }
       
+      }
         </Paper>
     </div>
   
