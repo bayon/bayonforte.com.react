@@ -6,20 +6,20 @@ import PlainCard from "../cards/PlainCard";
 
 const ProfilePage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  const [ user, setUser] = useState({})
+  const [user, setUser] = useState({});
   //var user = useSelector((state) => state.auth.user);
   //var haveUser = useSelector((state) => state.auth.haveUser);
   const dispatch = useDispatch();
 
   console.log("Search Page reached ...props:", props);
-  useEffect( () => {
+  useEffect(() => {
     dispatch(authAction.userProfile())
-    .then(async (result) => {
-      console.log("result:", result);
-      setUser(result.data)
-    })
-    .catch((err) => console.log(err));
-  },[])
+      .then(async (result) => {
+        console.log("result:", result);
+        setUser(result.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   if (!auth) {
     return <div>not authorized.</div>;
@@ -28,32 +28,51 @@ const ProfilePage = (props) => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
         console.log("result:", result);
-        setUser(result.data)
+        setUser(result.data);
       })
       .catch((err) => console.log(err));
   };
-
-
 
   return (
     <div>
       <Paper>
         <div>ProfilePage</div>
-        <div>List of All Records that Match Filter</div>
-        <button onClick={getUserProfile}>Get User Profile</button>
+
         <PlainCard user={user}></PlainCard>
-        <ul>
-        <li>CRUD: a business card: name,phone,email,website, logo, zipcode, distance willing to travel,activate/deactivate.</li>
-        <li>additional preferences: willing to join forces, cowboy contractor only, etc....</li>
-        <li>Type: Providing a Service, Hiring a Service.</li>
-        </ul>
+        <div style={{ textAlign: "left" }}>
+          <ul>
+            <li>
+              PERSONAL PROFILE
+              <ul>
+                <li>
+                  a business card: name,phone,email,website, logo, zipcode,
+                </li>
+                <li>distance willing to travel</li>
+                <li>activate/deactivate account</li>
+                <li>
+                  additional preferences: willing to join forces, cowboy
+                  contractor only, etc....
+                </li>
+                <li>Type: Providing a Service, Hiring a Service.</li>
+              </ul>
+            </li>
+            <li>
+              ACTIONS: 
+              <ul>
+                <li>Edit My Profile Info</li>
+                <li>Create a POST to go into the Search List </li>
+                <li>Share Post on Facebook.</li>
+                <li>Verify My Information.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
       </Paper>
     </div>
   );
 };
 
 export default ProfilePage;
-
 
 /*
 import Paper from "@material-ui/core/Paper";

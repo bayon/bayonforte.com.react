@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
+import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -51,6 +52,7 @@ function Navigation(props) {
 
   return (
     <Router>
+      <Paper>
       <Toolbar className={classes.toolbar}>
         <Grid container>
           
@@ -78,6 +80,7 @@ function Navigation(props) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <div style={{ listStyle: "none", display: "inline" }}>
+            <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
               <Link
                 to="/"
                 style={{
@@ -89,8 +92,10 @@ function Navigation(props) {
               >
                 home
               </Link>
+              </Grid>
               {auth &&
               <>
+               <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
                  <Link
                  to="/profile"
                  style={{
@@ -102,7 +107,8 @@ function Navigation(props) {
                >
                  Profile
                </Link>
-
+                 </Grid>
+                  <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
               <Link
               to="/search"
               style={{
@@ -114,12 +120,14 @@ function Navigation(props) {
               >
               Search
               </Link>
+              </Grid>
               </>
                 }
 
 
               {!auth ? (
                 <>
+                 <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
                 <Link
                   to="/login"
                   style={{
@@ -131,6 +139,8 @@ function Navigation(props) {
                 >
                   login
                 </Link>
+                </Grid>
+                <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
                  <Link
                  to="/register"
                  style={{
@@ -142,8 +152,10 @@ function Navigation(props) {
                >
                  register
                </Link>
+               </Grid>
                </>
               ) : (
+                <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
                 <Link
                   to="/logout"
                   onClick={() => {
@@ -169,12 +181,14 @@ function Navigation(props) {
                 >
                   log out
                 </Link>
+                </Grid>
               )}
             </div>
             
           </Grid>
         </Grid>
       </Toolbar>
+      </Paper>
 
       <Route exact path="/" component={Blog} />
       <Route exact path="/build" component={Blog} />
