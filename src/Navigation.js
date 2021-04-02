@@ -1,7 +1,4 @@
-import { Grid } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
@@ -18,27 +15,32 @@ import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import * as authAction from "./redux/actions/authAction";
 
-
-const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: "space-between",
-    overflowX: "auto",
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   toolbar: {
+//     borderBottom: `1px solid ${theme.palette.divider}`,
+//   },
+//   toolbarTitle: {
+//     flex: 1,
+//   },
+//   toolbarSecondary: {
+//     justifyContent: "space-between",
+//     overflowX: "auto",
+//   },
+//   toolbarLink: {
+//     padding: theme.spacing(1),
+//     flexShrink: 0,
+   
+//   },
+//   anchors:{
+//     // "@media (max-width: 900px)": {
+//       color:"red",
+//     // },
+//   }
+// }));
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  const classes = useStyles();
+  // const classes = useStyles();
   console.log("auth is:", auth);
   const dispatch = useDispatch();
   //const [inProgress, setInProgress] = useState(false);
@@ -52,143 +54,104 @@ function Navigation(props) {
 
   return (
     <Router>
-      <Paper>
-      <Toolbar className={classes.toolbar}>
-        <Grid container>
+     
+        <Toolbar
+          // className={classes.toolbar}
           
-          <Grid item xs={12} sm={3}>
-            <Typography
-              component="h5"
-              variant="h5"
-              color="inherit"
-              align="center"
-              noWrap
-              className={classes.toolbarTitle}
-            >
-              Forteworks...
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <div style={{ marginRight: 15 }}>
-              <a
-                href="tel:8122670592"
-                style={{ color: "#222", textDecoration: "none" }}
+         >
+          
+              <Typography
+                component="h5"
+                variant="h5"
+                color="inherit"
+                align="center"
+                noWrap
+                // className={classes.toolbarTitle}
               >
-                (812) 267-0592<Icon>phone</Icon>
-              </a>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <div style={{ listStyle: "none", display: "inline" }}>
-            <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
+                Forteworks...
+              </Typography>
+           
+              <div style={{ marginRight: 15 }}>
+                <a
+                  href="tel:8122670592"
+                  
+                >
+                  (812) 267-0592<Icon>phone</Icon>
+                </a>
+              </div>
+          
+
               <Link
                 to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "#333",
-                  padding: "15px",
-                  margin: "15px",
-                }}
+                className="anchors"
+                 
               >
                 home
               </Link>
-              </Grid>
-              {auth &&
-              <>
-               <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
-                 <Link
-                 to="/profile"
-                 style={{
-                   textDecoration: "none",
-                   color: "#333",
-                   padding: "15px",
-                   margin: "15px",
-                 }}
-               >
-                 Profile
-               </Link>
-                 </Grid>
-                  <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
-              <Link
-              to="/search"
-              style={{
-                textDecoration: "none",
-                color: "#333",
-                padding: "15px",
-                margin: "15px",
-              }}
-              >
-              Search
-              </Link>
-              </Grid>
-              </>
-                }
 
+              {auth && (
+                <>
+                  <Link
+                    to="/profile"
+                    className="anchors"
+                   
+                  >
+                    Profile
+                  </Link>
+
+                   <Link
+                    to="/search"
+                    className="anchors"
+                    
+                  >
+                    Search
+                  </Link>
+                 </>
+              )}
 
               {!auth ? (
                 <>
-                 <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
-                <Link
-                  to="/login"
-                  style={{
-                    textDecoration: "none",
-                    color: "#333",
-                    padding: "15px",
-                    margin: "15px",
-                  }}
-                >
-                  login
-                </Link>
-                </Grid>
-                <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
-                 <Link
-                 to="/register"
-                 style={{
-                   textDecoration: "none",
-                   color: "#333",
-                   padding: "15px",
-                   margin: "15px",
-                 }}
-               >
-                 register
-               </Link>
-               </Grid>
-               </>
+                   <Link
+                    to="/login"
+                    className="anchors"
+                    
+                  >
+                    login
+                  </Link>
+                    <Link
+                    to="/register"
+                    className="anchors"
+                   
+                  >
+                    register
+                  </Link>
+                 </>
               ) : (
-                <Grid item xs={12}  sm={2} style={{height:"35px",marginTop:"15px"}}>
-                <Link
+                 <Link
                   to="/logout"
+                  className="anchors"
                   onClick={() => {
-                    // console.log("values:", values);
-                    // setInProgress(true);
+                    
                     dispatch(authAction.logoutUser())
                       .then(async (result) => {
                         console.log("result:", result);
                         localStorage.removeItem("forteworksToken");
 
-                        // if (result.success) {
-                        //   setInProgress(true);
-                        // }
+                       
                       })
                       .catch((err) => console.log(err));
                   }}
-                  style={{
-                    textDecoration: "none",
-                    color: "#333",
-                    padding: "15px",
-                    margin: "15px",
-                  }}
+                
                 >
                   log out
                 </Link>
-                </Grid>
+                
               )}
-            </div>
+              
             
-          </Grid>
-        </Grid>
-      </Toolbar>
-      </Paper>
+          
+        </Toolbar>
+      
 
       <Route exact path="/" component={Blog} />
       <Route exact path="/build" component={Blog} />
