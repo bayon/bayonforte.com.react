@@ -39,7 +39,7 @@ export default function Footer(props) {
       <Container maxWidth="lg">
         <Grid container>
           <Grid item xs={12} sm={4}>
-            <div style={{ textAlign: "center" , marginTop:"20px"}}>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
               <div style={{ marginTop: 15 }}>
                 <a
                   href="tel:8122670592"
@@ -50,42 +50,58 @@ export default function Footer(props) {
               </div>
               <div style={{ marginTop: 15 }}>
                 <a
-                  href="mailto:bayon@forteworks.com"
+                  href="mailto:forteworks@gmail.com"
                   style={{ color: "#222", textDecoration: "none" }}
                 >
-                  bayon@forteworks.com<Icon>email</Icon>
+                  forteworks@gmail.com<Icon>email</Icon>
+                </a>
+              </div>
+              <div style={{ marginTop: 15 }}>
+                <a
+                  href="http://www.bayonforte.com/Forte_2021_gmail.pdf"
+                  target="blank"
+                  style={{ textDecoration: "none", color: "#222",fontWeight:"bold" }}
+                  download
+                >
+                  Resume
                 </a>
               </div>
             </div>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <div style={{marginTop:'20px'}}> 
-            <Typography variant="h6" align="center"  gutterBottom>
-              forteworks
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="textSecondary"
-              component="p"
-            >
-              Saas, MVP, Mobile Apps, Prototypes
-            </Typography>
-            <Copyright />
+            <div style={{ marginTop: "20px" }}>
+              <Typography variant="h6" align="center" gutterBottom>
+                forteworks
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                color="textSecondary"
+                component="p"
+              >
+                Saas, MVP, Mobile Apps, Prototypes
+              </Typography>
+              <Copyright />
             </div>
           </Grid>
 
           <Grid item xs={12} sm={4}>
-            <div style={{textAlign:'center', marginTop:"20px" }}> 
-            <img
-              src={bayon}
-              alt="..."
-              style={{ borderRadius: "25px", height: "100px" }}
-            />
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              <img
+                src={bayon}
+                alt="..."
+                style={{ borderRadius: "25px", height: "100px" }}
+              />
             </div>
             <div>
-            <a href='http://www.bayonforte.com/Forte_2021_gmail.pdf' target='blank' style={{textDecoration:'none'}} download>Experience and References</a>
-
+              <a
+                href="http://www.bayonforte.com/Forte_2021_gmail.pdf"
+                target="blank"
+                style={{ textDecoration: "none", color: "#222" }}
+                download
+              >
+                Resume
+              </a>
             </div>
           </Grid>
         </Grid>

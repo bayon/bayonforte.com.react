@@ -33,7 +33,7 @@ const SearchPage = (props) => {
     <div>
       <Paper>
         <div>Users List</div>
-        <div style={{ textAlign: "left" }}>
+        <div >
           <ul>
             <li>
               DETAILS

@@ -13,6 +13,7 @@ import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
+import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
 
 // const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,7 @@ import * as authAction from "./redux/actions/authAction";
 //   toolbarLink: {
 //     padding: theme.spacing(1),
 //     flexShrink: 0,
-   
+
 //   },
 //   anchors:{
 //     // "@media (max-width: 900px)": {
@@ -54,104 +55,93 @@ function Navigation(props) {
 
   return (
     <Router>
-     
-        <Toolbar
-          // className={classes.toolbar}
-          
-         >
-          
-              <Typography
-                component="h5"
-                variant="h5"
-                color="inherit"
-                align="center"
-                noWrap
-                // className={classes.toolbarTitle}
-              >
-                Forteworks...
-              </Typography>
-           
-              <div style={{ marginRight: 15 }}>
-                <a
-                  href="tel:8122670592"
-                  
-                >
-                  (812) 267-0592<Icon>phone</Icon>
-                </a>
-              </div>
-          
+      <Toolbar
+      // className={classes.toolbar}
+      >
+        <Typography
+          component="h5"
+          variant="h5"
+          color="inherit"
+          align="center"
+          noWrap
+          // className={classes.toolbarTitle}
+        >
+          Full Stack Development
+        </Typography>
 
-              <Link
-                to="/"
-                className="anchors"
-                 
-              >
-                home
-              </Link>
+        <div style={{ marginRight: 15 }}>
+          <a href="tel:8122670592" style={{ color: "#333", margin: "15px", textDecoration: "none" }}>
+            (812) 267-0592<Icon style={{ color: "#333", margin: "0px", textDecoration: "none" }}>phone</Icon>
+          </a>
+        </div>
 
-              {auth && (
-                <>
-                  <Link
-                    to="/profile"
-                    className="anchors"
+        <Link
+          style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+          to="/"
+          
+        >
+          Home
+        </Link>
+
+        {auth && (
+          <>
+            <Link
+              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+              to="/profile"
+              
+            >
+              Profile
+            </Link>
+
+            {/* 
                    
-                  >
-                    Profile
-                  </Link>
-
+                   TODO: Not Built into the API yet.
                    <Link
+                   style={{color:"#333",margin:"15px",textDecoration:"none"}}
                     to="/search"
-                    className="anchors"
+                    
                     
                   >
                     Search
-                  </Link>
-                 </>
-              )}
+                  </Link> */}
+          </>
+        )}
 
-              {!auth ? (
-                <>
-                   <Link
-                    to="/login"
-                    className="anchors"
-                    
-                  >
-                    login
-                  </Link>
-                    <Link
-                    to="/register"
-                    className="anchors"
-                   
-                  >
-                    register
-                  </Link>
-                 </>
-              ) : (
-                 <Link
-                  to="/logout"
-                  className="anchors"
-                  onClick={() => {
-                    
-                    dispatch(authAction.logoutUser())
-                      .then(async (result) => {
-                        console.log("result:", result);
-                        localStorage.removeItem("forteworksToken");
-
-                       
-                      })
-                      .catch((err) => console.log(err));
-                  }}
-                
-                >
-                  log out
-                </Link>
-                
-              )}
+        {!auth ? (
+          <>
+            <Link
+              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+              to="/login"
               
+            >
+              Login
+            </Link>
+            <Link
+              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+              to="/register"
+              
+            >
+              Register
+            </Link>
+          </>
+        ) : (
+          <Link
+            style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+            to="/logout"
             
-          
-        </Toolbar>
-      
+            onClick={() => {
+              dispatch(authAction.logoutUser())
+                .then(async (result) => {
+                  console.log("result:", result);
+                  localStorage.removeItem("forteworksToken");
+                })
+                .catch((err) => console.log(err));
+            }}
+          >
+            Log out
+          </Link>
+        )}
+      </Toolbar>
 
       <Route exact path="/" component={Blog} />
       <Route exact path="/build" component={Blog} />
