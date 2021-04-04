@@ -5,8 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import "./App.css";
-import Drawer from "./blog/components/Drawer";
-import Toolbar from "./blog/components/Toolbar";
 import Navigation from "./Navigation";
 import store from "./redux/store";
 
@@ -65,11 +63,11 @@ function App(props) {
           <CssBaseline />
           <Container maxWidth="lg">
             <Navigation />
-            <Toolbar openDrawerHandler={openDrawer} />
+            {/* <Toolbar openDrawerHandler={openDrawer} />
         <Drawer
           left={left}
           toggleDrawerHandler={toggleDrawer}
-        />
+        /> */}
           </Container>
         </React.Fragment>
       </div>
