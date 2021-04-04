@@ -84,7 +84,7 @@ export default function Footer(props) {
             />
             </div>
             <div>
-            <a href='http://www.bayonforte.com/Forte_2021_FullStackDeveloper.pdf' target='blank' style={{textDecoration:'none'}} download>Experience and References</a>
+            <a href='http://www.bayonforte.com/Forte_2021_gmail.pdf' target='blank' style={{textDecoration:'none'}} download>Experience and References</a>
 
             </div>
           </Grid>

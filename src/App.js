@@ -2,11 +2,17 @@
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import "./App.css";
+import Drawer from "./blog/components/Drawer";
+import Toolbar from "./blog/components/Toolbar";
 import Navigation from "./Navigation";
 import store from "./redux/store";
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -25,7 +31,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//
+
+
+
+
+
 function App(props) {
+
+  const [left,setLeft] = useState(false)
+
+  const toggleDrawer = () => {
+    // if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    //   return;
+    // }
+    setLeft(false);
+    // this.setState({ left: false });
+  };
+  
+  const openDrawer = () => {
+    setLeft(true);
+    // this.setState({
+    //   left: true
+    // });
+  };
+
+  
+  
   return (
     <Provider store={store}>
       <div className="App">
@@ -33,6 +65,11 @@ function App(props) {
           <CssBaseline />
           <Container maxWidth="lg">
             <Navigation />
+            <Toolbar openDrawerHandler={openDrawer} />
+        <Drawer
+          left={left}
+          toggleDrawerHandler={toggleDrawer}
+        />
           </Container>
         </React.Fragment>
       </div>
