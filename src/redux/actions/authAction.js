@@ -15,8 +15,8 @@ export const USER_PROFILE_SUCCESS = "USER_PROFILE_SUCCESS";
 export const USER_PROFILE_FAIL = "USER_PROFILE_FAIL";
 
 //const BASE_URL = "http://localhost:4000/api";
-const BASE_URL = "https://nameless-refuge-42185.herokuapp.com";
-
+//OLD AND GONEconst BASE_URL = "https://nameless-refuge-42185.herokuapp.com";
+const BASE_URL = "https://arcane-eyrie-05882.herokuapp.com"
 export const registerUser = (authData) => {
   const { fullName, email, password } = authData;
   return async (dispatch) => {
