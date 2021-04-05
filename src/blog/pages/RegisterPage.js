@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
+//stripe 
+import StripeCard from '../components/StripeCard';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -172,6 +174,11 @@ export default function RegisterPage(props) {
                     </Card>
                   )}
                 </Formik>
+                <div style={{background:"white",height:"100px"}}>
+                  <p>needs to be https</p>
+                <StripeCard />
+                </div>
+              
 
                 {/* //end  part 3*/}
               </Grid>
