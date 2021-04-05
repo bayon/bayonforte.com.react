@@ -2,6 +2,10 @@
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
+//TODO: set up stripe payments https://www.youtube.com/watch?v=JkSgXgqRH6k
+//stripe 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import "./App.css";
@@ -9,9 +13,7 @@ import Navigation from "./Navigation";
 import store from "./redux/store";
 
 
- //TODO: set up stripe payments https://www.youtube.com/watch?v=JkSgXgqRH6k
-
-
+ const stripePromise = loadStripe('pk_test_7aHY16H2I0thccZMQJIDUNpi');
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -59,6 +61,7 @@ function App(props) {
   
   return (
     <Provider store={store}>
+       <Elements stripe={stripePromise}>
       <div className="App">
         <React.Fragment>
           <CssBaseline />
@@ -72,6 +75,7 @@ function App(props) {
           </Container>
         </React.Fragment>
       </div>
+      </Elements>
     </Provider>
   );
 }
