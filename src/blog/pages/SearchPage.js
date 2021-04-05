@@ -30,7 +30,7 @@ const SearchPage = (props) => {
   };
 
   return (
-    <div>
+    <div >
       <Paper>
         <div>Users List</div>
         <div >

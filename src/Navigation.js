@@ -1,4 +1,7 @@
+import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
+/////
+import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
@@ -15,7 +18,6 @@ import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
-
 // const useStyles = makeStyles((theme) => ({
 //   toolbar: {
 //     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -39,9 +41,20 @@ import * as authAction from "./redux/actions/authAction";
 //   }
 // }));
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  link: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  // const classes = useStyles();
+  const classes = useStyles();
   console.log("auth is:", auth);
   const dispatch = useDispatch();
   //const [inProgress, setInProgress] = useState(false);
@@ -58,86 +71,125 @@ function Navigation(props) {
       <Toolbar
       // className={classes.toolbar}
       >
-        <Typography
-          component="h5"
-          variant="h5"
-          color="inherit"
-          align="center"
-          noWrap
-          // className={classes.toolbarTitle}
-        >
-          Full Stack Development
-        </Typography>
-
-        <div style={{ marginRight: 15 }}>
-          <a
-            href="tel:8122670592"
-            style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+        <Grid container spacing={1}>
+        <Grid item xs={12} sm={3}>
+          <Typography
+            component="h6"
+            variant="h6"
+            color="inherit"
+            align="center"
+            noWrap
+            // className={classes.toolbarTitle}
           >
-            (812) 267-0592
-            <Icon
-              style={{ color: "#333", margin: "0px", textDecoration: "none" }}
+            Full Stack Development
+          </Typography>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+          <div style={{ marginRight: 15 }}>
+            <a
+              href="tel:8122670592"
+              style={{ color: "#333", margin: "15px", textDecoration: "none" ,fontSize:".8em"}}
             >
-              phone
-            </Icon>
-          </a>
-        </div>
-
-        <Link
-          style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-          to="/"
-        >
-          Home
-        </Link>
-
-        {auth && (
-          <>
-            <Link
-              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-              to="/profile"
-            >
-              Profile
-            </Link>
-            <Link
-              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-              to="/search"
-            >
-              Search
-            </Link>
-          </>
-        )}
-
-        {!auth ? (
-          <>
-            <Link
-              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-              to="/login"
-            >
-              Login
-            </Link>
-            <Link
-              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-              to="/register"
-            >
-              Register
-            </Link>
-          </>
-        ) : (
+              (812) 267-0592
+              <Icon
+                style={{ color: "#333", marginLeft: "5px", textDecoration: "none" ,fontSize:"1em"}}
+              >
+                phone
+              </Icon>
+            </a>
+           
+          </div>
+          </Grid>
+          <Grid item xs={12} sm={1}>
           <Link
             style={{ color: "#333", margin: "15px", textDecoration: "none" }}
-            to="/logout"
-            onClick={() => {
-              dispatch(authAction.logoutUser())
-                .then(async (result) => {
-                  console.log("result:", result);
-                  localStorage.removeItem("forteworksToken");
-                })
-                .catch((err) => console.log(err));
-            }}
+            className={classes.link}
+            to="/"
           >
-            Log out
+            Home
           </Link>
-        )}
+          </Grid>
+
+          {auth && (
+            <>
+               <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/profile"
+              >
+                Profile
+              </Link>
+              </Grid>
+              <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/search"
+              >
+                Search
+              </Link>
+              </Grid>
+            </>
+          )}
+
+          {!auth ? (
+            <>
+             <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/login"
+              >
+                Login
+              </Link>
+              </Grid> 
+              <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/register"
+              >
+                Register
+              </Link>
+              </Grid>
+            </>
+          ) : (
+            <Grid item xs={12} sm={1}>
+            <Link
+              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+              className={classes.link}
+              to="/logout"
+              onClick={() => {
+                dispatch(authAction.logoutUser())
+                  .then(async (result) => {
+                    console.log("result:", result);
+                    localStorage.removeItem("forteworksToken");
+                  })
+                  .catch((err) => console.log(err));
+              }}
+            >
+              Logout
+            </Link>
+            </Grid>
+          )}
+        </Grid>
       </Toolbar>
 
       <Route exact path="/" component={Blog} />

@@ -2,7 +2,6 @@ import { Card, CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -11,22 +10,7 @@ import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
 
-const useStyles = makeStyles((theme) => ({
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: "space-between",
-    overflowX: "auto",
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
-}));
+ 
 
 const formSchema = yup.object({
   email: yup.string().email().required(),
@@ -51,7 +35,7 @@ function ButtonComponent(props) {
 
 export default function LoginPage(props) {
   const [loading, setLoading] = useState(false);
-  const classes = useStyles();
+  //const classes = useStyles();
   const { ...rest } = props;
 
   //FORM AND REDUX  part 2: default export function
@@ -166,51 +150,7 @@ export default function LoginPage(props) {
     return (
       <div>
         <p>no longer needed submenu</p>
-        {/* <Router>
-          <Toolbar className={classes.toolbar}>
-            <Grid container>
-              <Grid item xs={12} sm={2}>
-              <div style={{ listStyle: "none", display: "inline" }}>
-                  <Link
-                    to="/search"
-                    style={{
-                      textDecoration: "none",
-                      color: "#333",
-                      padding: "15px",
-                      margin: "15px",
-                    }}
-                  >
-                    Search
-                  </Link>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                x1
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                x2
-               
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <div style={{ listStyle: "none", display: "inline" }}>
-                  <Link
-                    to="/profile"
-                    style={{
-                      textDecoration: "none",
-                      color: "#333",
-                      padding: "15px",
-                      margin: "15px",
-                    }}
-                  >
-                    Profile
-                  </Link>
-                </div>
-              </Grid>
-            </Grid>
-          </Toolbar>
-          <Route path="/profile" component={ProfilePage} data={"string of data"}/>
-          <Route path="/search" component={SearchPage} />
-        </Router> */}
+       
       </div>
     );
   }
