@@ -70,15 +70,22 @@ function Navigation(props) {
         </Typography>
 
         <div style={{ marginRight: 15 }}>
-          <a href="tel:8122670592" style={{ color: "#333", margin: "15px", textDecoration: "none" }}>
-            (812) 267-0592<Icon style={{ color: "#333", margin: "0px", textDecoration: "none" }}>phone</Icon>
+          <a
+            href="tel:8122670592"
+            style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+          >
+            (812) 267-0592
+            <Icon
+              style={{ color: "#333", margin: "0px", textDecoration: "none" }}
+            >
+              phone
+            </Icon>
           </a>
         </div>
 
         <Link
           style={{ color: "#333", margin: "15px", textDecoration: "none" }}
           to="/"
-          
         >
           Home
         </Link>
@@ -88,22 +95,15 @@ function Navigation(props) {
             <Link
               style={{ color: "#333", margin: "15px", textDecoration: "none" }}
               to="/profile"
-              
             >
               Profile
             </Link>
-
-            {/* 
-                   
-                   TODO: Not Built into the API yet.
-                   <Link
-                   style={{color:"#333",margin:"15px",textDecoration:"none"}}
-                    to="/search"
-                    
-                    
-                  >
-                    Search
-                  </Link> */}
+            <Link
+              style={{ color: "#333", margin: "15px", textDecoration: "none" }}
+              to="/search"
+            >
+              Search
+            </Link>
           </>
         )}
 
@@ -112,14 +112,12 @@ function Navigation(props) {
             <Link
               style={{ color: "#333", margin: "15px", textDecoration: "none" }}
               to="/login"
-              
             >
               Login
             </Link>
             <Link
               style={{ color: "#333", margin: "15px", textDecoration: "none" }}
               to="/register"
-              
             >
               Register
             </Link>
@@ -128,7 +126,6 @@ function Navigation(props) {
           <Link
             style={{ color: "#333", margin: "15px", textDecoration: "none" }}
             to="/logout"
-            
             onClick={() => {
               dispatch(authAction.logoutUser())
                 .then(async (result) => {
