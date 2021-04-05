@@ -9,6 +9,7 @@ import Navigation from "./Navigation";
 import store from "./redux/store";
 
 
+ //TODO: set up stripe payments https://www.youtube.com/watch?v=JkSgXgqRH6k
 
 
 
