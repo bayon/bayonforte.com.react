@@ -3,6 +3,8 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -10,6 +12,11 @@ import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
+import HomePage from "./HomePage";
+
+
+const stripePromise = loadStripe("pk_test_7aHY16H2I0thccZMQJIDUNpi");
+
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -186,6 +193,9 @@ export default function RegisterPage(props) {
             </Grid>
           </Paper>
         </Grid>
+        <Elements stripe={stripePromise}>
+        <HomePage />
+          </Elements>
       </React.Fragment>
     );
   } else {
