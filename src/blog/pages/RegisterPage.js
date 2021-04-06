@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
-import CheckoutForm from '../components/CheckoutForm';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const formSchema = yup.object({
-    fullName: yup.string().required().min(3),
+  fullName: yup.string().required().min(3),
   email: yup.string().email().required(),
   password: yup.string().required().min(6),
 });
@@ -67,15 +66,13 @@ export default function RegisterPage(props) {
   if (!inProgress) {
     return (
       <React.Fragment>
-       
-       <Grid
-              container
-              spacing={0}
-              align="center"
-              justify="center"
-              direction="column"
-               
-            >
+        <Grid
+          container
+          spacing={0}
+          align="center"
+          justify="center"
+          direction="column"
+        >
           <Paper
             style={{
               backgroundImage: `url(${logo})`,
@@ -83,109 +80,112 @@ export default function RegisterPage(props) {
               height: "400px",
             }}
           >
-          
-              <Grid item xs={12} sm={6} style={{marginTop:"15px" }}>
-                {/* //FORM AND REDUX  part 3 JSX*/}
-                <Formik
-                  initialValues={{
-                    fullName:"",
-                    email: "",
-                    password: "",
-                  }}
-                  validationSchema={formSchema}
-                  onSubmit={(values) => {
-                    console.log("values:", values);
-                    setInProgress(true);
-                    setLoading(true);
-                    dispatch(authAction.registerUser(values))
-                      .then(async (result) => {
-                        console.log("register result:", result);
-                        localStorage.setItem("forteworksToken", result.token);
-                        localStorage.setItem("registerToken", result.token);
-                        setTimeout(() => setLoading(false), 3000);
-                        if (result.success) {
-                          setInProgress(true);
-                          //setLoading(false)
-                        }
-                      })
-                      .catch((err) => console.log(err));
-                  }}
-                >
-                  {(props) => (
-                    <Card>
-                      <div>
-                        <div style={{ textAlign: "center" }}>
+            <Grid item xs={12} sm={6} style={{ marginTop: "15px" }}>
+              {/* //FORM AND REDUX  part 3 JSX*/}
+              <Formik
+                initialValues={{
+                  fullName: "",
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={formSchema}
+                onSubmit={(values) => {
+                  console.log("values:", values);
+                  setInProgress(true);
+                  setLoading(true);
+                  dispatch(authAction.registerUser(values))
+                    .then(async (result) => {
+                      console.log("register result:", result);
+                      localStorage.setItem("forteworksToken", result.token);
+                      localStorage.setItem("registerToken", result.token);
+                      setTimeout(() => setLoading(false), 3000);
+                      if (result.success) {
+                        setInProgress(true);
+                        //setLoading(false)
+                      }
+                    })
+                    .catch((err) => console.log(err));
+                }}
+              >
+                {(props) => (
+                  <Card>
+                    <div>
+                      <div style={{ textAlign: "center" }}>
                         <input
-                            style={{
-                              marginTop: "15px",
-                              border: "none",
-                              outline: "none",
-                              borderBottom: "solid 1px #ddd",
-                              padding: "10px",
-                            }}
-                            placeholder="Full Name"
-                            onChange={props.handleChange("fullName")}
-                            value={props.values.fullName}
-                            onBlur={props.handleBlur("fullName")}
-                          />
-                          <div style={{ color: "salmon" }}>
-                            {props.touched.fullName && props.errors.fullName}
-                          </div>
-                          <input
-                            style={{
-                              marginTop: "15px",
-                              border: "none",
-                              outline: "none",
-                              borderBottom: "solid 1px #ddd",
-                              padding: "10px",
-                            }}
-                            placeholder="Email"
-                            onChange={props.handleChange("email")}
-                            value={props.values.email}
-                            onBlur={props.handleBlur("email")}
-                          />
-                          <div style={{ color: "salmon" }}>
-                            {props.touched.email && props.errors.email}
-                          </div>
-                          <input
-                            style={{
-                              marginTop: "15px",
-                              border: "none",
-                              outline: "none",
-                              borderBottom: "solid 1px #ddd",
-                              padding: "10px",
-                            }}
-                            placeholder="Password"
-                            onChange={props.handleChange("password")}
-                            value={props.values.password}
-                            onBlur={props.handleBlur("password")}
-                          />
-                          <div style={{ color: "salmon" }}>
-                            {props.touched.password && props.errors.password}
-                          </div>
-
-                          <ButtonComponent
-                            onClick={props.handleSubmit}
-                            loading={loading}
-                          />
+                          style={{
+                            marginTop: "15px",
+                            border: "none",
+                            outline: "none",
+                            borderBottom: "solid 1px #ddd",
+                            padding: "10px",
+                          }}
+                          placeholder="Full Name"
+                          onChange={props.handleChange("fullName")}
+                          value={props.values.fullName}
+                          onBlur={props.handleBlur("fullName")}
+                        />
+                        <div style={{ color: "salmon" }}>
+                          {props.touched.fullName && props.errors.fullName}
                         </div>
-                      </div>
-                    </Card>
-                  )}
-                </Formik>
-                <div style={{background:"white",height:"100px"}}>
-                  <p>needs to be https</p>
-                {/* <StripeCard /> */}
-                <CheckoutForm />
-                </div>
-              
+                        <input
+                          style={{
+                            marginTop: "15px",
+                            border: "none",
+                            outline: "none",
+                            borderBottom: "solid 1px #ddd",
+                            padding: "10px",
+                          }}
+                          placeholder="Email"
+                          onChange={props.handleChange("email")}
+                          value={props.values.email}
+                          onBlur={props.handleBlur("email")}
+                        />
+                        <div style={{ color: "salmon" }}>
+                          {props.touched.email && props.errors.email}
+                        </div>
+                        <input
+                          style={{
+                            marginTop: "15px",
+                            border: "none",
+                            outline: "none",
+                            borderBottom: "solid 1px #ddd",
+                            padding: "10px",
+                          }}
+                          placeholder="Password"
+                          onChange={props.handleChange("password")}
+                          value={props.values.password}
+                          onBlur={props.handleBlur("password")}
+                        />
+                        <div style={{ color: "salmon" }}>
+                          {props.touched.password && props.errors.password}
+                        </div>
 
-                {/* //end  part 3*/}
-              </Grid>
-           
+                        <ButtonComponent
+                          onClick={props.handleSubmit}
+                          loading={loading}
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                )}
+              </Formik>
+              <div
+                style={{ background: "white", height: "auto", padding: "30px" }}
+              >
+                <h2>Registration</h2>
+                <p>
+                  In order to register you must first pay the registration fee
+                  of $X.XX{" "}
+                </p>
+                <p>
+                  After that, you will be able to log in and browse the data.
+                </p>
+              </div>
+
+              {/* //end  part 3*/}
+            </Grid>
           </Paper>
-          </Grid>
-        
+        </Grid>
       </React.Fragment>
     );
   } else {
