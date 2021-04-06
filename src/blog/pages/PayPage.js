@@ -33,10 +33,12 @@ const useStyles = makeStyles({
   },
 });
 
-function HomePage() {
+function PayPage() {
   const classes = useStyles();
   // State
   const [email, setEmail] = useState('');
+
+  const [paid,setPaid] = useState(false); 
 
   const stripe = useStripe();
   const elements = useElements();
@@ -68,6 +70,7 @@ function HomePage() {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
         console.log('Money is in the bank!');
+        setPaid(true)
         // Show a success message to your customer
         // There's a risk of the customer closing the window before callback
         // execution. Set up a webhook or plugin to listen for the
@@ -110,19 +113,23 @@ function HomePage() {
           } else {
             console.log('You got the money 1!');
             // Show a success message to your customer
+            setPaid(true)
           }
         });
       } else {
         console.log('You got the money 2!');
         // No additional information was needed
         // Show a success message to your customer
+        setPaid(true)
       }
     }
   };
 
 
   return (
-    <Card className={classes.root}>
+    <>
+    { !paid && 
+      <Card className={classes.root}>
       <CardContent className={classes.content}>
         <TextField
           label='Email'
@@ -147,7 +154,14 @@ function HomePage() {
         </div>
       </CardContent>
     </Card>
+
+    } 
+    { paid && 
+      <h1>You Paid!</h1>
+    }
+    </>
+   
   );
 }
 
-export default HomePage;
+export default PayPage;

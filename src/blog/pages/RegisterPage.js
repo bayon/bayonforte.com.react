@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
-import HomePage from "./HomePage";
+import PayPage from "./PayPage";
 
 
 const stripePromise = loadStripe("pk_test_7aHY16H2I0thccZMQJIDUNpi");
@@ -194,60 +194,9 @@ export default function RegisterPage(props) {
           </Paper>
         </Grid>
         <Elements stripe={stripePromise}>
-        <HomePage />
+        <PayPage />
           </Elements>
       </React.Fragment>
     );
-  } else {
-    return (
-      <div>
-        <p>no longer needed submenu</p>
-        {/* <Router>
-          <Toolbar className={classes.toolbar}>
-            <Grid container>
-              <Grid item xs={12} sm={2}>
-              <div style={{ listStyle: "none", display: "inline" }}>
-                  <Link
-                    to="/search"
-                    style={{
-                      textDecoration: "none",
-                      color: "#333",
-                      padding: "15px",
-                      margin: "15px",
-                    }}
-                  >
-                    Search
-                  </Link>
-                </div>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                x1
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                x2
-               
-              </Grid>
-              <Grid item xs={12} sm={3}>
-                <div style={{ listStyle: "none", display: "inline" }}>
-                  <Link
-                    to="/profile"
-                    style={{
-                      textDecoration: "none",
-                      color: "#333",
-                      padding: "15px",
-                      margin: "15px",
-                    }}
-                  >
-                    Profile
-                  </Link>
-                </div>
-              </Grid>
-            </Grid>
-          </Toolbar>
-          <Route path="/profile" component={ProfilePage} data={"string of data"}/>
-          <Route path="/search" component={SearchPage} />
-        </Router> */}
-      </div>
-    );
-  }
+  }  
 }
