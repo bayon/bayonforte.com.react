@@ -15,7 +15,7 @@ import axios from 'axios';
 // import { loadStripe } from "@stripe/stripe-js";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
-import { default as React, default as React, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux"; //useSelector?
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
@@ -76,7 +76,7 @@ function ButtonComponent(props) {
 }
 
 
-function PayPage() {
+function PayPage(props) {
 
 
   const [loading, setLoading] = useState(false);
@@ -96,7 +96,6 @@ function PayPage() {
 
 
 
-  const classes = useStyles();
   // State
   const [email, setEmail] = useState('');
 
