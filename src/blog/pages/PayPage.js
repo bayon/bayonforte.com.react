@@ -75,9 +75,9 @@ function PayPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   //live
-const PAY_URL = "https://arcane-eyrie-05882.herokuapp.com"
+//const PAY_URL = "https://arcane-eyrie-05882.herokuapp.com"
 //local 
-//const PAY_URL = "http://localhost:4000"
+const PAY_URL = "http://localhost:4000"
 
 
   //FORM AND REDUX  part 2: default export function
