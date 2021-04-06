@@ -74,6 +74,11 @@ function PayPage(props) {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const { ...rest } = props;
+  //live
+const PAY_URL = "https://arcane-eyrie-05882.herokuapp.com"
+//local 
+//const PAY_URL = "http://localhost:4000"
+
 
   //FORM AND REDUX  part 2: default export function
   const dispatch = useDispatch();
@@ -93,7 +98,7 @@ function PayPage(props) {
       return;
     }
 
-    const res = await axios.post('http://localhost:4000/pay', {email: email});
+    const res = await axios.post(`${PAY_URL}/pay`, {email: email});
 
     const clientSecret = res.data['client_secret'];
 
@@ -142,7 +147,7 @@ function PayPage(props) {
     if (result.error) {
       console.log(result.error.message);
     } else {
-      const res = await axios.post('http://localhost:4000/sub', {'payment_method': result.paymentMethod.id, 'email': email});
+      const res = await axios.post(`${PAY_URL}/sub`, {'payment_method': result.paymentMethod.id, 'email': email});
       // eslint-disable-next-line camelcase
       const {client_secret, status} = res.data;
 
