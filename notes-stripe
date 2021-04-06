@@ -29,3 +29,10 @@ express-api:
 
     index.js 
         ALL CODE AND ENDPOINTS
+
+
+
+BUGS: 
+src/App.js
+  Line 12:23:  'loadStripe' is not defined  no-undef
+  Line 17:8:   'Elements' is not defined    react/jsx-no-undef
