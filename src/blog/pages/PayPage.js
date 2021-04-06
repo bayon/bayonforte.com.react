@@ -1,36 +1,23 @@
-// MUI Components
 import { CircularProgress } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-// Util imports
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-// stripe
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
-// import { Elements } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
 //FORM AND REDUX part 1: in header
 import { Formik } from "formik";
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux"; //useSelector?
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
-// Custom Components
 import CardInput from '../components/CardInput';
 
 
-
-
-
-
-
-
-//prod_JFUtg4zMnpq3lg 
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -78,6 +65,11 @@ function ButtonComponent(props) {
 
 function PayPage(props) {
 
+  const [inProgress, setInProgress] = useState(false);
+  console.log("inProgress:", inProgress);
+  useEffect(() => {
+    setInProgress(inProgress);
+  }, [inProgress]);
 
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
@@ -85,22 +77,12 @@ function PayPage(props) {
 
   //FORM AND REDUX  part 2: default export function
   const dispatch = useDispatch();
-  const [inProgress, setInProgress] = useState(false);
-  console.log("inProgress:", inProgress);
-  useEffect(() => {
-    setInProgress(inProgress);
-  }, [inProgress]);
+
   //end  part 2
-
-
-
-
 
   // State
   const [email, setEmail] = useState('');
-
   const [paid,setPaid] = useState(false); 
-
   const stripe = useStripe();
   const elements = useElements();
 
@@ -186,7 +168,7 @@ function PayPage(props) {
     }
   };
 
-
+if (!inProgress) {
   return (
     <>
     { !paid && 
@@ -219,7 +201,8 @@ function PayPage(props) {
     } 
     { paid && 
     <>
-      <h1>You Paid!</h1>
+      <h1>Welcome!</h1>
+      <p>Now you just need to create your password.</p>
       <React.Fragment>
         <Grid
           container
@@ -338,6 +321,13 @@ function PayPage(props) {
     </>
    
   );
+} else {
+  return (
+    <>
+    registration complete.
+    </>
+  )
+}
 }
 
 export default PayPage;

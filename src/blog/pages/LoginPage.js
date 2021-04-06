@@ -149,7 +149,7 @@ export default function LoginPage(props) {
   } else {
     return (
       <div>
-        <p>no longer needed submenu</p>
+        <p>logged in</p>
        
       </div>
     );
