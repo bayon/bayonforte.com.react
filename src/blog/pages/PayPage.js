@@ -12,10 +12,13 @@ import axios from 'axios';
 import { Formik } from "formik";
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
+import Blog from "../Blog";
 import CardInput from '../components/CardInput';
+
 
 
 const useStyles = makeStyles({
@@ -228,7 +231,7 @@ if (!inProgress) {
               <Formik
                 initialValues={{
                   fullName: "",
-                  email: "",
+                  email: email,
                   password: "",
                 }}
                 validationSchema={formSchema}
@@ -328,9 +331,9 @@ if (!inProgress) {
   );
 } else {
   return (
-    <>
-    registration complete.
-    </>
+    <Router>
+    <Route  path="/register" component={Blog} />
+  </Router>
   )
 }
 }

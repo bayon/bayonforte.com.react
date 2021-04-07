@@ -12,12 +12,14 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./App.css";
 //import logo from "./blog/assets/img/blue-cottage-840-464-widened-to-1024.png";
 import Blog from "./blog/Blog";
+import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
+
 
 
 // const useStyles = makeStyles((theme) => ({
@@ -118,6 +120,19 @@ function Navigation(props) {
 
           {auth && (
             <>
+             <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/dashboard"
+              >
+                Dashboard
+              </Link>
+              </Grid>
                <Grid item xs={12} sm={1}>
               <Link
                 style={{
@@ -203,6 +218,8 @@ function Navigation(props) {
       <Route exact path="/build" component={Blog} />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
+      <Route path="/dashboard" component={DashboardPage} />
+
       <Route path="/profile" component={ProfilePage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/logout" component={Blog} />

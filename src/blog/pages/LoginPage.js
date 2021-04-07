@@ -10,8 +10,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
-import Blog from "../Blog";
-
+import DashboardPage from "./DashboardPage";
 
 
 
@@ -157,7 +156,7 @@ export default function LoginPage(props) {
       
         
         <Router>
-            <Route  path="/login" component={Blog} />
+            <Route  path="/login" component={DashboardPage} />
           </Router>
        
     );

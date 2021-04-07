@@ -11,6 +11,8 @@ import FrontEndAnimatedCard from './cards/FrontEndAnimatedCard';
 import Footer from "./Footer";
 
  
+
+
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -40,8 +42,12 @@ export default function Blog(props) {
   const [user, setUser] = useState({});
 
   const dispatch = useDispatch();
+ 
 
   console.log("Search Page reached ...props:", props);
+
+
+
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
@@ -60,9 +66,7 @@ export default function Blog(props) {
         
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
           <Grid container  >
-            { auth && 
-              <p>Hello, {user.fullName}</p>
-            }
+           
           <Grid item xs={12} sm={12}>
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
           <Paper

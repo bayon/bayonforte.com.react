@@ -33,6 +33,8 @@ const ProfilePage = (props) => {
       .catch((err) => console.log(err));
   };
 
+  
+
   return (
     <div>
       <Paper>
