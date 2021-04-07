@@ -18,6 +18,8 @@ import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
+
+
 // const useStyles = makeStyles((theme) => ({
 //   toolbar: {
 //     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -54,9 +56,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
+   
+ 
+  
   const classes = useStyles();
   console.log("auth is:", auth);
   const dispatch = useDispatch();
+
   //const [inProgress, setInProgress] = useState(false);
 
   //   const hasToken = localStorage.getItem("forteworksToken");
@@ -187,6 +193,7 @@ function Navigation(props) {
             >
               Logout
             </Link>
+            
             </Grid>
           )}
         </Grid>
