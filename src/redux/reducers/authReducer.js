@@ -6,6 +6,9 @@ import {
   LOGOUT_USER_SUCCESS,
   REGISTER_USER_FAIL,
   REGISTER_USER_SUCCESS,
+
+  UPDATE_USER_FAIL, UPDATE_USER_SUCCESS,
+
   USER_PROFILE_FAIL,
   USER_PROFILE_SUCCESS
 } from "../actions/authAction";
@@ -78,6 +81,19 @@ export default function (state = initialState, action) {
         errors: true,
       };
       break;
+
+    case UPDATE_USER_SUCCESS:
+        return {
+          ...state,
+          user: action.payload,
+        };
+        break;
+    case UPDATE_USER_FAIL:
+          return {
+            ...state,
+            errors: true,
+          };
+          break;
     default:
       break;
   }

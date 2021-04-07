@@ -14,6 +14,9 @@ export const ALL_USERS_FAIL = "ALL_USERS_FAIL";
 export const USER_PROFILE_SUCCESS = "USER_PROFILE_SUCCESS";
 export const USER_PROFILE_FAIL = "USER_PROFILE_FAIL";
 
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
+
 const BASE_URL = "http://localhost:4000/api";
 //const BASE_URL = "https://arcane-eyrie-05882.herokuapp.com/api"
 
@@ -49,6 +52,7 @@ export const registerUser = (authData) => {
 
   };
 };
+
 export const logoutUser = () => {
   //console.log("how the hell is that?")
   //console.log('dispatch:',dispatch)
@@ -147,5 +151,39 @@ export const userProfile = () => {
       }
       return resultData;  
     
+  };
+};
+
+
+export const updateUser = (authData) => {
+  console.log('authData',authData)
+  const { fullName, email } = authData;
+  return async (dispatch) => {
+    //benefit: can now make async http request to Register
+    const result = await fetch(`${BASE_URL}/users/update`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success){
+        dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: resultData,
+          });
+    } else {
+        dispatch({
+            type: UPDATE_USER_FAIL,
+          });
+    }
+   
+    return resultData;
+
   };
 };
