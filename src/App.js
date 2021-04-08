@@ -1,3 +1,4 @@
+ 
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import { Elements } from "@stripe/react-stripe-js";
@@ -11,6 +12,8 @@ import store from "./redux/store";
 // const stripePromise = loadStripe("pk_test_7aHY16H2I0thccZMQJIDUNpi");
 
 function App(props) {
+
+  console.log('Environment:',process.env.NODE_ENV)
   return (
     <Provider store={store}>
       {/* <Elements stripe={stripePromise}> */}

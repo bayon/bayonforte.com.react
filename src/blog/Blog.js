@@ -1,8 +1,9 @@
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as authAction from "./../redux/actions/authAction";
 import logo from "./assets/img/pexels-pixabay-159201.jpg";
 import BackendAnimatedCard from './cards/BackendAnimatedCard';
 import DatabaseAnimatedCard from './cards/DatabaseAnimatedCard';
@@ -10,6 +11,8 @@ import FrontEndAnimatedCard from './cards/FrontEndAnimatedCard';
 import Footer from "./Footer";
 
  
+
+
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
@@ -33,10 +36,27 @@ const useStyles = makeStyles((theme) => ({
 
  
 
-export default function Blog() {
+export default function Blog(props) {
   const classes = useStyles();
   var auth = useSelector((state) => state.auth.authorized);
+  const [user, setUser] = useState({});
 
+  const dispatch = useDispatch();
+ 
+
+  console.log("Search Page reached ...props:", props);
+
+
+
+  useEffect(() => {
+    dispatch(authAction.userProfile())
+      .then(async (result) => {
+        console.log("result:", result);
+        setUser(result.data);
+      })
+      .catch((err) => console.log(err));
+  }, [auth]);
+  
   //sections={sections}
   return (
      <React.Fragment>
@@ -46,7 +66,7 @@ export default function Blog() {
         
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
           <Grid container  >
-
+           
           <Grid item xs={12} sm={12}>
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
           <Paper

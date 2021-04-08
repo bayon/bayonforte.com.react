@@ -1,3 +1,5 @@
+import { config } from '../../Constants';
+
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
 export const REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
 
@@ -14,14 +16,19 @@ export const ALL_USERS_FAIL = "ALL_USERS_FAIL";
 export const USER_PROFILE_SUCCESS = "USER_PROFILE_SUCCESS";
 export const USER_PROFILE_FAIL = "USER_PROFILE_FAIL";
 
-//const BASE_URL = "http://localhost:4000/api";
-const BASE_URL = "https://arcane-eyrie-05882.herokuapp.com/api"
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
+
+//const API_URL = "http://localhost:4000/api";
+//const API_URL = "https://arcane-eyrie-05882.herokuapp.com/api"
+
+const API_URL = config.url.API_URL
 
 export const registerUser = (authData) => {
   const { fullName, email, password } = authData;
   return async (dispatch) => {
     //benefit: can now make async http request to Register
-    const result = await fetch(`${BASE_URL}/users/register`, {
+    const result = await fetch(`${API_URL}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,6 +56,7 @@ export const registerUser = (authData) => {
 
   };
 };
+
 export const logoutUser = () => {
   //console.log("how the hell is that?")
   //console.log('dispatch:',dispatch)
@@ -66,7 +74,7 @@ export const loginUser = (authData) => {
   const { email, password } = authData;
   return async (dispatch) => {
     //benefit: can now make async http request to Login
-    const result = await fetch(`${BASE_URL}/users/login`, {
+    const result = await fetch(`${API_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +105,7 @@ export const loginUser = (authData) => {
 
 export const allUsers = () => {
   return async (dispatch) => {
-    const result = await fetch(`${BASE_URL}/users/users`, {
+    const result = await fetch(`${API_URL}/users/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +133,7 @@ export const allUsers = () => {
 
 export const userProfile = () => {
   return async (dispatch) => {
-    const result = await fetch(`${BASE_URL}/users/profile`, {
+    const result = await fetch(`${API_URL}/users/profile`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -147,5 +155,40 @@ export const userProfile = () => {
       }
       return resultData;  
     
+  };
+};
+
+
+export const updateUser = (authData) => {
+  console.log('authData',authData)
+  const { fullName, email, phone } = authData;
+  return async (dispatch) => {
+    //benefit: can now make async http request to Register
+    const result = await fetch(`${API_URL}/users/update`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName,
+        email,
+        phone
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success){
+        dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: resultData,
+          });
+    } else {
+        dispatch({
+            type: UPDATE_USER_FAIL,
+          });
+    }
+   
+    return resultData;
+
   };
 };

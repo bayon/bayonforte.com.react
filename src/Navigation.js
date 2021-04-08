@@ -4,7 +4,7 @@ import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useEffect, useState } from "react";
 //import store from "./redux/store";
 import { useDispatch, useSelector } from "react-redux";
 //import { Provider } from "react-redux";
@@ -12,12 +12,16 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import "./App.css";
 //import logo from "./blog/assets/img/blue-cottage-840-464-widened-to-1024.png";
 import Blog from "./blog/Blog";
+import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
 import SearchPage from "./blog/pages/SearchPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
+
+
+
 // const useStyles = makeStyles((theme) => ({
 //   toolbar: {
 //     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -54,17 +58,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  const classes = useStyles();
-  console.log("auth is:", auth);
-  const dispatch = useDispatch();
-  //const [inProgress, setInProgress] = useState(false);
+  console.log("initial auth is:", auth);
+  const [user, setUser] = useState({});
 
-  //   const hasToken = localStorage.getItem("forteworksToken");
-  //   console.log("hasToken:", hasToken);
-  //   var isAuth = false;
-  //   if (hasToken != "") {
-  //     isAuth = true;
-  //   }
+  const classes = useStyles();
+
+  //GOES FALSE AFTER REFRESH: IS THAT DESIRED ? 
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authAction.userProfile())
+      .then(async (result) => {
+        console.log("AUTH CHECK: profile to check auth ...result:", result);
+        setUser(result.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Router>
@@ -112,6 +122,19 @@ function Navigation(props) {
 
           {auth && (
             <>
+             <Grid item xs={12} sm={1}>
+              <Link
+                style={{
+                  color: "#333",
+                  margin: "15px",
+                  textDecoration: "none",
+                }}
+                className={classes.link}
+                to="/dashboard"
+              >
+                Dashboard
+              </Link>
+              </Grid>
                <Grid item xs={12} sm={1}>
               <Link
                 style={{
@@ -187,6 +210,7 @@ function Navigation(props) {
             >
               Logout
             </Link>
+            
             </Grid>
           )}
         </Grid>
@@ -196,6 +220,8 @@ function Navigation(props) {
       <Route exact path="/build" component={Blog} />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
+      <Route path="/dashboard" component={DashboardPage} />
+
       <Route path="/profile" component={ProfilePage} />
       <Route path="/search" component={SearchPage} />
       <Route path="/logout" component={Blog} />

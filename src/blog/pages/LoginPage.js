@@ -6,11 +6,13 @@ import Paper from "@material-ui/core/Paper";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"; //useSelector?
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
+import DashboardPage from "./DashboardPage";
 
- 
+
 
 const formSchema = yup.object({
   email: yup.string().email().required(),
@@ -82,10 +84,13 @@ export default function LoginPage(props) {
                       .then(async (result) => {
                         console.log("result:", result);
                         localStorage.setItem("forteworksToken", result.token);
-                        setTimeout(() => setLoading(false), 3000);
+                       // setTimeout(() => setLoading(false), 3000);
                         if (result.success) {
                           setInProgress(true);
-                          //setLoading(false)
+                          setLoading(false)
+                        }else {
+                          setInProgress(false)
+                          setLoading(false)
                         }
                       })
                       .catch((err) => console.log(err));
@@ -148,10 +153,12 @@ export default function LoginPage(props) {
     );
   } else {
     return (
-      <div>
-        <p>logged in</p>
+      
+        
+        <Router>
+            <Route  path="/login" component={DashboardPage} />
+          </Router>
        
-      </div>
     );
   }
 }
