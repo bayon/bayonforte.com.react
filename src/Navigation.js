@@ -4,7 +4,7 @@ import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, { useEffect, useState } from "react";
 //import store from "./redux/store";
 import { useDispatch, useSelector } from "react-redux";
 //import { Provider } from "react-redux";
@@ -58,21 +58,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-   
- 
-  
+  console.log("initial auth is:", auth);
+  const [user, setUser] = useState({});
+
   const classes = useStyles();
-  console.log("auth is:", auth);
+
+  //GOES FALSE AFTER REFRESH: IS THAT DESIRED ? 
+  
   const dispatch = useDispatch();
 
-  //const [inProgress, setInProgress] = useState(false);
-
-  //   const hasToken = localStorage.getItem("forteworksToken");
-  //   console.log("hasToken:", hasToken);
-  //   var isAuth = false;
-  //   if (hasToken != "") {
-  //     isAuth = true;
-  //   }
+  useEffect(() => {
+    dispatch(authAction.userProfile())
+      .then(async (result) => {
+        console.log("AUTH CHECK: profile to check auth ...result:", result);
+        setUser(result.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Router>

@@ -54,6 +54,7 @@ export default function (state = initialState, action) {
         ...state,
         user: action.payload,
         haveUser: true,
+        authorized: true,
       };
       break;
     case LOGIN_USER_FAIL:

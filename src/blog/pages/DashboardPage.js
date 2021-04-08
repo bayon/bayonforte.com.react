@@ -48,6 +48,9 @@ export default function DashboardPage(props) {
   }, [auth]);
   
   //sections={sections}
+  if (!auth) {
+    return <div>not authorized.</div>;
+  }
   return (
      <React.Fragment>
     
