@@ -1,3 +1,4 @@
+
 import { CircularProgress } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -14,10 +15,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as yup from "yup";
+import { config } from '../../Constants';
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
 import Blog from "../Blog";
 import CardInput from '../components/CardInput';
+
+
+
 
 
 
@@ -78,10 +83,10 @@ function PayPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   //live
-//const PAY_URL = "https://arcane-eyrie-05882.herokuapp.com"
+//const API_URL = "https://arcane-eyrie-05882.herokuapp.com"
 //local 
-const PAY_URL = "http://localhost:4000"
-
+//const API_URL = "http://localhost:4000"
+const API_URL = config.url.API_URL
 
   //FORM AND REDUX  part 2: default export function
   const dispatch = useDispatch();
@@ -101,7 +106,7 @@ const PAY_URL = "http://localhost:4000"
       return;
     }
 
-    const res = await axios.post(`${PAY_URL}/pay`, {email: email});
+    const res = await axios.post(`${API_URL}/pay`, {email: email});
 
     const clientSecret = res.data['client_secret'];
 
@@ -150,7 +155,7 @@ const PAY_URL = "http://localhost:4000"
     if (result.error) {
       console.log(result.error.message);
     } else {
-      const res = await axios.post(`${PAY_URL}/sub`, {'payment_method': result.paymentMethod.id, 'email': email});
+      const res = await axios.post(`${API_URL}/sub`, {'payment_method': result.paymentMethod.id, 'email': email});
       // eslint-disable-next-line camelcase
       const {client_secret, status} = res.data;
 

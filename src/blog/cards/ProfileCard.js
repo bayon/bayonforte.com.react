@@ -139,6 +139,7 @@ const ProfileCard = (props) => {
                               {props.touched.phone && props.errors.phone}
                             </div>
                           </Grid>
+                          {/* UPLOAD AN IMAGE: https://www.youtube.com/watch?v=SAUvlkTDMM4 */}
                           <Grid item xs={12} >
                             <button onClick={props.handleSubmit}>Update</button>
                           </Grid>
