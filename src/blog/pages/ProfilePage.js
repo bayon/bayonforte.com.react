@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import ProfileCard from "../cards/ProfileCard";
+import UploadCard from '../cards/UploadCard';
 
 const ProfilePage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -69,6 +70,7 @@ const ProfilePage = (props) => {
             </li>
           </ul>
         </div>
+        <UploadCard></UploadCard>
       </Paper>
     </div>
   );
