@@ -50,8 +50,7 @@ const ProfileCard = (props) => {
             {props.user.email}
           </Typography>
           <p>{props.user.phone}</p>
-          <p>Need props on ProfileCard to refresh ...??? </p>
-          <React.Fragment>
+           <React.Fragment>
             <Grid
               container
               spacing={0}
