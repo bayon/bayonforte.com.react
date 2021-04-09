@@ -37,7 +37,7 @@ const ProfilePage = (props) => {
   return (
     <div>
       
-        <div>ProfilePage</div>
+        
 
         <ProfileCard user={user} refresh={getUserProfile}></ProfileCard>
         <div style={{ textAlign: "left" }}>

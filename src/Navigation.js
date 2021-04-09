@@ -56,7 +56,7 @@ function Navigation(props) {
               align="center"
               noWrap
             >
-              Full Stack Development
+              Web Applications
             </Typography>
           </Grid>
           <Grid item xs={12} sm={2}>

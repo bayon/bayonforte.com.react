@@ -1,5 +1,4 @@
 import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -89,8 +88,7 @@ const ProfileCard = (props) => {
                     }}
                   >
                     {(props) => (
-                      <Card>
-                        <Grid container className="ProfileCardForm">
+                         <Grid container className="ProfileCardForm">
                          
 
                           <Grid item xs={12} sm={6}>
@@ -148,8 +146,7 @@ const ProfileCard = (props) => {
                             </Grid>
                           </Grid>
                         </Grid>
-                      </Card>
-                    )}
+                     )}
                   </Formik>
 
                   {/* //end  part 3*/}
