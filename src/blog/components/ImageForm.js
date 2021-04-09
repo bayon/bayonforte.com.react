@@ -1,8 +1,8 @@
 
 //THANKS TO: https://stackoverflow.com/questions/65176026/uploading-image-from-react-frontend-to-express-backend-and-displaying-it-back-in 
-
 import axios from "axios";
 import React, { useState } from 'react';
+import { config } from "../../Constants";
 
 const ImageForm = () => {
 
@@ -15,6 +15,8 @@ const handleFileChange = (event) => {
     console.log(file)
 }
 
+const API_URL = config.url.API_URL;
+const HOST_URL = config.url.HOST_URL;
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,13 +24,13 @@ const handleSubmit = (event) => {
     for(var x = 0; x<file.length; x++) {
         data.append('file', file[x])
     }
-    axios.post("http://localhost:4000/api/upload", data)
+    axios.post(`${API_URL}/upload`, data)
     .then(res => { 
         console.log('res:',res)
         console.log('data:',data)
        // console.log('res.data:',res.data);
         //console.log(res.statusText)
-        setImgFile('http://localhost:4000/public/images/'+res.data)
+        setImgFile(`${HOST_URL}/public/images/`+res.data)
 
       })
 }
