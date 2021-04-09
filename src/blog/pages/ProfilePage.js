@@ -1,9 +1,7 @@
-import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import ProfileCard from "../cards/ProfileCard";
-import ImageForm from '../components/ImageForm';
 
 const ProfilePage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -38,7 +36,7 @@ const ProfilePage = (props) => {
 
   return (
     <div>
-      <Paper>
+      
         <div>ProfilePage</div>
 
         <ProfileCard user={user} refresh={getUserProfile}></ProfileCard>
@@ -70,9 +68,8 @@ const ProfilePage = (props) => {
             </li>
           </ul>
         </div>
-        {/* <ImageUploader></ImageUploader> */}
-        <ImageForm></ImageForm>
-      </Paper>
+        
+      
     </div>
   );
 };
