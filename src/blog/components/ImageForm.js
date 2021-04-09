@@ -24,6 +24,7 @@ const ImageForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if(!file){ return false};
     const data = new FormData();
     data.append("_id", props.props.user._id);
     for (var x = 0; x < file.length; x++) {
@@ -39,7 +40,7 @@ const ImageForm = (props) => {
           if (result.success) {
             //code
           }
-          props.refresh();
+          props.props.refresh();
         })
         .catch((err) => console.log(err));
     });
@@ -55,8 +56,8 @@ const ImageForm = (props) => {
       >
         <form name="fileinfo" enctype="multipart/form-data">
           <Grid xs={12}>
-            {imgFile && (
-              <>
+            {/* {imgFile && (
+              
                 <img
                   src={imgFile}
                   alt="img"
@@ -66,28 +67,36 @@ const ImageForm = (props) => {
                     borderRadius: "15px",
                   }}
                 />
-              </>
-            )}
-            {props.props.user.profileImage && (
-              <img
-                src={
-                  `${HOST_URL}/public/images/` + props.props.user.profileImage
-                }
-                alt="img"
-                style={{ height: "200px", width: "auto", borderRadius: "15px" }}
-              />
-            )}
+              
+            )}   */}
+            
+             {
+              
+                <img
+                  src={
+                    `${HOST_URL}/public/images/` + props.props.user.profileImage
+                  }
+                  alt="img"
+                  style={{ height: "200px", width: "auto", borderRadius: "15px" }}
+                />
+              
+            }
+           
           </Grid>
 
           <Grid xs={12}>
-            <input
+             <input
+              name="profileImage"
               type="file"
               id="file"
               accept=".jpg"
               multiple
               onChange={handleFileChange}
+              style={{outline:"none",border:"none"}}
+              innerHTML="jack"
             />
-          </Grid>
+              
+           </Grid>
           <Grid xs={12}>
             <button className="btn btn-primary mt-3" onClick={handleSubmit}>
               Change Profile Image
