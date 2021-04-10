@@ -1,6 +1,8 @@
 import {
   ALL_USERS_FAIL,
   ALL_USERS_SUCCESS,
+  FILTER_USERS_FAIL,
+  FILTER_USERS_SUCCESS,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
@@ -28,27 +30,28 @@ export default function (state = initialState, action) {
         users: action.payload,
         authorized: true,
       };
-      break;
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
         user: action.payload,
         authorized: true,
       };
-      break;
     case LOGOUT_USER_SUCCESS:
       return {
         ...state,
         authorized: false,
       };
-      break;
     case ALL_USERS_SUCCESS:
       return {
         ...state,
         users: action.payload,
         haveUsers: true,
       };
-      break;
+    case ALL_USERS_FAIL:
+      return {
+        ...state,
+        errors: true,
+      };
     case USER_PROFILE_SUCCESS:
       return {
         ...state,
@@ -56,44 +59,45 @@ export default function (state = initialState, action) {
         haveUser: true,
         authorized: true,
       };
-      break;
     case LOGIN_USER_FAIL:
       return {
         ...state,
         errors: true,
       };
-      break;
     case REGISTER_USER_FAIL:
       return {
         ...state,
         errors: true,
       };
-      break;
-    case ALL_USERS_FAIL:
-      return {
-        ...state,
-        errors: true,
-      };
-      break;
+
     case USER_PROFILE_FAIL:
       return {
         ...state,
         errors: true,
       };
-      break;
 
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
         user: action.payload,
       };
-      break;
     case UPDATE_USER_FAIL:
       return {
         ...state,
         errors: true,
       };
-      break;
+    case FILTER_USERS_SUCCESS:
+      return {
+        ...state,
+        users: action.payload,
+        haveUsers: true,
+      };
+    case FILTER_USERS_FAIL:
+      return {
+        ...state,
+        errors: true,
+      };
+
     default:
       break;
   }

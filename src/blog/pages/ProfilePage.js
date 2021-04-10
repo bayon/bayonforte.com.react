@@ -10,8 +10,7 @@ const ProfilePage = (props) => {
   //var haveUser = useSelector((state) => state.auth.haveUser);
   const dispatch = useDispatch();
 
-  console.log("Search Page reached ...props:", props);
-  useEffect(() => {
+   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
         console.log("result:", result);
@@ -37,7 +36,7 @@ const ProfilePage = (props) => {
   return (
     <div>
       
-        <div>ProfilePage</div>
+        
 
         <ProfileCard user={user} refresh={getUserProfile}></ProfileCard>
         <div style={{ textAlign: "left" }}>

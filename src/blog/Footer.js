@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Footer(props) {
   const classes = useStyles();
-  const { description, title } = props;
 
   return (
     <footer className={classes.footer}>

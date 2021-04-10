@@ -29,7 +29,7 @@ const LinkStyle = styled.section`
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
   console.log("initial auth is:", auth);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
 
   //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
 
@@ -56,7 +56,7 @@ function Navigation(props) {
               align="center"
               noWrap
             >
-              Full Stack Development
+              Web Applications
             </Typography>
           </Grid>
           <Grid item xs={12} sm={2}>
@@ -151,7 +151,7 @@ function Navigation(props) {
           ) : (
             <Grid item xs={12} sm={1}>
               <Link
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none",backgroundColor:"#ccc",color:"#fff" }}
                 to="/logout"
                 onClick={() => {
                   dispatch(authAction.logoutUser())
@@ -162,7 +162,7 @@ function Navigation(props) {
                     .catch((err) => console.log(err));
                 }}
               >
-                <LinkStyle>Logout</LinkStyle>
+                <LinkStyle style={{ textDecoration: "none",backgroundColor:"#ccc",color:"#fff" }} >Logout</LinkStyle>
               </Link>
             </Grid>
           )}

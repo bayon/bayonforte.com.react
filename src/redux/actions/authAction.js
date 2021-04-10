@@ -19,6 +19,9 @@ export const USER_PROFILE_FAIL = "USER_PROFILE_FAIL";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
 export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 
+export const FILTER_USERS_SUCCESS = "FILTER_USERS_SUCCESS";
+export const FILTER_USERS_FAIL = "FILTER_USERS_FAIL";
+
 //const API_URL = "http://localhost:4000/api";
 //const API_URL = "https://arcane-eyrie-05882.herokuapp.com/api"
 
@@ -58,11 +61,7 @@ export const registerUser = (authData) => {
 };
 
 export const logoutUser = () => {
-  //console.log("how the hell is that?")
-  //console.log('dispatch:',dispatch)
-  // dispatch({
-  //   type: LOGOUT_USER_SUCCESS,
-  // });
+
   return async (dispatch) => {
     dispatch({
         type: LOGOUT_USER_SUCCESS,
@@ -161,7 +160,7 @@ export const userProfile = () => {
 
 export const updateUser = (authData) => {
   console.log('authData',authData)
-  const { fullName, email, phone , profileImage } = authData;
+  const { fullName, email, phone , profileImage, address, city, state, zip } = authData;
   return async (dispatch) => {
     //benefit: can now make async http request to Register
     const result = await fetch(`${API_URL}/users/update`, {
@@ -173,7 +172,11 @@ export const updateUser = (authData) => {
         fullName,
         email,
         phone,
-        profileImage
+        profileImage,
+        address,
+        city,
+        state,
+        zip
       }),
     });
 
@@ -192,4 +195,38 @@ export const updateUser = (authData) => {
     return resultData;
 
   };
+};
+
+// filter 
+export const filterUsers = (key) => {
+  console.log('filter key is ...',key)
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/users/filter`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: FILTER_USERS_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: FILTER_USERS_FAIL,
+          });
+      }
+      return resultData;  
+    
+  };
+   
+
+
 };
