@@ -6,11 +6,9 @@ import PlainCard from "../cards/PlainCard";
 
 const SearchPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  //var users = useSelector((state) => state.auth.users);
   var haveUsers = useSelector((state) => state.auth.haveUsers);
   const dispatch = useDispatch();
 
-// LEFT OFF HERE MESSING WITH CURRENT USERS REPLACING USERS AND THE FILTER>>>>>>>!!!!!! 
   const [currentUsers,setCurrentUsers] = useState([])
 
   const [sortName, setSortName] = useState(false);
@@ -20,13 +18,13 @@ const SearchPage = (props) => {
   const [sortState, setSortState] = useState(false);
   const [noSort, setNoSort] = useState(true); //true by default
 
-  const [dataChanged,setDataChanged] = useState(false);
   const [filterKey,setFilterKey] = useState('')
 
   const getDefaultUsers = () => {
+    //Function needed to handle case where search input empty or a space.
     dispatch(authAction.allUsers())
     .then(async (result) => {
-      console.log("ALL USERS RESULTS:", result);
+      console.log("ALL USERS RESULTS FUNCTION:", result);
       setCurrentUsers(result)
     })
     .catch((err) => console.log(err));
@@ -43,34 +41,15 @@ const SearchPage = (props) => {
 
 
   useEffect(() => {
+    //initial gets all users once.
     dispatch(authAction.allUsers())
       .then(async (result) => {
-        console.log("ALL USERS RESULTS:", result);
+        console.log("ALL USERS RESULTS USEEFFECT:", result);
         setCurrentUsers(result)
       })
       .catch((err) => console.log(err));
-    //getDefaultUsers();
-  }, []);
-  //dataChanged
-  // useEffect(()=> {
-  //   dispatch(authAction.filterUsers(filterKey))
-  //   .then(async (result) => {
-  //     console.log("----- FILTERED USERS RESULTS:", result);
-  //     setCurrentUsers(result)
-  //   })
-  //   .catch((err) => console.log(err));
-
- 
-  // },[filterKey])
- 
-// const filterTheUsers = () => {
-//   dispatch(authAction.filterUsers(filterKey))
-//   .then(async (result) => {
-//     console.log("----- FILTERED USERS RESULTS:", result);
-//     setCurrentUsers(result)
-//   })
-//   .catch((err) => console.log(err));
-// }
+   }, []);
+   
   
 
   const sortByFullName = (users) => {
@@ -81,7 +60,6 @@ const SearchPage = (props) => {
       });
   };
   const clearSortOptions = () => {
-    //SET SORT OPTIONS HERE:
     setSortName(false);
     setSortEmail(false);
     setSortId(false);
@@ -119,7 +97,6 @@ const SearchPage = (props) => {
       console.log('GET DEFAULT DATA BACK...')
       getDefaultUsers();
     }else{
-      setDataChanged(true)
       getFilteredUsers(key);
     }
     
@@ -166,9 +143,7 @@ const displayUsers = () => {
       )
     }
   }
-  if(dataChanged){
-    console.log("D A T A   C H A N G E D   ! ! ! !")
-  }
+ 
    
 }
 
@@ -223,8 +198,7 @@ if (!auth) {
         </div>
 
         {haveUsers && displayUsers()}
-        {/* {dataChanged && displayUsers()} */}
-
+ 
         <div>
           <ul>
             <li>
@@ -260,9 +234,4 @@ if (!auth) {
 
 export default SearchPage;
 
-/*
-  const myData = [].concat(users).sort( (a, b) => a.fullName > b.fullName ? 1 : -1)
-          .map((item, i) => 
-              <div key={i}> {item.fullName} {item.email}{item.phone}</div>
-          );
-          */
+ 
