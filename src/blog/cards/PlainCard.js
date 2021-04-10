@@ -1,43 +1,20 @@
-import { CircularProgress, Typography } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
+import { Typography } from "@material-ui/core";
 import Icon from "@material-ui/core/Icon";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import * as yup from "yup";
 import "./card.css";
 
 
 
-const formSchema = yup.object({
-  fullName: yup.string().required().min(3),
-  email: yup.string().email().required(),
-
-});
 
 
 
-function ButtonComponent(props) {
-  const { onClick, loading } = props;
 
-  return (
-    <Button
-      variant="contained"
-      onClick={onClick}
-      disabled={loading}
-      style={{ marginTop: "15px", marginBottom: "15px" }}
-    >
-      {loading && <CircularProgress size={14} />}
-      {!loading && "Update"}
-    </Button>
-  );
-}
 
  
 
 const PlainCard = (props) => {
 
-    const dispatch = useDispatch();
-    const [seeDetails,setSeeDetails] = useState(false); 
+     const [seeDetails,setSeeDetails] = useState(false); 
 
     const [inProgress, setInProgress] = useState(false);
     console.log("inProgress:", inProgress);
@@ -45,8 +22,7 @@ const PlainCard = (props) => {
       setInProgress(inProgress);
     }, [inProgress]);
   
-    const [loading, setLoading] = useState(false);
-    
+     
 
   return (
     <div  className="card-plain">

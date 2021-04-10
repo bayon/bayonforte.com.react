@@ -29,7 +29,7 @@ const LinkStyle = styled.section`
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
   console.log("initial auth is:", auth);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
 
   //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
 

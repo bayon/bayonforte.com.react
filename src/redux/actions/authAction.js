@@ -61,11 +61,7 @@ export const registerUser = (authData) => {
 };
 
 export const logoutUser = () => {
-  //console.log("how the hell is that?")
-  //console.log('dispatch:',dispatch)
-  // dispatch({
-  //   type: LOGOUT_USER_SUCCESS,
-  // });
+
   return async (dispatch) => {
     dispatch({
         type: LOGOUT_USER_SUCCESS,
@@ -227,33 +223,10 @@ export const filterUsers = (key) => {
             type: FILTER_USERS_FAIL,
           });
       }
-      return resultData; //Why?:  so that we have access to it in the dispatch to the action from loginScreen.
-    //
+      return resultData;  
     
   };
-  // return async (dispatch) => {
-  //   const result = await fetch(`${API_URL}/users/users`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-     
-  //     });
-  
-  //     const resultData = await result.json();
-  //     if(resultData){
-  //       dispatch({
-  //           type: ALL_USERS_SUCCESS,
-  //           payload: resultData,
-  //         });
-  //     } else {
-  //       dispatch({
-  //           type: ALL_USERS_FAIL,
-  //         });
-  //     }
-  //     return resultData;  
-    
-  // };
+   
 
 
 };

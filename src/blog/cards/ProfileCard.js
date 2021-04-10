@@ -15,28 +15,15 @@ const formSchema = yup.object({
 });
 
 const ProfileCard = (props) => {
-  console.log("ProfileCard props:", props);
-  
-  const [us_state, set_us_state] = React.useState("");
-  const handleChange = (event) => {
-    set_us_state(event.target.value);
-  };
-
-
-
-
-
+   
   const dispatch = useDispatch();
-
   const [seeDetails, setSeeDetails] = useState(false);
-
   const [inProgress, setInProgress] = useState(false);
-  console.log("inProgress:", inProgress);
+
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
 
-  const [loading, setLoading] = useState(false);
 const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
 ;
   return (
@@ -88,15 +75,12 @@ const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','Cal
                   onSubmit={(values) => {
                     console.log("values:", values);
                     setInProgress(true);
-                    setLoading(true);
-                    dispatch(authAction.updateUser(values))
+                     dispatch(authAction.updateUser(values))
                       .then(async (result) => {
                         console.log("update result:", result);
 
-                        setTimeout(() => setLoading(false), 3000);
                         if (result.success) {
                           setInProgress(true);
-                          //setLoading(false)
                         }
                         props.refresh();
                       })

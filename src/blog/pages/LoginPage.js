@@ -37,8 +37,7 @@ function ButtonComponent(props) {
 
 export default function LoginPage(props) {
   const [loading, setLoading] = useState(false);
-  //const classes = useStyles();
-  const { ...rest } = props;
+  const { ...rest } = props; //? 
 
   //FORM AND REDUX  part 2: default export function
   const dispatch = useDispatch();

@@ -56,7 +56,7 @@ const SearchPage = (props) => {
     users
       .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
       .map((user, i) => {
-        return <PlainCard user={user}></PlainCard>;
+        return <PlainCard key={i} user={user}></PlainCard>;
       });
   };
   const clearSortOptions = () => {
@@ -92,7 +92,7 @@ const SearchPage = (props) => {
     const key = e.target.value;
      
      
-    if(key == '' || key == ' '){
+    if(key === '' || key === ' '){
        
       console.log('GET DEFAULT DATA BACK...')
       getDefaultUsers();
@@ -110,7 +110,7 @@ const displayUsers = () => {
         currentUsers
         .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
         .map((user, i) => {
-          return <PlainCard user={user}></PlainCard>;
+          return <PlainCard key={i} user={user}></PlainCard>;
         })
       )
     } 
@@ -119,7 +119,7 @@ const displayUsers = () => {
         currentUsers
         .sort((a, b) => (a.email > b.email ? 1 : -1))
         .map((user, i) => {
-          return <PlainCard user={user}></PlainCard>;
+          return <PlainCard key={i} user={user}></PlainCard>;
         })
       )
      
@@ -129,7 +129,7 @@ const displayUsers = () => {
         currentUsers
         .sort((a, b) => (a._id > b._id ? 1 : -1))
         .map((user, i) => {
-          return <PlainCard user={user}></PlainCard>;
+          return <PlainCard key={i}  user={user}></PlainCard>;
         })
       )
 
@@ -138,7 +138,7 @@ const displayUsers = () => {
     if(noSort){
       return(
         currentUsers.map((user, i) => {
-          return <PlainCard user={user}></PlainCard>;
+          return <PlainCard  key={i} user={user}></PlainCard>;
         })
       )
     }
