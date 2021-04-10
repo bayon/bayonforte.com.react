@@ -161,7 +161,7 @@ export const userProfile = () => {
 
 export const updateUser = (authData) => {
   console.log('authData',authData)
-  const { fullName, email, phone , profileImage } = authData;
+  const { fullName, email, phone , profileImage, address, city, state, zip } = authData;
   return async (dispatch) => {
     //benefit: can now make async http request to Register
     const result = await fetch(`${API_URL}/users/update`, {
@@ -173,7 +173,11 @@ export const updateUser = (authData) => {
         fullName,
         email,
         phone,
-        profileImage
+        profileImage,
+        address,
+        city,
+        state,
+        zip
       }),
     });
 

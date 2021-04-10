@@ -1,5 +1,6 @@
 import { CircularProgress, Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import Icon from "@material-ui/core/Icon";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
@@ -31,15 +32,11 @@ function ButtonComponent(props) {
   );
 }
 
-const fuckall = () => {
-  console.log('what the hell....')
-}
+ 
 
 const PlainCard = (props) => {
-    console.log('PlainCard props:',props)
 
     const dispatch = useDispatch();
-  
     const [seeDetails,setSeeDetails] = useState(false); 
 
     const [inProgress, setInProgress] = useState(false);
@@ -56,16 +53,20 @@ const PlainCard = (props) => {
       <Typography variant="h5" component="h2">
         {props.user.fullName}
       </Typography>
-
   
-      {/* <button onClick={() => {props.details(props.user)}} >details</button> */}
       <button onClick={() => {setSeeDetails(!seeDetails)} } >{seeDetails ? "hide" : "details" }</button>
       {seeDetails && 
       (
         <>
-        <Typography variant="body2" component="p" color="textSecondary">
-        {props.user.email}
-        </Typography>
+        
+        <div style={{ marginTop: 15 }}>
+                <a
+                  href={"mailto:"+props.user.email}
+                  style={{ color: "#222", textDecoration: "none" }}
+                >
+                  {props.user.email} <Icon>email</Icon>
+                </a>
+              </div>
         </>
       )
       }
