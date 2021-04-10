@@ -6,30 +6,71 @@ import PlainCard from "../cards/PlainCard";
 
 const SearchPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  var users = useSelector((state) => state.auth.users);
+  //var users = useSelector((state) => state.auth.users);
   var haveUsers = useSelector((state) => state.auth.haveUsers);
-
   const dispatch = useDispatch();
+
+// LEFT OFF HERE MESSING WITH CURRENT USERS REPLACING USERS AND THE FILTER>>>>>>>!!!!!! 
+  const [currentUsers,setCurrentUsers] = useState([])
 
   const [sortName, setSortName] = useState(false);
   const [sortEmail, setSortEmail] = useState(false);
   const [sortId, setSortId] = useState(false);
   const [sortZip, setSortZip] = useState(false);
   const [sortState, setSortState] = useState(false);
-  const [noSort, setNoSort] = useState(false);
+  const [noSort, setNoSort] = useState(true); //true by default
 
-  console.log("Search Page reached ...props:", props);
+  const [dataChanged,setDataChanged] = useState(false);
+  const [filterKey,setFilterKey] = useState('')
+
+  const getDefaultUsers = () => {
+    dispatch(authAction.allUsers())
+    .then(async (result) => {
+      console.log("ALL USERS RESULTS:", result);
+      setCurrentUsers(result)
+    })
+    .catch((err) => console.log(err));
+  }
+
+  const getFilteredUsers = (key) => {
+    dispatch(authAction.filterUsers(key))
+    .then(async (result) => {
+      console.log(" --oo--  FILTERED USERS RESULTS:", result);
+      setCurrentUsers(result)
+    })
+    .catch((err) => console.log(err));
+  }
+
+
   useEffect(() => {
     dispatch(authAction.allUsers())
       .then(async (result) => {
         console.log("ALL USERS RESULTS:", result);
+        setCurrentUsers(result)
       })
       .catch((err) => console.log(err));
+    //getDefaultUsers();
   }, []);
-  if (!auth) {
-    return <div>not authorized.</div>;
-  }
+  //dataChanged
+  // useEffect(()=> {
+  //   dispatch(authAction.filterUsers(filterKey))
+  //   .then(async (result) => {
+  //     console.log("----- FILTERED USERS RESULTS:", result);
+  //     setCurrentUsers(result)
+  //   })
+  //   .catch((err) => console.log(err));
 
+ 
+  // },[filterKey])
+ 
+// const filterTheUsers = () => {
+//   dispatch(authAction.filterUsers(filterKey))
+//   .then(async (result) => {
+//     console.log("----- FILTERED USERS RESULTS:", result);
+//     setCurrentUsers(result)
+//   })
+//   .catch((err) => console.log(err));
+// }
   
 
   const sortByFullName = (users) => {
@@ -66,6 +107,76 @@ const SearchPage = (props) => {
     }
   };
 
+  const setFilterOption = (e) => {
+
+    setFilterKey(e.target.value);
+    console.log('SETTING FILTER:');
+    const key = e.target.value;
+     
+     
+    if(key == '' || key == ' '){
+       
+      console.log('GET DEFAULT DATA BACK...')
+      getDefaultUsers();
+    }else{
+      setDataChanged(true)
+      getFilteredUsers(key);
+    }
+    
+  
+  }
+
+const displayUsers = () => {
+   if(haveUsers){
+    if( sortName){
+      return(
+        currentUsers
+        .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
+        .map((user, i) => {
+          return <PlainCard user={user}></PlainCard>;
+        })
+      )
+    } 
+    if(sortEmail){
+      return(
+        currentUsers
+        .sort((a, b) => (a.email > b.email ? 1 : -1))
+        .map((user, i) => {
+          return <PlainCard user={user}></PlainCard>;
+        })
+      )
+     
+    }
+    if(sortId){
+      return(
+        currentUsers
+        .sort((a, b) => (a._id > b._id ? 1 : -1))
+        .map((user, i) => {
+          return <PlainCard user={user}></PlainCard>;
+        })
+      )
+
+    }
+
+    if(noSort){
+      return(
+        currentUsers.map((user, i) => {
+          return <PlainCard user={user}></PlainCard>;
+        })
+      )
+    }
+  }
+  if(dataChanged){
+    console.log("D A T A   C H A N G E D   ! ! ! !")
+  }
+   
+}
+
+if (!auth) {
+  return <div>not authorized.</div>;
+}
+   
+
   return (
     <div>
       <Paper>
@@ -79,7 +190,7 @@ const SearchPage = (props) => {
               value="name"
               onChange={setSortOption}
             />
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input
               type="radio"
               id="email"
@@ -87,7 +198,7 @@ const SearchPage = (props) => {
               value="email"
               onChange={setSortOption}
             />
-            <label for="email">Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="radio"
               id="id"
@@ -95,39 +206,24 @@ const SearchPage = (props) => {
               value="id"
               onChange={setSortOption}
             />
-            <label for="id">Id</label>
+            <label htmlFor="id">Id</label>
+          </span>
+        </div>
+        <div>
+          <span>Filter:
+          
+            <input
+              type="text"
+              id="filterKey"
+              name="filterKey"
+              onBlur={setFilterOption}
+            />
+            <button>search</button>
           </span>
         </div>
 
-        {haveUsers &&
-          sortName &&
-          users
-            .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
-            .map((user, i) => {
-              return <PlainCard user={user}></PlainCard>;
-            })}
-
-        {haveUsers &&
-          sortEmail &&
-          users
-            .sort((a, b) => (a.email > b.email ? 1 : -1))
-            .map((user, i) => {
-              return <PlainCard user={user}></PlainCard>;
-            })}
-
-        {haveUsers &&
-          sortId &&
-          users
-            .sort((a, b) => (a._id > b._id ? 1 : -1))
-            .map((user, i) => {
-              return <PlainCard user={user}></PlainCard>;
-            })}
-
-        {haveUsers &&
-          noSort &&
-          users.map((user, i) => {
-            return <PlainCard user={user}></PlainCard>;
-          })}
+        {haveUsers && displayUsers()}
+        {/* {dataChanged && displayUsers()} */}
 
         <div>
           <ul>

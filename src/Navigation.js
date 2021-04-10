@@ -151,7 +151,7 @@ function Navigation(props) {
           ) : (
             <Grid item xs={12} sm={1}>
               <Link
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none",backgroundColor:"#ccc",color:"#fff" }}
                 to="/logout"
                 onClick={() => {
                   dispatch(authAction.logoutUser())
@@ -162,7 +162,7 @@ function Navigation(props) {
                     .catch((err) => console.log(err));
                 }}
               >
-                <LinkStyle>Logout</LinkStyle>
+                <LinkStyle style={{ textDecoration: "none",backgroundColor:"#ccc",color:"#fff" }} >Logout</LinkStyle>
               </Link>
             </Grid>
           )}

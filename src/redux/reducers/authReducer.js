@@ -1,7 +1,17 @@
 import {
   ALL_USERS_FAIL,
   ALL_USERS_SUCCESS,
-  LOGIN_USER_FAIL,
+
+
+
+
+
+
+
+
+
+  FILTER_USERS_FAIL,
+  FILTER_USERS_SUCCESS, LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
   REGISTER_USER_FAIL,
@@ -49,6 +59,12 @@ export default function (state = initialState, action) {
         haveUsers: true,
       };
       break;
+      case ALL_USERS_FAIL:
+        return {
+          ...state,
+          errors: true,
+        };
+        break;
     case USER_PROFILE_SUCCESS:
       return {
         ...state,
@@ -69,12 +85,7 @@ export default function (state = initialState, action) {
         errors: true,
       };
       break;
-    case ALL_USERS_FAIL:
-      return {
-        ...state,
-        errors: true,
-      };
-      break;
+   
     case USER_PROFILE_FAIL:
       return {
         ...state,
@@ -94,6 +105,22 @@ export default function (state = initialState, action) {
         errors: true,
       };
       break;
+
+      case FILTER_USERS_SUCCESS:
+        return {
+          ...state,
+          users: action.payload,
+          haveUsers: true,
+        };
+        break;
+        case FILTER_USERS_FAIL:
+          return {
+            ...state,
+            errors: true,
+          };
+          break;
+
+
     default:
       break;
   }
