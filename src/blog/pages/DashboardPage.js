@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
-
+import CreatePost from "../components/CreatePost/CreatePost";
  
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -72,6 +72,14 @@ export default function DashboardPage(props) {
              
             <Grid item xs={12}>
                 Dashboard Page
+                <ul>
+                  <li>Create a Post</li>
+                  <li>Go to Search Posts</li>
+                  
+                </ul>
+            </Grid>
+            <Grid item xs={12}>
+              <CreatePost></CreatePost>
             </Grid>
          
           </Grid>
