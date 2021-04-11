@@ -34,6 +34,7 @@ export const allPosts = () => {
         dispatch({
             type: ALL_POSTS_SUCCESS,
             payload: resultData,
+            
           });
       } else {
         dispatch({
