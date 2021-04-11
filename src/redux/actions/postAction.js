@@ -1,8 +1,11 @@
 import { config } from '../../Constants';
 
 //
-export const ALL_POSTS_SUCCESS = "ALL_POSTS_SUCCESS";
-export const ALL_POSTS_FAIL = "ALL_POSTS_FAIL";
+export const ALL_USER_POSTS_SUCCESS = "ALL_USER_POSTS_SUCCESS";
+export const ALL_USER_POSTS_FAIL = "ALL_USER_POSTS_FAIL";
+
+export const ALL_SITE_POSTS_SUCCESS = "ALL_SITE_POSTS_SUCCESS";
+export const ALL_SITE_POSTS_FAIL = "ALL_SITE_POSTS_FAIL";
 
 export const POST_GET_SUCCESS = "POST_GET_SUCCESS";
 export const POST_GET_FAIL = "POST_GET_FAIL";
@@ -19,9 +22,11 @@ export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 const API_URL = config.url.API_URL
  
 
-export const allPosts = () => {
+
+
+export const allSitePosts = () => {
   return async (dispatch) => {
-    const result = await fetch(`${API_URL}/posts/posts`, {
+    const result = await fetch(`${API_URL}/posts/site/posts`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -32,13 +37,13 @@ export const allPosts = () => {
       const resultData = await result.json();
       if(resultData){
         dispatch({
-            type: ALL_POSTS_SUCCESS,
+            type: ALL_SITE_POSTS_SUCCESS,
             payload: resultData,
             
           });
       } else {
         dispatch({
-            type: ALL_POSTS_FAIL,
+            type: ALL_SITE_POSTS_FAIL,
           });
       }
       return resultData;  
@@ -184,7 +189,57 @@ export const filterPosts = (key) => {
       return resultData;  
     
   };
-   
+};
 
-
+export const allUserPosts = (key) => {
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/posts/user/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: ALL_USER_POSTS_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: ALL_USER_POSTS_FAIL,
+          });
+      }
+      return resultData;  
+    
+  };
+  // return async (dispatch) => {
+  //   const result = await fetch(`${API_URL}/posts/user/posts`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+     
+  //     });
+  
+  //     const resultData = await result.json();
+  //     if(resultData){
+  //       dispatch({
+  //           type: ALL_USER_POSTS_SUCCESS,
+  //           payload: resultData,
+            
+  //         });
+  //     } else {
+  //       dispatch({
+  //           type: ALL_USER_POSTS_FAIL,
+  //         });
+  //     }
+  //     return resultData;  
+    
+  // };
 };

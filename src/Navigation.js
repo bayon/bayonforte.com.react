@@ -11,6 +11,7 @@ import styled from "styled-components";
 import "./App.css";
 //import logo from "./blog/assets/img/blue-cottage-840-464-widened-to-1024.png";
 import Blog from "./blog/Blog";
+import AllSitePostsPage from "./blog/pages/AllSitePostsPage";
 import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
@@ -18,6 +19,7 @@ import RegisterPage from "./blog/pages/RegisterPage";
 import UsersPage from "./blog/pages/UsersPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
+
 
 const LinkStyle = styled.section`
   padding: 0.3em;
@@ -122,6 +124,23 @@ function Navigation(props) {
                   <LinkStyle>Users</LinkStyle>
                 </Link>
               </Grid>
+
+
+
+              <Grid item xs={12} sm={1}>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                  }}
+                  to="/allSitePosts"
+                >
+                  <LinkStyle>Posts</LinkStyle>
+                </Link>
+              </Grid>
+
+
+
+
             </>
           )}
 
@@ -177,6 +196,7 @@ function Navigation(props) {
 
       <Route path="/profile" component={ProfilePage} />
       <Route path="/users" component={UsersPage} />
+      <Route path="/allSitePosts" component={AllSitePostsPage} />
       <Route path="/logout" component={Blog} />
     </Router>
   );

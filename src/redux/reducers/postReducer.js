@@ -1,6 +1,6 @@
 import {
-  ALL_POSTS_FAIL,
-  ALL_POSTS_SUCCESS,
+  ALL_SITE_POSTS_FAIL,
+  ALL_SITE_POSTS_SUCCESS,
   CREATE_POST_FAIL,
   CREATE_POST_SUCCESS,
   FILTER_POSTS_FAIL,
@@ -18,13 +18,24 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ALL_POSTS_SUCCESS:
+    case ALL_USER_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.payload,
         havePosts: true,
       };
-    case ALL_POSTS_FAIL:
+    case ALL_USER_POSTS_FAIL:
+      return {
+        ...state,
+        errors: true,
+      };
+    case ALL_SITE_POSTS_SUCCESS:
+      return {
+        ...state,
+        posts: action.payload,
+        havePosts: true,
+      };
+    case ALL_SITE_POSTS_FAIL:
       return {
         ...state,
         errors: true,

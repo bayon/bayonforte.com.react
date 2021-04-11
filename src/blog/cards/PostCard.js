@@ -113,7 +113,6 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                   onSubmit={(values) => {
                     console.log("values:", values);
                     setInProgress(true);
-                    alert('should close...')
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {

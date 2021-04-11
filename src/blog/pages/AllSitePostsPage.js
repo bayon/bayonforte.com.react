@@ -1,47 +1,15 @@
 import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as authAction from "../../redux/actions/authAction";
 import * as postAction from "../../redux/actions/postAction";
 import PostDisplayCard from "../cards/PostDisplayCard";
 
 
-
-const UsersPostsPage = (props) => {
+const AllSitePostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-
-
-
-  const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
-
-  //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
+  
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(authAction.userProfile())
-      .then(async (result) => {
-        console.log("AUTH CHECK: profile to check auth ...result:", result);
-        setUser(result.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-
-
-
-  //var user = useSelector((state) => state.auth.user);
-  if(user){
-    console.log("- - - - - - - - - -user:",user);
-    var key = user._id;
-  } else {
-    console.log('do not have user yet ? or at all ? ')
-  }
-
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //var havePosts = useSelector((state) => state.post.havePosts); ???? 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
   const [currentPosts,setCurrentPosts] = useState([])
   const [haveCurrentPosts,setHaveCurrentPosts] = useState(false)
@@ -55,9 +23,9 @@ const UsersPostsPage = (props) => {
 
   const [filterKey,setFilterKey] = useState('')
 
-  const getDefaultPosts = (key) => {
+  const getDefaultPosts = () => {
     //Function needed to handle case where search input empty or a space.
-    dispatch(postAction.allUserPosts(key))
+    dispatch(postAction.allSitePosts())
     .then(async (result) => {
       console.log("ALL POSTS RESULTS FUNCTION:", result);
       setCurrentPosts(result)
@@ -79,16 +47,14 @@ const UsersPostsPage = (props) => {
 
   useEffect(() => {
     //initial gets all users once.
-    console.log("user.id:",user._id)
-    console.log(typeof user._id)
-    dispatch(postAction.allUserPosts(user._id))
+    dispatch(postAction.allSitePosts())
       .then(async (result) => {
         console.log("ALL POSTS RESULTS USEEFFECT:", result);
         setCurrentPosts(result)
         setHaveCurrentPosts(true)
       })
       .catch((err) => console.log(err));
-   }, [user]);
+   }, []);
    
   
 
@@ -135,7 +101,7 @@ const UsersPostsPage = (props) => {
     if(key === '' || key === ' '){
        
       console.log('GET DEFAULT DATA BACK...')
-      getDefaultPosts(user._id);
+      getDefaultPosts();
     }else{
       getFilteredPosts(key);
     }
@@ -237,8 +203,7 @@ if (!auth) {
             <button>displayPosts</button>
           </span>
         </div>
-        {haveCurrentPosts && (<p>JACK HAS POSTS</p>)}
-        {currentPosts && <p>Jack got some currentPosts.</p>}
+      
         {haveCurrentPosts && displayPosts()}
  
        
@@ -247,6 +212,6 @@ if (!auth) {
   );
 };
 
-export default UsersPostsPage;
+export default AllSitePostsPage;
 
  

@@ -37,19 +37,14 @@ const PostPage = (props) => {
         <div style={{ textAlign: "left" }}>
           <ul>
             <li>
-             Post Page
-              <ul>
-               
-                
-                <li>Public Title:</li>
-                <li>Public Story:</li>
-                
-              </ul>
+             Users Post Page
+             *Make sure JUST the users Posts here, as opposed to all user posts.
             </li>
             <li>
               ACTIONS: 
               <ul>
-                <li>Edit My Post Info</li>
+                <li>Edit My Post Info: Delete , Make Inactive, etc...</li>
+                <li>See 'live' version of my post.</li>
                
               </ul>
             </li>
