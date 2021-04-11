@@ -15,7 +15,7 @@ import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
-import SearchPage from "./blog/pages/SearchPage";
+import UsersPage from "./blog/pages/UsersPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
 
@@ -117,9 +117,9 @@ function Navigation(props) {
                   style={{
                     textDecoration: "none",
                   }}
-                  to="/search"
+                  to="/users"
                 >
-                  <LinkStyle>Search</LinkStyle>
+                  <LinkStyle>Users</LinkStyle>
                 </Link>
               </Grid>
             </>
@@ -176,7 +176,7 @@ function Navigation(props) {
       <Route path="/dashboard" component={DashboardPage} />
 
       <Route path="/profile" component={ProfilePage} />
-      <Route path="/search" component={SearchPage} />
+      <Route path="/users" component={UsersPage} />
       <Route path="/logout" component={Blog} />
     </Router>
   );

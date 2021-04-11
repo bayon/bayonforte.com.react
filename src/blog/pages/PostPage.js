@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as authAction from "../../redux/actions/authAction";
-import ProfileCard from "../cards/ProfileCard";
+import * as postAction from "../../redux/actions/postAction";
+import PostCard from "../cards/PostCard";
 
-const ProfilePage = (props) => {
+const PostPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  const [user, setUser] = useState({});
-  //var user = useSelector((state) => state.auth.user);
-  //var haveUser = useSelector((state) => state.auth.haveUser);
+  const [post, setPost] = useState({});
   const dispatch = useDispatch();
 
    useEffect(() => {
-    dispatch(authAction.userProfile())
+    dispatch(postAction.getPost())
       .then(async (result) => {
         console.log("result:", result);
-        setUser(result.data);
+        setPost(result.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -22,11 +20,11 @@ const ProfilePage = (props) => {
   if (!auth) {
     return <div>not authorized.</div>;
   }
-  const getUserProfile = () => {
-    dispatch(authAction.userProfile())
+  const getPosts = () => {
+    dispatch(postAction.getPost())
       .then(async (result) => {
         console.log("result:", result);
-        setUser(result.data);
+        setPost(result.data);
       })
       .catch((err) => console.log(err));
   };
@@ -34,18 +32,15 @@ const ProfilePage = (props) => {
   
 
   return (
-    <div>
-      
-        
-
-        <ProfileCard user={user} refresh={getUserProfile}></ProfileCard>
+    <div>        
+        <PostCard post={post} refresh={getPosts}></PostCard>
         <div style={{ textAlign: "left" }}>
           <ul>
             <li>
-              PERSONAL PROFILE
+             Post Page
               <ul>
                
-                <li>activate/deactivate account</li>
+                
                 <li>Public Title:</li>
                 <li>Public Story:</li>
                 
@@ -54,8 +49,8 @@ const ProfilePage = (props) => {
             <li>
               ACTIONS: 
               <ul>
-                <li>Edit My Profile Info</li>
-                <li>Verify My Information.</li>
+                <li>Edit My Post Info</li>
+               
               </ul>
             </li>
           </ul>
@@ -66,4 +61,4 @@ const ProfilePage = (props) => {
   );
 };
 
-export default ProfilePage;
+export default PostPage;
