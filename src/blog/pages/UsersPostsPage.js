@@ -30,13 +30,7 @@ const UsersPostsPage = (props) => {
 
 
 
-  //var user = useSelector((state) => state.auth.user);
-  if(user){
-    console.log("- - - - - - - - - -user:",user);
-    var key = user._id;
-  } else {
-    console.log('do not have user yet ? or at all ? ')
-  }
+  
 
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //var havePosts = useSelector((state) => state.post.havePosts); ???? 
