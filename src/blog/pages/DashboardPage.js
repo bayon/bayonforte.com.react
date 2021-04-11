@@ -65,8 +65,6 @@ export default function DashboardPage(props) {
             { auth && 
               <p>Hello, {user.fullName}</p>
             }
-
-          
           </Grid>
 
           </Toolbar>
