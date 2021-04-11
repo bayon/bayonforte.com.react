@@ -4,10 +4,17 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from "yup";
+// import PostImageForm from "../components/PostImageForm";
+import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
-import PostImageForm from "../components/PostImageForm";
 import "./card.css";
 import PostPreviewCard from "./PostPreviewCard";
+
+
+
+
+const HOST_URL = config.url.HOST_URL;
+
 
 
 const formSchema = yup.object({
@@ -78,36 +85,43 @@ const post_categories = ["select one", "looking for work","looking to hire"]
               direction="row"
             >
               <Grid item xs={12} sm={6}>
-                <PostImageForm props={props}></PostImageForm>
+                {/* <PostImageForm props={props}></PostImageForm> */}
+                <img
+              src={`${HOST_URL}/public/images/`+ user.data.profileImage } //+ props.props.post.postImage
+              alt="img"
+              style={{ height: "100px", width: "auto", borderRadius: "15px" }}
+            />
               </Grid>
               <Grid item xs={12} sm={6}>
                 {/* //FORM AND REDUX  part 3 JSX*/}
-                <p>{user.data._id}</p>
                 <Formik
                   initialValues={{
                     userId: user.data._id,
                     title: '',
                     description: '',
                     category: '',
-                    email: user.email,
-                    phone: user.phone,
-                    address: user.address,
-                    city: user.city,
+                    email: user.data.email,
+                    phone: user.data.phone,
+                    address: user.data.address,
+                    city: user.data.city,
                     state: user.state,
-                    zip: user.zip,
-                    postImage: ''
+                    zip: user.data.zip,
+                    postImage: user.data.profileImage
                   }}
                   // !PostImage REQUIRED here so as to not get deleted accidentally.
                   validationSchema={formSchema}
                   onSubmit={(values) => {
                     console.log("values:", values);
                     setInProgress(true);
+                    alert('should close...')
+                    setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
                         console.log("create post result:", result);
-
+                        // seeDetails(false);
                         if (result.success) {
-                          setInProgress(true);
+                          //setInProgress(true);
+                          //seeDetails(false);
                         }
                         props.refresh();
                       })
