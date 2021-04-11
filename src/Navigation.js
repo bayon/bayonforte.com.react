@@ -104,28 +104,6 @@ function Navigation(props) {
                   <LinkStyle>Dashboard</LinkStyle>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={1}>
-                <Link
-                  style={{
-                    textDecoration: "none",
-                  }}
-                  to="/profile"
-                >
-                  <LinkStyle>Profile</LinkStyle>
-                </Link>
-              </Grid>
-              {/* <Grid item xs={12} sm={1}>
-                <Link
-                  style={{
-                    textDecoration: "none",
-                  }}
-                  to="/users"
-                >
-                  <LinkStyle>Users</LinkStyle>
-                </Link>
-              </Grid> */}
-
-
 
               <Grid item xs={12} sm={1}>
                 <Link
@@ -139,7 +117,29 @@ function Navigation(props) {
               </Grid>
 
 
+              <Grid item xs={12} sm={1}>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                  }}
+                  to="/profile"
+                >
+                  <LinkStyle>Profile</LinkStyle>
+                </Link>
+              </Grid>
 
+
+              {/* <Grid item xs={12} sm={1}>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                  }}
+                  to="/users"
+                >
+                  <LinkStyle>Users</LinkStyle>
+                </Link>
+              </Grid> */}
+ 
 
             </>
           )}

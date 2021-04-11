@@ -51,8 +51,7 @@ const PostPage = (props) => {
             <li>
             ENTIRE SITE TODOS:
               <ul>
-                
-                <li>Edit and Delete Posts.</li>
+                <li>Edit and Delete 'My Posts'.</li>
                 <li>Improve Search</li>
                 <li>Finish Filters</li>
                 <li>add website as profile and post info.</li>
@@ -60,7 +59,14 @@ const PostPage = (props) => {
                 <li>Map Locations</li>
                 <li>Tie Payments to Post Creation.</li>
                 <li>Tag other posts.</li>
-                
+                <li>correct image rotation from droid uploads.</li>
+                <li>add 'time-posted field' to be able to search by 'latest' posts.</li>
+                <li>inner messaging system for privacy concerned users.</li>
+                <li>display 'my tagged posts' in dashboard. </li>
+                <li>IF posts are to have a 'life time of a week' need way to track and check when no longer valid.</li>
+                <li>keep old posts so they can be re-used </li>
+                <li>make a subscription option, to make keeping posts up to date easier for the user.</li>
+                <li>Make sure 'newly created posts' are displayed immediately.</li>
               </ul>
             </li>
           </ul>

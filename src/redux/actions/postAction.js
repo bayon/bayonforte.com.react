@@ -124,7 +124,9 @@ export const getPost = () => {
 
 
 export const updatePost = (postData) => {
-  const { fullName, email, phone , postImage, address, city, state, zip } = postData;
+  console.log('POST ACTION UPDATE POST: postData:',postData)
+  const {  postId,userId,title, description, category,email ,phone , address, city, state, zip, postImage} = postData;
+  //post versus posts in URL 
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/update`, {
       method: "PUT",
@@ -132,14 +134,18 @@ export const updatePost = (postData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fullName,
-        email,
-        phone,
-        postImage,
-        address,
-        city,
-        state,
-        zip
+        postId,
+        userId,
+        title, 
+        description, 
+        category,
+        email ,
+        phone , 
+        address, 
+        city, 
+        state, 
+        zip, 
+        postImage
       }),
     });
 
