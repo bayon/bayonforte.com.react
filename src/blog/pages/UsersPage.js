@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import PlainCard from "../cards/PlainCard";
 
-const SearchPage = (props) => {
+const UsersPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
   var haveUsers = useSelector((state) => state.auth.haveUsers);
   const dispatch = useDispatch();
@@ -199,39 +199,12 @@ if (!auth) {
 
         {haveUsers && displayUsers()}
  
-        <div>
-          <ul>
-            <li>
-              DETAILS
-              <ul>
-                <li>See Contact Details and General Info of Individual Post</li>
-                <li>Is the poster's info verified.</li>
-                <li>Map of Posters location.</li>
-                <li>Distance Poster is willing to travel.</li>
-                <li>Image of Poster</li>
-              </ul>
-            </li>
-            <li>
-              ACTIONS:
-              <ul>
-                <li>
-                  Send Poster a request to :
-                  <ul>
-                    <li>Get an Estimate</li>
-                    <li>Collaborate on a job.</li>
-                    <li>Leave comments on Experience or Service.</li>
-                  </ul>
-                </li>
-                <li>Search and Filter the list </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+       
       </Paper>
     </div>
   );
 };
 
-export default SearchPage;
+export default UsersPage;
 
  
