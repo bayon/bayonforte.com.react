@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import "./card.css";
 
  
-const PlainCard = (props) => {
+const PostDisplayCard = (props) => {
 
      const [seeDetails,setSeeDetails] = useState(false); 
 
@@ -19,7 +19,7 @@ const PlainCard = (props) => {
   return (
     <div  className="card-plain">
       <Typography variant="h5" component="h2">
-        {props.user.fullName}
+        {props.post.title}
       </Typography>
   
       <button onClick={() => {setSeeDetails(!seeDetails)} } >{seeDetails ? "hide" : "details" }</button>
@@ -29,11 +29,17 @@ const PlainCard = (props) => {
         
         <div style={{ marginTop: 15 }}>
                 <a
-                  href={"mailto:"+props.user.email}
+                  href={"mailto:"+props.post.email}
                   style={{ color: "#222", textDecoration: "none" }}
                 >
-                  {props.user.email} <Icon>email</Icon>
+                  {props.post.email} <Icon>email</Icon>
                 </a>
+              </div>
+              <div>
+              {props.post.description}
+              </div>
+              <div>
+              {props.post.phone}
               </div>
         </>
       )
@@ -42,4 +48,4 @@ const PlainCard = (props) => {
   );
 };
 
-export default PlainCard;
+export default PostDisplayCard;

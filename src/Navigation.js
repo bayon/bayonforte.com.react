@@ -11,13 +11,15 @@ import styled from "styled-components";
 import "./App.css";
 //import logo from "./blog/assets/img/blue-cottage-840-464-widened-to-1024.png";
 import Blog from "./blog/Blog";
+import AllSitePostsPage from "./blog/pages/AllSitePostsPage";
 import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
-import SearchPage from "./blog/pages/SearchPage";
+// import UsersPage from "./blog/pages/UsersPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
+
 
 const LinkStyle = styled.section`
   padding: 0.3em;
@@ -46,8 +48,8 @@ function Navigation(props) {
 
   return (
     <Router>
-      <Toolbar>
-        <Grid container spacing={1}>
+      <Toolbar >
+        <Grid container spacing={1} >
           <Grid item xs={12} sm={3}>
             <Typography
               component="h6"
@@ -112,16 +114,33 @@ function Navigation(props) {
                   <LinkStyle>Profile</LinkStyle>
                 </Link>
               </Grid>
+              {/* <Grid item xs={12} sm={1}>
+                <Link
+                  style={{
+                    textDecoration: "none",
+                  }}
+                  to="/users"
+                >
+                  <LinkStyle>Users</LinkStyle>
+                </Link>
+              </Grid> */}
+
+
+
               <Grid item xs={12} sm={1}>
                 <Link
                   style={{
                     textDecoration: "none",
                   }}
-                  to="/search"
+                  to="/allSitePosts"
                 >
-                  <LinkStyle>Search</LinkStyle>
+                  <LinkStyle>Posts</LinkStyle>
                 </Link>
               </Grid>
+
+
+
+
             </>
           )}
 
@@ -176,7 +195,8 @@ function Navigation(props) {
       <Route path="/dashboard" component={DashboardPage} />
 
       <Route path="/profile" component={ProfilePage} />
-      <Route path="/search" component={SearchPage} />
+      {/* <Route path="/users" component={UsersPage} /> */}
+      <Route path="/allSitePosts" component={AllSitePostsPage} />
       <Route path="/logout" component={Blog} />
     </Router>
   );

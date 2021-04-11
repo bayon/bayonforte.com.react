@@ -6,8 +6,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import AudioMaster from "../components/AudioNote/AudioMaster";
-import CreatePost from "../components/CreatePost/CreatePost";
-
+// import CreatePost from "../components/CreatePost/CreatePost";
+import PostPage from "./PostPage";
+import UsersPostsPage from "./UsersPostsPage";
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -39,7 +40,7 @@ export default function DashboardPage(props) {
 
   const dispatch = useDispatch();
 
-  console.log("Search Page reached ...props:", props);
+  console.log("Dashboard Page reached ...props:", props);
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
@@ -65,23 +66,21 @@ export default function DashboardPage(props) {
             { auth && 
               <p>Hello, {user.fullName}</p>
             }
-
-          
           </Grid>
 
           </Toolbar>
           <Grid container className={classes.mainGrid} >
              
             <Grid item xs={12}>
-                Dashboard Page
-                <ul>
-                  <li>Create a Post</li>
-                  <li>Go to Search Posts</li>
-                  
-                </ul>
+                <h1>Dashboard</h1>
             </Grid>
-            <Grid item xs={12}>
-              <CreatePost></CreatePost>
+            <Grid item xs={12} sm={6}>
+              <PostPage></PostPage>
+              {/* <CreatePost></CreatePost> */}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <p>My Posts:</p>
+              <UsersPostsPage></UsersPostsPage>
             </Grid>
             <Grid>
               <p>create audio note:</p>

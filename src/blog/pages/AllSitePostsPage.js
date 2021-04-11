@@ -1,15 +1,18 @@
 import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as authAction from "../../redux/actions/authAction";
-import PlainCard from "../cards/PlainCard";
+import * as postAction from "../../redux/actions/postAction";
+import AllSitePostsDisplayCard from "../cards/AllSitePostsDisplayCard";
 
-const SearchPage = (props) => {
+
+const AllSitePostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-  var haveUsers = useSelector((state) => state.auth.haveUsers);
+  
+
   const dispatch = useDispatch();
 
-  const [currentUsers,setCurrentUsers] = useState([])
+  const [currentPosts,setCurrentPosts] = useState([])
+  const [haveCurrentPosts,setHaveCurrentPosts] = useState(false)
 
   const [sortName, setSortName] = useState(false);
   const [sortEmail, setSortEmail] = useState(false);
@@ -20,21 +23,23 @@ const SearchPage = (props) => {
 
   const [filterKey,setFilterKey] = useState('')
 
-  const getDefaultUsers = () => {
+  const getDefaultPosts = () => {
     //Function needed to handle case where search input empty or a space.
-    dispatch(authAction.allUsers())
+    dispatch(postAction.allSitePosts())
     .then(async (result) => {
-      console.log("ALL USERS RESULTS FUNCTION:", result);
-      setCurrentUsers(result)
+      console.log("ALL POSTS RESULTS FUNCTION:", result);
+      setCurrentPosts(result)
+      setHaveCurrentPosts(true)
     })
     .catch((err) => console.log(err));
   }
 
-  const getFilteredUsers = (key) => {
-    dispatch(authAction.filterUsers(key))
+  const getFilteredPosts = (key) => {
+    dispatch(postAction.filterPosts(key))
     .then(async (result) => {
-      console.log(" --oo--  FILTERED USERS RESULTS:", result);
-      setCurrentUsers(result)
+      console.log(" --oo--  FILTERED POSTS RESULTS:", result);
+      setCurrentPosts(result)
+      setHaveCurrentPosts(true)
     })
     .catch((err) => console.log(err));
   }
@@ -42,21 +47,22 @@ const SearchPage = (props) => {
 
   useEffect(() => {
     //initial gets all users once.
-    dispatch(authAction.allUsers())
+    dispatch(postAction.allSitePosts())
       .then(async (result) => {
-        console.log("ALL USERS RESULTS USEEFFECT:", result);
-        setCurrentUsers(result)
+        console.log("ALL POSTS RESULTS USEEFFECT:", result);
+        setCurrentPosts(result)
+        setHaveCurrentPosts(true)
       })
       .catch((err) => console.log(err));
    }, []);
    
   
 
-  const sortByFullName = (users) => {
-    users
-      .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
-      .map((user, i) => {
-        return <PlainCard key={i} user={user}></PlainCard>;
+  const sortByTitle = (posts) => {
+    posts
+      .sort((a, b) => (a.title > b.title ? 1 : -1))
+      .map((post, i) => {
+        return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
       });
   };
   const clearSortOptions = () => {
@@ -95,41 +101,42 @@ const SearchPage = (props) => {
     if(key === '' || key === ' '){
        
       console.log('GET DEFAULT DATA BACK...')
-      getDefaultUsers();
+      getDefaultPosts();
     }else{
-      getFilteredUsers(key);
+      getFilteredPosts(key);
     }
     
   
   }
 
-const displayUsers = () => {
-   if(haveUsers){
+const displayPosts = () => {
+    console.log("DISPALY POSTS.....")
+   if(haveCurrentPosts){
     if( sortName){
       return(
-        currentUsers
-        .sort((a, b) => (a.fullName > b.fullName ? 1 : -1))
-        .map((user, i) => {
-          return <PlainCard key={i} user={user}></PlainCard>;
+        currentPosts
+        .sort((a, b) => (a.title > b.title ? 1 : -1))
+        .map((post, i) => {
+          return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
     } 
     if(sortEmail){
       return(
-        currentUsers
+        currentPosts
         .sort((a, b) => (a.email > b.email ? 1 : -1))
-        .map((user, i) => {
-          return <PlainCard key={i} user={user}></PlainCard>;
+        .map((post, i) => {
+          return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
      
     }
     if(sortId){
       return(
-        currentUsers
+        currentPosts
         .sort((a, b) => (a._id > b._id ? 1 : -1))
-        .map((user, i) => {
-          return <PlainCard key={i}  user={user}></PlainCard>;
+        .map((post, i) => {
+          return <AllSitePostsDisplayCard key={i}  post={post}></AllSitePostsDisplayCard>;
         })
       )
 
@@ -137,8 +144,8 @@ const displayUsers = () => {
 
     if(noSort){
       return(
-        currentUsers.map((user, i) => {
-          return <PlainCard  key={i} user={user}></PlainCard>;
+        currentPosts.map((post, i) => {
+          return <AllSitePostsDisplayCard  key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
     }
@@ -182,6 +189,34 @@ if (!auth) {
               onChange={setSortOption}
             />
             <label htmlFor="id">Id</label>
+
+            <input
+              type="radio"
+              id="latest"
+              name="sortOption"
+              value="latest"
+              onChange={setSortOption}
+            />
+            <label htmlFor="latest">Latest</label>
+
+            <input
+              type="radio"
+              id="category1"
+              name="sortOption"
+              value="category1"
+              onChange={setSortOption}
+            />
+            <label htmlFor="category1">Looking For Work</label>
+            <input
+              type="radio"
+              id="category2"
+              name="sortOption"
+              value="category2"
+              onChange={setSortOption}
+            />
+            <label htmlFor="category2">Looking To Hire</label>
+
+            
           </span>
         </div>
         <div>
@@ -193,45 +228,18 @@ if (!auth) {
               name="filterKey"
               onBlur={setFilterOption}
             />
-            <button>search</button>
+            <button>displayPosts</button>
           </span>
         </div>
-
-        {haveUsers && displayUsers()}
+      
+        {haveCurrentPosts && displayPosts()}
  
-        <div>
-          <ul>
-            <li>
-              DETAILS
-              <ul>
-                <li>See Contact Details and General Info of Individual Post</li>
-                <li>Is the poster's info verified.</li>
-                <li>Map of Posters location.</li>
-                <li>Distance Poster is willing to travel.</li>
-                <li>Image of Poster</li>
-              </ul>
-            </li>
-            <li>
-              ACTIONS:
-              <ul>
-                <li>
-                  Send Poster a request to :
-                  <ul>
-                    <li>Get an Estimate</li>
-                    <li>Collaborate on a job.</li>
-                    <li>Leave comments on Experience or Service.</li>
-                  </ul>
-                </li>
-                <li>Search and Filter the list </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+       
       </Paper>
     </div>
   );
 };
 
-export default SearchPage;
+export default AllSitePostsPage;
 
  

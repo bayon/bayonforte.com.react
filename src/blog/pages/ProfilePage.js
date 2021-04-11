@@ -44,24 +44,17 @@ const ProfilePage = (props) => {
             <li>
               PERSONAL PROFILE
               <ul>
-                <li>
-                  a business card: name,phone,email,website, logo, zipcode,
-                </li>
-                <li>distance willing to travel</li>
+               
                 <li>activate/deactivate account</li>
-                <li>
-                  additional preferences: willing to join forces, cowboy
-                  contractor only, etc....
-                </li>
-                <li>Type: Providing a Service, Hiring a Service.</li>
+                <li>Public Title:</li>
+                <li>Public Story:</li>
+                
               </ul>
             </li>
             <li>
               ACTIONS: 
               <ul>
                 <li>Edit My Profile Info</li>
-                <li>Create a POST to go into the Search List </li>
-                <li>Share Post on Facebook.</li>
                 <li>Verify My Information.</li>
               </ul>
             </li>
@@ -74,36 +67,3 @@ const ProfilePage = (props) => {
 };
 
 export default ProfilePage;
-
-/*
-import Paper from "@material-ui/core/Paper";
-import React from "react";
-import { useSelector } from "react-redux";
-
-const ProfilePage = (props) => {
-  var auth = useSelector((state) => state.auth.authorized);
-  //console.log("Profile Page reached or what? props:", props);
-
- 
-  
-  if(!auth){
-    return(<div>not authorized.</div>)
-  }
-
-  return (
-    <div>
-      <Paper>      </Paper>
-
-      <div>ProfilePage</div>
-      <ul>
-        <li>CRUD: a business card: name,phone,email,website, logo, zipcode, distance willing to travel,activate/deactivate.</li>
-        <li>additional preferences: willing to join forces, cowboy contractor only, etc....</li>
-        <li>Type: Providing a Service, Hiring a Service.</li>
-      </ul>
-    </div>
-  );
-};
-
-export default ProfilePage;
-
-*/
