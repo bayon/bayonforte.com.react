@@ -37,7 +37,7 @@ const PostPage = (props) => {
         <div style={{ textAlign: "left" }}>
           <ul>
             <li>
-             Users Post Page
+             USERS POST PAGE:
              *Make sure JUST the users Posts here, as opposed to all user posts.
             </li>
             <li>
@@ -46,6 +46,21 @@ const PostPage = (props) => {
                 <li>Edit My Post Info: Delete , Make Inactive, etc...</li>
                 <li>See 'live' version of my post.</li>
                
+              </ul>
+            </li>
+            <li>
+            ENTIRE SITE TODOS:
+              <ul>
+                
+                <li>Edit and Delete Posts.</li>
+                <li>Improve Search</li>
+                <li>Finish Filters</li>
+                <li>add website as profile and post info.</li>
+                <li>Search By Distance from ZipCode.</li>
+                <li>Map Locations</li>
+                <li>Tie Payments to Post Creation.</li>
+                <li>Tag other posts.</li>
+                
               </ul>
             </li>
           </ul>

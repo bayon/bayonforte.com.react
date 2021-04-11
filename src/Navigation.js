@@ -16,7 +16,7 @@ import DashboardPage from "./blog/pages/DashboardPage";
 import LoginPage from "./blog/pages/LoginPage";
 import ProfilePage from "./blog/pages/ProfilePage";
 import RegisterPage from "./blog/pages/RegisterPage";
-import UsersPage from "./blog/pages/UsersPage";
+// import UsersPage from "./blog/pages/UsersPage";
 import "./navigation.css";
 import * as authAction from "./redux/actions/authAction";
 
@@ -48,8 +48,8 @@ function Navigation(props) {
 
   return (
     <Router>
-      <Toolbar>
-        <Grid container spacing={1}>
+      <Toolbar >
+        <Grid container spacing={1} >
           <Grid item xs={12} sm={3}>
             <Typography
               component="h6"
@@ -114,7 +114,7 @@ function Navigation(props) {
                   <LinkStyle>Profile</LinkStyle>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={1}>
+              {/* <Grid item xs={12} sm={1}>
                 <Link
                   style={{
                     textDecoration: "none",
@@ -123,7 +123,7 @@ function Navigation(props) {
                 >
                   <LinkStyle>Users</LinkStyle>
                 </Link>
-              </Grid>
+              </Grid> */}
 
 
 
@@ -195,7 +195,7 @@ function Navigation(props) {
       <Route path="/dashboard" component={DashboardPage} />
 
       <Route path="/profile" component={ProfilePage} />
-      <Route path="/users" component={UsersPage} />
+      {/* <Route path="/users" component={UsersPage} /> */}
       <Route path="/allSitePosts" component={AllSitePostsPage} />
       <Route path="/logout" component={Blog} />
     </Router>

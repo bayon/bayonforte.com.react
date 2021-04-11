@@ -231,8 +231,7 @@ if (!auth) {
             <button>displayPosts</button>
           </span>
         </div>
-        {haveCurrentPosts && (<p>JACK HAS POSTS</p>)}
-        {currentPosts && <p>Jack got some currentPosts.</p>}
+        
         {haveCurrentPosts && displayPosts()}
  
        

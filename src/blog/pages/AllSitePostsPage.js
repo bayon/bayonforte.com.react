@@ -2,7 +2,7 @@ import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as postAction from "../../redux/actions/postAction";
-import PostDisplayCard from "../cards/PostDisplayCard";
+import AllSitePostsDisplayCard from "../cards/AllSitePostsDisplayCard";
 
 
 const AllSitePostsPage = (props) => {
@@ -62,7 +62,7 @@ const AllSitePostsPage = (props) => {
     posts
       .sort((a, b) => (a.title > b.title ? 1 : -1))
       .map((post, i) => {
-        return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+        return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
       });
   };
   const clearSortOptions = () => {
@@ -117,7 +117,7 @@ const displayPosts = () => {
         currentPosts
         .sort((a, b) => (a.title > b.title ? 1 : -1))
         .map((post, i) => {
-          return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+          return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
     } 
@@ -126,7 +126,7 @@ const displayPosts = () => {
         currentPosts
         .sort((a, b) => (a.email > b.email ? 1 : -1))
         .map((post, i) => {
-          return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+          return <AllSitePostsDisplayCard key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
      
@@ -136,7 +136,7 @@ const displayPosts = () => {
         currentPosts
         .sort((a, b) => (a._id > b._id ? 1 : -1))
         .map((post, i) => {
-          return <PostDisplayCard key={i}  post={post}></PostDisplayCard>;
+          return <AllSitePostsDisplayCard key={i}  post={post}></AllSitePostsDisplayCard>;
         })
       )
 
@@ -145,7 +145,7 @@ const displayPosts = () => {
     if(noSort){
       return(
         currentPosts.map((post, i) => {
-          return <PostDisplayCard  key={i} post={post}></PostDisplayCard>;
+          return <AllSitePostsDisplayCard  key={i} post={post}></AllSitePostsDisplayCard>;
         })
       )
     }
@@ -189,6 +189,34 @@ if (!auth) {
               onChange={setSortOption}
             />
             <label htmlFor="id">Id</label>
+
+            <input
+              type="radio"
+              id="latest"
+              name="sortOption"
+              value="latest"
+              onChange={setSortOption}
+            />
+            <label htmlFor="latest">Latest</label>
+
+            <input
+              type="radio"
+              id="category1"
+              name="sortOption"
+              value="category1"
+              onChange={setSortOption}
+            />
+            <label htmlFor="category1">Looking For Work</label>
+            <input
+              type="radio"
+              id="category2"
+              name="sortOption"
+              value="category2"
+              onChange={setSortOption}
+            />
+            <label htmlFor="category2">Looking To Hire</label>
+
+            
           </span>
         </div>
         <div>
