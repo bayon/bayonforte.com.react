@@ -8,8 +8,7 @@ import * as yup from "yup";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
 import "./card.css";
-import PostPreviewCard from "./PostPreviewCard";
-
+ 
 
 
 
@@ -23,7 +22,7 @@ const formSchema = yup.object({
   phone: yup.string().min(10),
 });
 
-const PostCard = (props) => {
+const PostCreateCard = (props) => {
    
   const dispatch = useDispatch();
   const [seeDetails, setSeeDetails] = useState(false);
@@ -116,19 +115,17 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
-                        console.log("create post result:", result);
-                        // seeDetails(false);
-                        if (result.success) {
-                          //setInProgress(true);
-                          //seeDetails(false);
-                        }
-                        props.refresh();
+                        console.log("create post result:", result);//good.
+                       // ANOTHER dispatch would ONLY be good here for updating state. 
+                       // whether taht will update at the users posts list is the question. 
+
+                         
                       })
                       .catch((err) => console.log(err));
                   }}
                 >
                   {(props) => (
-                    <Grid container className="PostCardForm">
+                    <Grid container className="PostCreateCardForm">
                       <Grid item xs={12} sm={6}>
                         <Grid item xs={12} sm={6}>
                           <label>Post Title</label>
@@ -294,11 +291,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                 {/* //end  part 3*/}
               </Grid>
             </Grid>
-            <Grid container>
-                <Grid item xs={12}>
-                    <PostPreviewCard></PostPreviewCard>
-                </Grid>
-            </Grid>
+          
           </React.Fragment>
         </>
       )}
@@ -306,4 +299,4 @@ const post_categories = ["select one", "looking for work","looking to hire"]
   );
 };
 
-export default PostCard;
+export default PostCreateCard;

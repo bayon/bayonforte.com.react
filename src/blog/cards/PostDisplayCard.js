@@ -39,12 +39,18 @@ const PostDisplayCard = (props) => {
       </Grid>
       {seeDetails && (
         <Grid item xs={12} sm={12} style={{ background: "#eee" }}>
-          <Grid container spacing={0} direction="row"  >
+          <Grid container spacing={0} direction="row">
             <Grid item sm={10}>
               {!allowEdit && (
-                <Grid container direction="row" align="center" justify="center" style={{textAlign: "left", padding: "10px"}}>
-                  
-                  <Grid item xs={12} sm={10}  >
+                <Grid
+                  container
+                  direction="row"
+                  align="center"
+                  justify="center"
+                  style={{ textAlign: "left", padding: "10px" }}
+                >
+                  <Grid item xs={12} sm={10}>
+                    <p className="cardDevNote">PostDisplayCard</p>
                     <p>{props.post.title}</p>
                     <p>{props.post.description}</p>
                     <div>
@@ -53,13 +59,21 @@ const PostDisplayCard = (props) => {
                         style={{ color: "#222", textDecoration: "none" }}
                       >
                         {props.post.email}{" "}
-                        <Icon style={{ fontSize: ".8em" }}>email</Icon>
+                        <Icon className="cardIcon"  >email</Icon>
                       </a>
                     </div>
 
-                    <div>{props.post.phone}</div>
+                    <div>
+                      <a
+                        href={"tel:" + props.post.phone}
+                        style={{ color: "#222", textDecoration: "none" }}
+                      >
+                        {props.post.phone}
+                        <Icon className="cardIcon" >phone</Icon>
+                      </a>
+                    </div>
                   </Grid>
-                  <Grid item xs={12} sm={2} >
+                  <Grid item xs={12} sm={2}>
                     {/* <PostImageForm props={props}></PostImageForm> */}
                     <img
                       src={
@@ -73,7 +87,7 @@ const PostDisplayCard = (props) => {
                       }}
                     />
                   </Grid>
-                 </Grid>
+                </Grid>
               )}
             </Grid>
             <Grid item sm={2}>
@@ -94,6 +108,7 @@ const PostDisplayCard = (props) => {
               <EditPostCard
                 data={props.post}
                 closeEdit={closeEdit}
+                refresh={props.refresh}
               ></EditPostCard>
             </>
           )}

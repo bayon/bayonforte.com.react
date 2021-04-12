@@ -77,3 +77,12 @@
     border-radius: 4px;
   }
  
+  .cardIcon{
+    font-size: .8em !important;
+    margin-left:.8em;
+  }
+
+  .cardDevNote{
+    font-size:.7em;
+    font-style: italic;
+  }

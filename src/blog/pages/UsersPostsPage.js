@@ -1,22 +1,28 @@
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import * as postAction from "../../redux/actions/postAction";
 import PostDisplayCard from "../cards/PostDisplayCard";
-
+// import ModalCreatePost from "../components/ModalCreatePost";
 
 
 const UsersPostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
-
-
-
-  const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
-
-  //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
-
+  var newPost = useSelector((state) => state.newPost); //whenever new post created, use to trigger all posts refresh.
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
+
+
+
+// I NEED A USE EFFECT TO LISTEN FOR CHANGES ON LOWER COMPONENTS. 
+
+
+
+
+
+
 
   useEffect(() => {
     dispatch(authAction.userProfile())
@@ -27,18 +33,8 @@ const UsersPostsPage = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-
-
-
-  
-
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //var havePosts = useSelector((state) => state.post.havePosts); ???? 
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-  const [currentPosts,setCurrentPosts] = useState([])
-  const [haveCurrentPosts,setHaveCurrentPosts] = useState(false)
+  const [currentPosts, setCurrentPosts] = useState([]);
+  const [haveCurrentPosts, setHaveCurrentPosts] = useState(false);
 
   const [sortName, setSortName] = useState(false);
   const [sortEmail, setSortEmail] = useState(false);
@@ -47,44 +43,61 @@ const UsersPostsPage = (props) => {
   const [sortState, setSortState] = useState(false);
   const [noSort, setNoSort] = useState(true); //true by default
 
-  const [filterKey,setFilterKey] = useState('')
+  const [filterKey, setFilterKey] = useState("");
 
   const getDefaultPosts = (key) => {
     //Function needed to handle case where search input empty or a space.
     dispatch(postAction.allUserPosts(key))
-    .then(async (result) => {
-      console.log("ALL POSTS RESULTS FUNCTION:", result);
-      setCurrentPosts(result)
-      setHaveCurrentPosts(true)
-    })
-    .catch((err) => console.log(err));
-  }
-
-  const getFilteredOwnerPosts = (key, userId) => {
-    dispatch(postAction.filterOwnersPosts(key,userId))
-    .then(async (result) => {
-      console.log(" --xx--  FILTERED OWNER POSTS RESULTS:", result);
-      setCurrentPosts(result)
-      setHaveCurrentPosts(true)
-    })
-    .catch((err) => console.log(err));
-  }
-
-
-  useEffect(() => {
-    //initial gets all users once.
-    console.log("user.id:",user._id)
-    console.log(typeof user._id)
-    dispatch(postAction.allUserPosts(user._id))
       .then(async (result) => {
-        console.log("ALL POSTS RESULTS USEEFFECT:", result);
-        setCurrentPosts(result)
-        setHaveCurrentPosts(true)
+        console.log("ALL POSTS RESULTS FUNCTION:", result);
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
       })
       .catch((err) => console.log(err));
-   }, [user]);
-   
+  };
+
+  const getFilteredOwnerPosts = (key, userId) => {
+    dispatch(postAction.filterOwnersPosts(key, userId))
+      .then(async (result) => {
+        console.log(" --xx--  FILTERED OWNER POSTS RESULTS:", result);
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    //initial gets all users posts once.
+    dispatch(postAction.allUserPosts(user._id))
+      .then(async (result) => {
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
+      })
+      .catch((err) => console.log(err));
+  }, [user]); // user or post post broke something ? yes. 
+
+  useEffect(() => {
+    //initial gets all users posts once.
+    dispatch(postAction.allUserPosts(user._id))
+      .then(async (result) => {
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
+      })
+      .catch((err) => console.log(err));
+  }, [newPost]); // get new ones when posted...did NOT solve the problem .... 
   
+
+
+  //HERE?
+  // whenever currentPosts update I'd like to update state posts as well. (havePost and posts)
+  // ? I creates userPosts array in reducer...now how does AllSitePostsPage page do it. ? 
+  
+  // FLOW: currentPosts -> post to PostDisplayCard  props.post -> EditPostCard as 'data' THEN upon update...
+  //  dispatch(postAction.updatePost(values)) -> props.refresh() ? 
+
+  //NOW: whenever a new post is created, ALL the posts need to be re-queried to get it included. 
+  // useEffect based on state.post
+
 
   const sortByTitle = (posts) => {
     posts
@@ -120,79 +133,86 @@ const UsersPostsPage = (props) => {
   };
 
   const setFilterOption = (e) => {
-
     setFilterKey(e.target.value);
-    console.log('SETTING FILTER:');
+    console.log("SETTING FILTER:");
     const key = e.target.value;
-     
-     
-    if(key === '' || key === ' '){
-       
-      console.log('GET DEFAULT DATA BACK...')
+
+    if (key === "" || key === " ") {
+      console.log("GET DEFAULT DATA BACK...");
       getDefaultPosts(user._id);
-    }else{
-      const userId = user._id
-      getFilteredOwnerPosts(key,userId);
+    } else {
+      const userId = user._id;
+      getFilteredOwnerPosts(key, userId);
     }
-    
-  
+  };
+  //
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+  const refreshUserPosts = () => {
+    console.log('should refresh users posts here and now immediately after changing....')
+    //to do this...need to requery 
+    dispatch(postAction.allUserPosts(user._id))
+    .then(async (result) => {
+      setCurrentPosts(result);
+      setHaveCurrentPosts(true);
+    })
+    .catch((err) => console.log(err));
+
+    console.log("Question now is does this refreshed data continue down to the bottom component. YES SUCCESS!")
   }
 
-const displayPosts = () => {
-    console.log("DISPALY POSTS.....")
-   if(haveCurrentPosts){
-    if( sortName){
-      return(
-        currentPosts
-        .sort((a, b) => (a.title > b.title ? 1 : -1))
-        .map((post, i) => {
-          return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
-        })
-      )
-    } 
-    if(sortEmail){
-      return(
-        currentPosts
-        .sort((a, b) => (a.email > b.email ? 1 : -1))
-        .map((post, i) => {
-          return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
-        })
-      )
-     
-    }
-    if(sortId){
-      return(
-        currentPosts
-        .sort((a, b) => (a._id > b._id ? 1 : -1))
-        .map((post, i) => {
-          return <PostDisplayCard key={i}  post={post}></PostDisplayCard>;
-        })
-      )
+  const displayPosts = () => {
+    console.log("DISPALY POSTS.....");
+    if (haveCurrentPosts) {
+      if (sortName) {
+        return currentPosts
+          .sort((a, b) => (a.title > b.title ? 1 : -1))
+          .map((post, i) => {
+            return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+          });
+      }
+      if (sortEmail) {
+        return currentPosts
+          .sort((a, b) => (a.email > b.email ? 1 : -1))
+          .map((post, i) => {
+            return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+          });
+      }
+      if (sortId) {
+        return currentPosts
+          .sort((a, b) => (a._id > b._id ? 1 : -1))
+          .map((post, i) => {
+            return <PostDisplayCard key={i} post={post}></PostDisplayCard>;
+          });
+      }
 
+      if (noSort) {
+        return currentPosts.map((post, i) => {
+          return <PostDisplayCard key={i} post={post} refresh={refreshUserPosts} ></PostDisplayCard>;
+        });
+      }
     }
+  };
 
-    if(noSort){
-      return(
-        currentPosts.map((post, i) => {
-          return <PostDisplayCard  key={i} post={post}></PostDisplayCard>;
-        })
-      )
-    }
+  if (!auth) {
+    return <div>not authorized.</div>;
   }
- 
-   
-}
-
-if (!auth) {
-  return <div>not authorized.</div>;
-}
-   
 
   return (
-    <div>
+   
       <Paper>
-        <div>
-          <p>My Posts</p>
+         <Grid container direction="column">
+        <Grid item>
+          <p className="cardDevNote" >UsersPostPage</p>
           <span>
             Sort Options:
             <input
@@ -220,10 +240,10 @@ if (!auth) {
             />
             <label htmlFor="id">Id</label>
           </span>
-        </div>
-        <div>
-          <span>Filter:
-          
+        </Grid>
+        <Grid item>
+          <span>
+            Filter:
             <input
               type="text"
               id="filterKey"
@@ -232,16 +252,13 @@ if (!auth) {
             />
             <button>Search</button>
           </span>
-        </div>
-        
+        </Grid>
+
         {haveCurrentPosts && displayPosts()}
- 
-       
+        </Grid>
       </Paper>
-    </div>
+   
   );
 };
 
 export default UsersPostsPage;
-
- 

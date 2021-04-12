@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import * as postAction from "../../redux/actions/postAction";
 import "./card.css";
- // import PostPreviewCard from "./PostPreviewCard";
-
+ 
 
 const formSchema = yup.object({
   title: yup.string().required().min(3),
@@ -92,6 +91,7 @@ _id: "60730537d09d5d33501fc987"
                       //setInProgress(true);
                       //seeDetails(false);
                     }
+                    console.log("IT ALL STARTS HERE WITH REFRESH POSTS FOR USER.")
                     props.refresh();
                   })
                   .catch((err) => console.log(err));
@@ -100,7 +100,8 @@ _id: "60730537d09d5d33501fc987"
               {(props) => (
                 <Grid container className="EditPostCardForm">
                   <Grid item xs={12} sm={8}>
-                    
+                  <p className="cardDevNote" >EditPostCard</p>
+
                     <Grid item xs={12}>
                       <input
                         placeholder="Post Title"
@@ -266,11 +267,7 @@ _id: "60730537d09d5d33501fc987"
             <button onClick={props.closeEdit} style={{color:"orange"}}>cancel</button>
           </Grid>
         </Grid>
-        {/* <Grid container>
-          <Grid item xs={12}>
-            <PostPreviewCard></PostPreviewCard>
-          </Grid>
-        </Grid> */}
+      
       </React.Fragment>
     </>
   );

@@ -6,8 +6,10 @@ const initialState = {
   havePosts: false,
   posts: [],
   post: {},
+  usersPosts: [],
+  haveUsersPosts: false,
   errors: {},
-  
+  newPost: false
 };
 
 
@@ -16,8 +18,8 @@ export default function (state = initialState, action) {
     case ALL_USER_POSTS_SUCCESS:
       return {
         ...state,
-        posts: action.payload,
-        havePosts: true,
+        usersPosts: action.payload,
+        haveUsersPosts: true,
       };
     case ALL_USER_POSTS_FAIL:
       return {
@@ -39,7 +41,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: action.payload,
-        havePost: true,
+        newPost: true,
       };
     case CREATE_POST_FAIL:
       return {
@@ -70,8 +72,8 @@ export default function (state = initialState, action) {
       case FILTER_OWNERS_POSTS_SUCCESS:
         return {
           ...state,
-          posts: action.payload,
-          havePosts: true,
+          usersPosts: action.payload,
+          haveUsersPosts: true,
         };
       case FILTER_OWNERS_POSTS_FAIL:
         return {

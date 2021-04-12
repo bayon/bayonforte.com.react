@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as postAction from "../../redux/actions/postAction";
-import PostCard from "../cards/PostCard";
+import PostCreateCard from "../cards/PostCreateCard";
 
-const PostPage = (props) => {
+const PostCreatePage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
   const [post, setPost] = useState({});
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const PostPage = (props) => {
 
   return (
     <div>        
-        <PostCard post={post} refresh={getPosts}></PostCard>
+        <PostCreateCard post={post} refresh={getPosts}></PostCreateCard>
         <div style={{ textAlign: "left" }}>
           <ul>
             <li>
@@ -43,8 +43,7 @@ const PostPage = (props) => {
               ACTIONS: 
               <ul>
                 <li>Edit My Post Info: Delete , Make Inactive, etc...</li>
-                <li>See 'live' version of my post.</li>
-               
+                
               </ul>
             </li>
             <li>
@@ -82,4 +81,4 @@ const PostPage = (props) => {
   );
 };
 
-export default PostPage;
+export default PostCreatePage;
