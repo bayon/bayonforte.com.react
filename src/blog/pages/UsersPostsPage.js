@@ -60,10 +60,10 @@ const UsersPostsPage = (props) => {
     .catch((err) => console.log(err));
   }
 
-  const getFilteredPosts = (key) => {
-    dispatch(postAction.filterPosts(key))
+  const getFilteredOwnerPosts = (key, userId) => {
+    dispatch(postAction.filterOwnersPosts(key,userId))
     .then(async (result) => {
-      console.log(" --oo--  FILTERED POSTS RESULTS:", result);
+      console.log(" --xx--  FILTERED OWNER POSTS RESULTS:", result);
       setCurrentPosts(result)
       setHaveCurrentPosts(true)
     })
@@ -131,7 +131,8 @@ const UsersPostsPage = (props) => {
       console.log('GET DEFAULT DATA BACK...')
       getDefaultPosts(user._id);
     }else{
-      getFilteredPosts(key);
+      const userId = user._id
+      getFilteredOwnerPosts(key,userId);
     }
     
   

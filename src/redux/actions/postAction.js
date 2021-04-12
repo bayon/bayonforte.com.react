@@ -19,6 +19,9 @@ export const FILTER_POSTS_FAIL = "FILTER_POSTS_FAIL";
 export const CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
 export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 
+export const FILTER_OWNERS_POSTS_SUCCESS = "FILTER_OWNERS_POSTS_SUCCESS";
+export const FILTER_OWNERS_POSTS_FAIL = "FILTER_OWNERS_POSTS_FAIL";
+
 const API_URL = config.url.API_URL
  
 
@@ -198,8 +201,41 @@ export const filterPosts = (key) => {
 };
 
 // NEED FILTER FOR JUST USERS POST TOO. 
-// LEFT OFF HERE 
+// LEFT OFF HERE : new action touches: [redux actions(function & definitions), reducers(include defs & make cases),api(endpoint), UI()...]
+//need to send userId parameter too. 
+// OK TEST: 
 
+export const filterOwnersPosts = (key,userId) => {
+  console.log('OWNERS: filter key is ...',key)
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/posts/filterOwners`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+          userId
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: FILTER_OWNERS_POSTS_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: FILTER_OWNERS_POSTS_FAIL,
+          });
+      }
+      return resultData;  
+    
+  };
+};
+//
 export const allUserPosts = (key) => {
   return async (dispatch) => {
     

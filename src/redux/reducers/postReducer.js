@@ -1,12 +1,5 @@
 import {
-  ALL_SITE_POSTS_FAIL,
-  ALL_SITE_POSTS_SUCCESS,
-  CREATE_POST_FAIL,
-  CREATE_POST_SUCCESS,
-  FILTER_POSTS_FAIL,
-  FILTER_POSTS_SUCCESS,
-  UPDATE_POST_FAIL,
-  UPDATE_POST_SUCCESS
+  ALL_SITE_POSTS_FAIL, ALL_SITE_POSTS_SUCCESS, CREATE_POST_FAIL, CREATE_POST_SUCCESS, FILTER_OWNERS_POSTS_FAIL, FILTER_OWNERS_POSTS_SUCCESS, FILTER_POSTS_FAIL, FILTER_POSTS_SUCCESS, UPDATE_POST_FAIL, UPDATE_POST_SUCCESS
 } from "../actions/postAction";
 
 const initialState = {
@@ -72,6 +65,17 @@ export default function (state = initialState, action) {
         ...state,
         errors: true,
       };
+      case FILTER_OWNERS_POSTS_SUCCESS:
+        return {
+          ...state,
+          posts: action.payload,
+          havePosts: true,
+        };
+      case FILTER_OWNERS_POSTS_FAIL:
+        return {
+          ...state,
+          errors: true,
+        };
 
     default:
       break;
