@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import React, { useEffect, useState } from "react";
@@ -10,63 +9,74 @@ const PostDisplayCard = (props) => {
   const [allowEdit, setAllowEdit] = useState(false);
   const [inProgress, setInProgress] = useState(false);
 
+  const closeEdit = () => {
+    setAllowEdit(!allowEdit);
+  };
+
   console.log("inProgress:", inProgress);
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
 
   return (
-    <Grid container>
-      <Grid item xs={12} sm={6}>
-        <Typography variant="h5" component="h2">
-          {props.post.title}
-        </Typography>
+    <Grid container spacing={0}>
+      <Grid item xs={12} sm={10} style={{ border: "solid orange 1px" }}>
+        <p>{props.post.title}</p>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={2} style={{ border: "solid blue 1px" }}>
         <button
           onClick={() => {
             setSeeDetails(!seeDetails);
           }}
         >
-          {seeDetails ? "hide" : "details"}
+          {seeDetails ? "close" : "details"}
         </button>
       </Grid>
       {seeDetails && (
-        <Grid item xs={12} sm={12} style={{ background: "#eee" }}>
-          {!allowEdit && (
-            <>
-              <div style={{ marginTop: 15 }}>
-                <a
-                  href={"mailto:" + props.post.email}
-                  style={{ color: "#222", textDecoration: "none" }}
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          style={{ background: "#eee", border: "solid red 1px" }}
+        >
+          <Grid container spacing={0}>
+            <Grid item sm={10} style={{ border: "solid 1px blue" }}>
+              {!allowEdit && (
+                <div style={{textAlign:"left",padding:"10px"}}>
+                  <div>
+                    <a
+                      href={"mailto:" + props.post.email}
+                      style={{ color: "#222", textDecoration: "none" }}
+                    >
+                      {props.post.email} <Icon style={{fontSize:".8em"}}>email</Icon>
+                    </a>
+                  </div>
+                  <div>{props.post.description}</div>
+                  <div>{props.post.phone}</div>
+                </div>
+              )}
+            </Grid>
+            <Grid item sm={2} style={{ border: "solid 1px yellow" }}>
+              {!allowEdit && (
+                <button
+                  onClick={() => {
+                    setAllowEdit(!allowEdit);
+                  }}
+                  style={{ color: "blue" }}
                 >
-                  {props.post.email} <Icon>email</Icon>
-                </a>
-              </div>
-              <div>{props.post.description}</div>
-              <div>{props.post.phone}</div>
+                  Edit
+                </button>
+              )}
+            </Grid>
+          </Grid>
+          {allowEdit && (
+            <>
+              <EditPostCard
+                data={props.post}
+                closeEdit={closeEdit}
+              ></EditPostCard>
             </>
           )}
-           <button
-            onClick={() => {
-              setAllowEdit(!allowEdit);
-            }}
-          >
-            {allowEdit 
-            ? ("switch out with create button") 
-            : ("edit")
-            }
-          </button>
-          {allowEdit &&
-          (
-            <>
-            <p>NEED: prepopulated data, the 'create' button to toggle form as well as save by post_id</p>
-            <EditPostCard data={props.post}></EditPostCard>
-            </>
-          )
-
-          }
-         
         </Grid>
       )}
     </Grid>

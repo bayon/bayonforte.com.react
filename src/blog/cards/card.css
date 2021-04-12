@@ -56,7 +56,8 @@
    }
    
    button{
-    margin-top:15px;
+    margin-top:1em;
+    margin-bottom:1em;
     border: none;
     outline: none;
     border: solid 1px #ddd;
