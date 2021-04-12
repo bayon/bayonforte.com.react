@@ -191,6 +191,7 @@ if (!auth) {
     <div>
       <Paper>
         <div>
+          <p>My Posts</p>
           <span>
             Sort Options:
             <input
@@ -228,7 +229,7 @@ if (!auth) {
               name="filterKey"
               onBlur={setFilterOption}
             />
-            <button>displayPosts</button>
+            <button>Search</button>
           </span>
         </div>
         

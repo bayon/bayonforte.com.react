@@ -228,7 +228,7 @@ if (!auth) {
               name="filterKey"
               onBlur={setFilterOption}
             />
-            <button>displayPosts</button>
+            <button>Search</button>
           </span>
         </div>
       

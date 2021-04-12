@@ -1,7 +1,5 @@
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-//import Footer from "../Footer";
-import Toolbar from "@material-ui/core/Toolbar";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
@@ -61,25 +59,27 @@ export default function DashboardPage(props) {
         
         
           {/* <MainFeaturedPost post={mainFeaturedPost} /> */}
-          <Toolbar>
-          <Grid container className={classes.mainGrid} >
+           
+         
+          
+          <Grid container  >
+             
+            <Grid item xs={10}>
+                <h1>Dashboard</h1>
+            </Grid>
+            <Grid item sm={2}> 
             { auth && 
               <p>Hello, {user.fullName}</p>
             }
-          </Grid>
-
-          </Toolbar>
-          <Grid container className={classes.mainGrid} >
-             
-            <Grid item xs={12}>
-                <h1>Dashboard</h1>
             </Grid>
+          </Grid> 
+          <Grid container  >
             <Grid item xs={12} sm={6}>
               <PostPage></PostPage>
               {/* <CreatePost></CreatePost> */}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <p>My Posts:</p>
+              
               <UsersPostsPage></UsersPostsPage>
             </Grid>
             <Grid>

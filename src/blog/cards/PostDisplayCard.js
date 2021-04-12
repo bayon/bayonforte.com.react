@@ -20,10 +20,10 @@ const PostDisplayCard = (props) => {
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={12} sm={10} style={{ border: "solid orange 1px" }}>
+      <Grid item xs={12} sm={10}  >
         <p>{props.post.title}</p>
       </Grid>
-      <Grid item xs={12} sm={2} style={{ border: "solid blue 1px" }}>
+      <Grid item xs={12} sm={2}  >
         <button
           onClick={() => {
             setSeeDetails(!seeDetails);
@@ -37,10 +37,10 @@ const PostDisplayCard = (props) => {
           item
           xs={12}
           sm={12}
-          style={{ background: "#eee", border: "solid red 1px" }}
+          style={{ background: "#eee"}}
         >
           <Grid container spacing={0}>
-            <Grid item sm={10} style={{ border: "solid 1px blue" }}>
+            <Grid item sm={10} >
               {!allowEdit && (
                 <div style={{textAlign:"left",padding:"10px"}}>
                   <div>
@@ -56,7 +56,7 @@ const PostDisplayCard = (props) => {
                 </div>
               )}
             </Grid>
-            <Grid item sm={2} style={{ border: "solid 1px yellow" }}>
+            <Grid item sm={2}  >
               {!allowEdit && (
                 <button
                   onClick={() => {
