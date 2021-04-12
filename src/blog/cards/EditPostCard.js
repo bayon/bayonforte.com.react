@@ -154,7 +154,9 @@ return(
 
 
 
-
+                    <Grid item xs={12}>
+                      <label>Description</label>
+                    </Grid>
                     <Grid item xs={12}>
                       <input
                         placeholder="Description"

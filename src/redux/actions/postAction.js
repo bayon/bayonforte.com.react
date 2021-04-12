@@ -140,7 +140,7 @@ export const updatePost = (postData) => {
         description, 
         category,
         email ,
-        phone , 
+        phone ,
         address, 
         city, 
         state, 
