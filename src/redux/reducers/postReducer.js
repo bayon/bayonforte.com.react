@@ -7,7 +7,9 @@ const initialState = {
   posts: [],
   post: {},
   errors: {},
+  
 };
+
 
 export default function (state = initialState, action) {
   switch (action.type) {

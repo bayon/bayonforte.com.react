@@ -38,8 +38,7 @@ const PostPage = (props) => {
           <ul>
             <li>
              USERS POST PAGE:
-             *Make sure JUST the users Posts here, as opposed to all user posts.
-            </li>
+             </li>
             <li>
               ACTIONS: 
               <ul>
@@ -52,8 +51,14 @@ const PostPage = (props) => {
             ENTIRE SITE TODOS:
               <ul>
                 <li>Edit and Delete 'My Posts'.</li>
-                <li>Improve Search</li>
-                <li>Finish Filters</li>
+                <li>Make Sure ALL data changes update immediately.
+                  <ul>
+                    <li>ie. My Posts: editing updates ONLY AFTER leave and return.</li>
+                    <li>Make sure 'newly created posts' are displayed immediately.</li>
+                  </ul>
+                </li>
+                <li>switch out 'category' with 'postType',use category for industry vertical.</li>
+                <li>Finish Filters<ul><li>by latest</li><li>by category</li><li>etc.</li></ul></li>
                 <li>add website as profile and post info.</li>
                 <li>Search By Distance from ZipCode.</li>
                 <li>Map Locations</li>
@@ -66,7 +71,7 @@ const PostPage = (props) => {
                 <li>IF posts are to have a 'life time of a week' need way to track and check when no longer valid.</li>
                 <li>keep old posts so they can be re-used </li>
                 <li>make a subscription option, to make keeping posts up to date easier for the user.</li>
-                <li>Make sure 'newly created posts' are displayed immediately.</li>
+                
               </ul>
             </li>
           </ul>

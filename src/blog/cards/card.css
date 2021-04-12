@@ -66,3 +66,14 @@
     font-size:.8em;
 
   }
+
+  .cardSelect{
+    padding: .5em;
+    margin-top: 1em;
+    /* border:none; */
+    /* outline: none; */
+    min-width:90px;
+    border: solid 1px #ddd !important;
+    border-radius: 4px;
+  }
+ 

@@ -3,13 +3,10 @@ import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-// import PostImageForm from "../components/PostImageForm";
-import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
 import "./card.css";
-// import PostPreviewCard from "./PostPreviewCard";
+ // import PostPreviewCard from "./PostPreviewCard";
 
-const HOST_URL = config.url.HOST_URL;
 
 const formSchema = yup.object({
   title: yup.string().required().min(3),
@@ -39,73 +36,14 @@ _id: "60730537d09d5d33501fc987"
   const [inProgress, setInProgress] = useState(false);
 
   var user = useSelector((state) => state.auth.user);
+  var us_states = useSelector( (state) => state.auth.usstates)
   console.log("STATE---------user:", user);
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
 
-  const us_states = [
-    "Select One",
-    "Alabama",
-    "Alaska",
-    "American Samoa",
-    "Arizona",
-    "Arkansas",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "Delaware",
-    "District of Columbia",
-    "Federated States of Micronesia",
-    "Florida",
-    "Georgia",
-    "Guam",
-    "Hawaii",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Iowa",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Maine",
-    "Marshall Islands",
-    "Maryland",
-    "Massachusetts",
-    "Michigan",
-    "Minnesota",
-    "Mississippi",
-    "Missouri",
-    "Montana",
-    "Nebraska",
-    "Nevada",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "New York",
-    "North Carolina",
-    "North Dakota",
-    "Northern Mariana Islands",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Palau",
-    "Pennsylvania",
-    "Puerto Rico",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Vermont",
-    "Virgin Island",
-    "Virginia",
-    "Washington",
-    "West Virginia",
-    "Wisconsin",
-    "Wyoming",
-  ];
+
+  
   const post_categories = ["select one", "looking for work", "looking to hire"];
 
   return (
@@ -120,16 +58,8 @@ _id: "60730537d09d5d33501fc987"
           style={{padding:"1em"}}
 
         >
-          <Grid item xs={12} sm={3}>
-            {/* <PostImageForm props={props}></PostImageForm> */}
-            <img
-              src={`${HOST_URL}/public/images/` + user.data.profileImage} //+ props.props.post.postImage
-              alt="img"
-              style={{ height: "100px", width: "auto", borderRadius: "15px" }}
-            />
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
+         
+          <Grid item xs={12} sm={8}>
             {/* //FORM AND REDUX  part 3 JSX*/}
 
             <Formik
@@ -169,10 +99,8 @@ _id: "60730537d09d5d33501fc987"
             >
               {(props) => (
                 <Grid container className="EditPostCardForm">
-                  <Grid item xs={12} sm={6}>
-                    <Grid item xs={12} sm={6}>
-                      <label>Post Title</label>
-                    </Grid>
+                  <Grid item xs={12} sm={8}>
+                    
                     <Grid item xs={12}>
                       <input
                         placeholder="Post Title"
@@ -186,11 +114,10 @@ _id: "60730537d09d5d33501fc987"
                       </div>
                     </Grid>
 
-                    <Grid item xs={12}>
-                      <label>Category</label>
-                    </Grid>
+                   
                     <Grid item xs={12}>
                       <select
+                        className="cardSelect"
                         value={props.values.category}
                         onChange={props.handleChange("category")}
                         style={{
@@ -209,9 +136,7 @@ _id: "60730537d09d5d33501fc987"
                       </select>
                     </Grid>
 
-                    <Grid item xs={12}>
-                      <label>Description</label>
-                    </Grid>
+                   
                     <Grid item xs={12}>
                       <input
                         placeholder="Description"
@@ -224,9 +149,7 @@ _id: "60730537d09d5d33501fc987"
                       </div>
                     </Grid>
 
-                    <Grid item xs={12}>
-                      <label>Email</label>
-                    </Grid>
+                  
                     <Grid item xs={12}>
                       <input
                         placeholder="Email"
@@ -238,9 +161,7 @@ _id: "60730537d09d5d33501fc987"
                         {props.touched.email && props.errors.email}
                       </div>
                     </Grid>
-                    <Grid item xs={12}>
-                      <label>Phone</label>
-                    </Grid>
+                 
                     <Grid item xs={12}>
                       <input
                         placeholder="Phone"
@@ -252,9 +173,7 @@ _id: "60730537d09d5d33501fc987"
                         {props.touched.phone && props.errors.phone}
                       </div>
                     </Grid>
-                    <Grid item xs={12}>
-                      <label>Address</label>
-                    </Grid>
+                    
                     <Grid item xs={12}>
                       <input
                         placeholder="Address"
@@ -266,9 +185,7 @@ _id: "60730537d09d5d33501fc987"
                         {props.touched.address && props.errors.address}
                       </div>
                     </Grid>
-                    <Grid item xs={12}>
-                      <label>City</label>
-                    </Grid>
+                  
                     <Grid item xs={12}>
                       <input
                         placeholder="City"
@@ -280,11 +197,10 @@ _id: "60730537d09d5d33501fc987"
                         {props.touched.city && props.errors.city}
                       </div>
                     </Grid>
-                    <Grid item xs={12}>
-                      <label>State</label>
-                    </Grid>
+                   
                     <Grid item xs={12}>
                       <select
+                      className="cardSelect"
                         value={props.values.state}
                         onChange={props.handleChange("state")}
                         style={{
@@ -302,9 +218,7 @@ _id: "60730537d09d5d33501fc987"
                         })}
                       </select>
                     </Grid>
-                    <Grid item xs={12}>
-                      <label>Zip</label>
-                    </Grid>
+                  
                     <Grid item xs={12}>
                       <input
                         placeholder="Zip"
@@ -330,8 +244,16 @@ _id: "60730537d09d5d33501fc987"
                     />
 
                     {/* UPLOAD AN IMAGE: https://www.youtube.com/watch?v=SAUvlkTDMM4 */}
-                    <Grid item xs={12}>
-                      <button onClick={props.handleSubmit} style={{color:"green"}}>Update</button>
+                    <Grid container direction="row">
+                      <Grid item xs={12} sm={4}>
+                        <button onClick={props.handleSubmit} style={{color:"green"}}>Update</button>
+                      </Grid>
+                      <Grid item xs={12} sm={4}>
+                        <button onClick={()=>{console.log('code to delete ')}} style={{color:"red"}}>DELETE</button>
+                      </Grid>
+                      <Grid item xs={12} sm={4}>
+                        active/inactive
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -341,7 +263,7 @@ _id: "60730537d09d5d33501fc987"
             {/* //end  part 3*/}
           </Grid>
           <Grid item xs={12} sm={1}>
-            <button onClick={props.closeEdit} style={{color:"red"}}>cancel</button>
+            <button onClick={props.closeEdit} style={{color:"orange"}}>cancel</button>
           </Grid>
         </Grid>
         {/* <Grid container>
