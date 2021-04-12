@@ -166,7 +166,7 @@ export const updatePost = (postData) => {
   };
 };
 
-// filter 
+// filter : FILTERS ALL POSTS:
 export const filterPosts = (key) => {
   console.log('filter key is ...',key)
   return async (dispatch) => {
@@ -196,6 +196,9 @@ export const filterPosts = (key) => {
     
   };
 };
+
+// NEED FILTER FOR JUST USERS POST TOO. 
+// LEFT OFF HERE 
 
 export const allUserPosts = (key) => {
   return async (dispatch) => {
