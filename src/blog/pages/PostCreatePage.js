@@ -45,8 +45,8 @@ const PostCreatePage = (props) => {
               ui:
               <ul>
 
-                <li>search should include description field as well as the title field....</li>
-                <li>reset button</li>
+                 <li>make the all posts layout cards look cool.</li>
+                <li>need to add category: ie. construction, carpentry, plumbing, remodeling, tile work, ...</li>
               </ul>
               api:
               <ul>
