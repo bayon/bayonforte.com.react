@@ -1,18 +1,26 @@
-import { FETCH_STATUS } from "../actions/statusAction";
+import { GET_STATUS_COLOR, SET_STATUS_BLUE, SET_STATUS_GREEN } from "../actions/statusAction";
 
 const initialState = {
-    authorized:false,
-    sentence:"oh what fun it is...",
-  
+    statusColor:'undefined'
 };
+
 export default function (state = initialState, action) {
   switch (action.type) {
-    case FETCH_STATUS:
-      
+     
+    case SET_STATUS_BLUE: 
+      return {
+        ...state, 
+        statusColor:'BLUE'
+      }
+    case SET_STATUS_GREEN: 
+      return {
+        ...state, 
+        statusColor:'GREEN'
+      }
+    case GET_STATUS_COLOR: 
       return {
         ...state,
-        status: action.payload,
-      };
+      }
     
   }
   return state;

@@ -2,7 +2,6 @@ import Grid from "@material-ui/core/Grid";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
-// import AudioMaster from "../components/AudioNote/AudioMaster";
 import PostCreatePage from "./PostCreatePage";
 import UsersPostsPage from "./UsersPostsPage";
 

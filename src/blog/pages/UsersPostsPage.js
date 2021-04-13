@@ -13,6 +13,7 @@ const UsersPostsPage = (props) => {
   var newPost = useSelector((state) => state.newPost); //whenever new post created, use to trigger all posts refresh.
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
+  const Kolor = useSelector((state) => state.post.statusColor);
 
 
 
@@ -75,6 +76,15 @@ const UsersPostsPage = (props) => {
       })
       .catch((err) => console.log(err));
   }, [user]); // user or post post broke something ? yes. 
+
+  useEffect(() => {
+    dispatch(postAction.allUserPosts(user._id))
+      .then(async (result) => {
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
+      })
+      .catch((err) => console.log(err));
+  }, [Kolor]);  
 
   useEffect(() => {
     //initial gets all users posts once.

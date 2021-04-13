@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import * as postAction from "../../redux/actions/postAction";
+import PostStatus from "../components/PostStatus";
 import "./card.css";
- 
+
 
 const formSchema = yup.object({
   title: yup.string().required().min(3),
@@ -15,6 +16,33 @@ const formSchema = yup.object({
 
 const EditPostCard = (props) => {
   console.log("EDIT POST CARD props:", props);
+  const Kolor = useSelector((state) => state.post.statusColor);
+
+
+  useEffect(() => {
+    dispatch(postAction.getStatusColor())
+      .then(async () => {
+        // result would be undefined
+        console.log("NEW >>> hook status color:", Kolor);
+        //setKolor(Kolor)
+      })
+      .catch((err) => console.log(err));
+      /* Dependencies: 
+        import * as statusAction from "../../redux/actions/statusAction";
+        import { useDispatch, useSelector } from "react-redux";
+        const Kolor = useSelector((state) => state.status.statusColor);
+      */
+  }, [Kolor]);
+
+
+
+  
+   
+ 
+//  const changeStatus = (arg) => {
+//     useStatus(arg)
+//  }
+
   /* props.data.xxx
 category: "1"
 city: "asdfasdf"
@@ -60,7 +88,9 @@ _id: "60730537d09d5d33501fc987"
          
           <Grid item xs={12} sm={8}>
             {/* //FORM AND REDUX  part 3 JSX*/}
-
+    <PostStatus></PostStatus>
+    {/* <button onClick={changeStatus("blue")}>hook blue</button>
+    <button onClick={changeStatus("green")}>hook green</button> */}
             <Formik
               initialValues={{
                 postId: props.data._id,

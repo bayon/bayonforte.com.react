@@ -7,8 +7,9 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
+import PostStatus from "../components/PostStatus";
 import "./card.css";
- 
+
 
 
 
@@ -63,6 +64,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
           </Typography>
         </Grid>
         <Grid item xs={12} sm={3}>
+          <PostStatus></PostStatus >
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
