@@ -28,6 +28,8 @@ const ProfileCard = (props) => {
  
   return (
     <div className="card-plain">
+            <p className="cardDevNote" >ProfileCard</p>
+
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
           <Typography variant="h5" component="h2">
@@ -69,7 +71,10 @@ const ProfileCard = (props) => {
                     city: props.user.city,
                     state: props.user.state,
                     zip: props.user.zip,
-                    profileImage: props.user.profileImage
+                    profileImage: props.user.profileImage,
+                    website: props.user.website,
+                    created: props.user.created,
+                    lastUpdated: props.user.lastUpdated
                   }}
                   validationSchema={formSchema}
                   onSubmit={(values) => {
@@ -190,6 +195,20 @@ const ProfileCard = (props) => {
                           />
                           <div style={{ color: "salmon" }}>
                             {props.touched.zip && props.errors.zip}
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <label>Website</label>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <input
+                            placeholder="Website"
+                            onChange={props.handleChange("website")}
+                            value={props.values.website}
+                            onBlur={props.handleBlur("website")}
+                          />
+                          <div style={{ color: "salmon" }}>
+                            {props.touched.website && props.errors.website}
                           </div>
                         </Grid>
                         <input

@@ -48,7 +48,7 @@ const PostCreatePage = (props) => {
               <ul>
                 db:<ul>
 
-                <li>switch out 'postType' with 'postType',use postType for industry vertical.</li>
+                <li>add category back for work industry type.</li>
                 <li>add website as profile and post info.</li>
                 <li>add 'time-posted field' to be able to search by 'latest' posts.</li>
 
