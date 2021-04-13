@@ -1,5 +1,5 @@
 import Paper from "@material-ui/core/Paper";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as postAction from "../../redux/actions/postAction";
 import AllSitePostsDisplayCard from "../cards/AllSitePostsDisplayCard";
@@ -25,6 +25,8 @@ const AllSitePostsPage = (props) => {
 
   const [filterKey, setFilterKey] = useState("");
 
+  const searchInputEl = useRef(null);
+  
   const getDefaultPosts = () => {
     //Function needed to handle case where search input empty or a space.
     dispatch(postAction.allSitePosts())
@@ -194,7 +196,14 @@ const AllSitePostsPage = (props) => {
       }
     }
   };
-
+  const resetAll = async () => {
+    console.log('resetting all ...')
+    getDefaultPosts()
+    searchInputEl.current.value ="";
+    searchInputEl.current.focus();
+    //  setNoSort(true);
+    // displayPosts()
+  }
   if (!auth) {
     return <div>not authorized.</div>;
   }
@@ -249,8 +258,10 @@ const AllSitePostsPage = (props) => {
               id="filterKey"
               name="filterKey"
               onBlur={setFilterOption}
+              ref={searchInputEl} 
             />
             <button>Search</button>
+            <button onClick={resetAll}>Reset</button>
           </span>
         </div>
 

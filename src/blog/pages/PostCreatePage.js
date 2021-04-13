@@ -43,7 +43,11 @@ const PostCreatePage = (props) => {
             <ul>
               db:<ul></ul>
               ui:
-              <ul></ul>
+              <ul>
+
+                <li>search should include description field as well as the title field....</li>
+                <li>reset button</li>
+              </ul>
               api:
               <ul>
                 <li>Search By Distance from ZipCode.</li>
