@@ -35,7 +35,7 @@ console.log("STATE---------user:",user)
     setInProgress(inProgress);
   }, [inProgress]);
   var us_states = useSelector( (state) => state.auth.usstates)
-
+  var categories = useSelector( (state) =>  state.post.categories)
  
 
 const post_types = ["select one", "looking for work","looking to hire"]
@@ -103,6 +103,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     title: '',
                     description: '',
                     postType: '',
+                    category: '',
                     email: user.data.email,
                     phone: user.data.phone,
                     address: user.data.address,
@@ -183,6 +184,29 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.description && props.errors.description}
                           </div>
                         </Grid>
+
+
+                        <Grid item xs={12}>
+                          <label>Category</label>
+                        </Grid>
+                        <Grid item xs={12}>
+                        <select value={props.values.category} onChange={props.handleChange("category")} className="cardSelect"  >
+                            
+                            {
+                              categories.map( (item,index ) => {
+                                return(
+                                  <option key={index} value={index} >{item}</option>
+                                )
+                              })
+                            }
+                          </select>
+                        </Grid>
+
+
+
+
+
+
  
                         <Grid item xs={12}>
                           <label>Email</label>

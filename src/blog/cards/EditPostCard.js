@@ -57,6 +57,9 @@ _id: "60730537d09d5d33501fc987"
 
   var user = useSelector((state) => state.auth.user);
   var us_states = useSelector((state) => state.auth.usstates);
+  var categories = useSelector((state) => state.post.categories);
+
+
   console.log("STATE---------user:", user);
   useEffect(() => {
     setInProgress(inProgress);
@@ -125,6 +128,7 @@ _id: "60730537d09d5d33501fc987"
                 userId: props.data.userId,
                 title: props.data.title,
                 description: props.data.description,
+                category: props.data.category,
                 postType: props.data.postType,
                 email: props.data.email,
                 phone: props.data.phone,
@@ -210,6 +214,30 @@ _id: "60730537d09d5d33501fc987"
                         {props.touched.description && props.errors.description}
                       </div>
                     </Grid>
+
+
+                    <Grid item xs={12}>
+                      <select
+                        className="cardSelect"
+                        value={props.values.category}
+                        onChange={props.handleChange("category")}
+                        
+                      >
+                        {categories.map((item, index) => {
+                          return (
+                            <option key={index} value={index}>
+                              {item}
+                            </option>
+                          );
+                        })}
+                      </select>
+                     
+                    </Grid>
+
+
+
+
+
 
                     <Grid item xs={12}>
                       <input

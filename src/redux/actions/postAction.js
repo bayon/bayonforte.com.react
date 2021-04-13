@@ -63,7 +63,7 @@ export const createPost = (postData) => {
 
 console.log("CREATE POST ACTION: postData:",postData)
 
-    const { userId,title, description, postType,email ,phone , address, city, state, zip, postImage } = postData;
+    const { userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage } = postData;
     return async (dispatch) => {
       const result = await fetch(`${API_URL}/posts/create`, {
         method: "POST",
@@ -74,6 +74,7 @@ console.log("CREATE POST ACTION: postData:",postData)
           userId,
           title,
           description,
+          category, 
           postType,
           email,
           phone,
@@ -133,7 +134,7 @@ export const getPost = () => {
 
 export const updatePost = (postData) => {
   console.log('POST ACTION UPDATE POST: postData:',postData)
-  const {  postId,userId,title, description, postType,email ,phone , address, city, state, zip, postImage,activated} = postData;
+  const {  postId,userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage,activated} = postData;
   //post versus posts in URL 
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/update`, {
@@ -146,6 +147,7 @@ export const updatePost = (postData) => {
         userId,
         title, 
         description, 
+        category,
         postType,
         email ,
         phone ,

@@ -16,6 +16,7 @@ const AllSitePostsPage = (props) => {
   const [sortLatest, setSortLatest] = useState(false);
   const [sortPostType1, setSortPostType1] = useState(false);
   const [sortPostType2, setSortPostType2] = useState(false);
+  const [sortCategory, setSortCategory] = useState(false);
 
 
   const [sortId, setSortId] = useState(false);
@@ -76,7 +77,7 @@ const AllSitePostsPage = (props) => {
     setSortLatest(false);
     setSortPostType1(false);
     setSortPostType2(false);
-
+    setSortCategory(false);
     setNoSort(false);
   };
   const setSortOption = (e) => {
@@ -102,6 +103,9 @@ const AllSitePostsPage = (props) => {
       case "postType2":
         setSortPostType2(true);
         break;
+      case "category":
+          setSortCategory(true);
+          break;
       default:
         setNoSort(true);
         break;
@@ -171,9 +175,9 @@ const AllSitePostsPage = (props) => {
             );
           });
       }
-      if (sortId) {
+      if (sortCategory) {
         return currentPosts
-          .sort((a, b) => (a._id > b._id ? 1 : -1))
+          .sort((a, b) => (a.category > b.category ? 1 : -1))
           .map((post, i) => {
             return (
               <AllSitePostsDisplayCard
@@ -248,6 +252,14 @@ const AllSitePostsPage = (props) => {
               onChange={setSortOption}
             />
             <label htmlFor="postType2">Looking To Hire</label>
+            <input
+              type="radio"
+              id="category"
+              name="sortOption"
+              value="category"
+              onChange={setSortOption}
+            />
+            <label htmlFor="category">Category</label>
           </span>
         </div>
         <div>

@@ -15,9 +15,10 @@ const initialState = {
   haveUsersPosts: false,
   errors: {},
   newPost: false,
-  statusColor:'undefined'
+  statusColor:'undefined',
+  categories: ["construction","remodeling","plumbing","painting","carpentry","siding","drywall","concrete","frameing","cabinetry","tile","decks","landscaping"]
 };
-
+//!!!!: The order of there 'categories' is important !!!
  
 
 
