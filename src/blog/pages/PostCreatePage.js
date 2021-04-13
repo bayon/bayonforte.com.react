@@ -42,23 +42,11 @@ const PostCreatePage = (props) => {
             <li>
              USERS POST PAGE:
              </li>
-            <li>
-              ACTIONS: 
-              <ul>
-                <li>Edit My Post Info: Delete , Make Inactive, etc...</li>
-                
-              </ul>
-            </li>
+          
             <li>
             ENTIRE SITE TODOS:
               <ul>
-                <li>Edit and Delete 'My Posts'.</li>
-                <li>Make Sure ALL data changes update immediately.
-                  <ul>
-                    <li>ie. My Posts: editing updates ONLY AFTER leave and return.</li>
-                    <li>Make sure 'newly created posts' are displayed immediately.</li>
-                  </ul>
-                </li>
+                
                 <li>switch out 'category' with 'postType',use category for industry vertical.</li>
                 <li>Finish Filters<ul><li>by latest</li><li>by category</li><li>etc.</li></ul></li>
                 <li>add website as profile and post info.</li>

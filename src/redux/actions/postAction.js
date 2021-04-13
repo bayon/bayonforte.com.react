@@ -133,7 +133,7 @@ export const getPost = () => {
 
 export const updatePost = (postData) => {
   console.log('POST ACTION UPDATE POST: postData:',postData)
-  const {  postId,userId,title, description, category,email ,phone , address, city, state, zip, postImage} = postData;
+  const {  postId,userId,title, description, category,email ,phone , address, city, state, zip, postImage,activated} = postData;
   //post versus posts in URL 
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/update`, {
@@ -153,7 +153,8 @@ export const updatePost = (postData) => {
         city, 
         state, 
         zip, 
-        postImage
+        postImage,
+        activated
       }),
     });
 

@@ -18,7 +18,6 @@ const EditPostCard = (props) => {
   console.log("EDIT POST CARD props:", props);
   const Kolor = useSelector((state) => state.post.statusColor);
 
-
   useEffect(() => {
     dispatch(postAction.getStatusColor())
       .then(async () => {
@@ -27,17 +26,12 @@ const EditPostCard = (props) => {
         //setKolor(Kolor)
       })
       .catch((err) => console.log(err));
-      /* Dependencies: 
+    /* Dependencies: 
         import * as statusAction from "../../redux/actions/statusAction";
         import { useDispatch, useSelector } from "react-redux";
         const Kolor = useSelector((state) => state.status.statusColor);
       */
   }, [Kolor]);
-
-
-
-  
- 
 
   /* props.data.xxx
 category: "1"
@@ -58,27 +52,54 @@ _id: "60730537d09d5d33501fc987"
   const [seeDetails, setSeeDetails] = useState(false);
   const [inProgress, setInProgress] = useState(false);
 
+  const [activated,setActivated] = useState(false)
+ 
+
   var user = useSelector((state) => state.auth.user);
-  var us_states = useSelector( (state) => state.auth.usstates)
+  var us_states = useSelector((state) => state.auth.usstates);
   console.log("STATE---------user:", user);
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
 
-
-  
   const post_categories = ["select one", "looking for work", "looking to hire"];
-console.log('EditPostCard.js props:',props);
+  const activatedOptions = ["Set Activation","activated","deactivated"];
+  console.log("EditPostCard.js props:", props);
   const deleteItem = () => {
-    console.log('delete item ',props.data._id);
-    //call to a redux action. 
+    console.log("delete item ", props.data._id);
+    //call to a redux action.
     dispatch(postAction.deletePost(props.data._id))
-    .then( async (res) => {
-      console.log('res:',res)
-      dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
-    })
-    .catch( (err) => console.error(err))
-  }
+      .then(async (res) => {
+        console.log("res:", res);
+        dispatch(postAction.setStatusGreen()).catch((err) =>
+          console.error(err)
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
+  // const setActivated = (arg) => {
+  //   console.log("setActivated arg:", arg);
+  // };
+  // // const clearSortOptions = () => {
+  // //   setSortName(false);
+  // //   setSortEmail(false);
+
+  // // };
+  // const activateOptions = (e) => {
+  //   const key = e.target.value;
+  //   // clearSortOptions();
+  //   switch (key) {
+  //     case "active":
+  //       setActivated(true);
+  //       break;
+  //     case "inactive":
+  //       setActivated(false);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   return (
     <>
@@ -89,14 +110,12 @@ console.log('EditPostCard.js props:',props);
           align="center"
           justify="center"
           direction="row"
-          style={{padding:"1em"}}
-
+          style={{ padding: "1em" }}
         >
-         
           <Grid item xs={12} sm={8}>
             {/* //FORM AND REDUX  part 3 JSX*/}
-    <PostStatus></PostStatus>
-    {/* <button onClick={changeStatus("blue")}>hook blue</button>
+            <PostStatus></PostStatus>
+            {/* <button onClick={changeStatus("blue")}>hook blue</button>
     <button onClick={changeStatus("green")}>hook green</button> */}
             <Formik
               initialValues={{
@@ -112,7 +131,9 @@ console.log('EditPostCard.js props:',props);
                 state: props.data.state,
                 zip: props.data.zip,
                 postImage: props.data.profileImage,
+                activated: props.data.activated
               }}
+             
               // !PostImage REQUIRED here so as to not get deleted accidentally.
               validationSchema={formSchema}
               onSubmit={(values) => {
@@ -128,16 +149,19 @@ console.log('EditPostCard.js props:',props);
                       //setInProgress(true);
                       //seeDetails(false);
                     }
-                    console.log("IT ALL STARTS HERE WITH REFRESH POSTS FOR USER.")
+                    console.log(
+                      "IT ALL STARTS HERE WITH REFRESH POSTS FOR USER."
+                    );
                     props.refresh();
                   })
                   .catch((err) => console.log(err));
               }}
             >
               {(props) => (
+                
                 <Grid container className="EditPostCardForm">
                   <Grid item xs={12} sm={8}>
-                  <p className="cardDevNote" >EditPostCard</p>
+                    <p className="cardDevNote">EditPostCard</p>
 
                     <Grid item xs={12}>
                       <input
@@ -152,7 +176,6 @@ console.log('EditPostCard.js props:',props);
                       </div>
                     </Grid>
 
-                   
                     <Grid item xs={12}>
                       <select
                         className="cardSelect"
@@ -174,7 +197,6 @@ console.log('EditPostCard.js props:',props);
                       </select>
                     </Grid>
 
-                   
                     <Grid item xs={12}>
                       <input
                         placeholder="Description"
@@ -187,7 +209,6 @@ console.log('EditPostCard.js props:',props);
                       </div>
                     </Grid>
 
-                  
                     <Grid item xs={12}>
                       <input
                         placeholder="Email"
@@ -199,7 +220,7 @@ console.log('EditPostCard.js props:',props);
                         {props.touched.email && props.errors.email}
                       </div>
                     </Grid>
-                 
+
                     <Grid item xs={12}>
                       <input
                         placeholder="Phone"
@@ -211,7 +232,7 @@ console.log('EditPostCard.js props:',props);
                         {props.touched.phone && props.errors.phone}
                       </div>
                     </Grid>
-                    
+
                     <Grid item xs={12}>
                       <input
                         placeholder="Address"
@@ -223,7 +244,7 @@ console.log('EditPostCard.js props:',props);
                         {props.touched.address && props.errors.address}
                       </div>
                     </Grid>
-                  
+
                     <Grid item xs={12}>
                       <input
                         placeholder="City"
@@ -235,10 +256,10 @@ console.log('EditPostCard.js props:',props);
                         {props.touched.city && props.errors.city}
                       </div>
                     </Grid>
-                   
+
                     <Grid item xs={12}>
                       <select
-                      className="cardSelect"
+                        className="cardSelect"
                         value={props.values.state}
                         onChange={props.handleChange("state")}
                         style={{
@@ -255,8 +276,9 @@ console.log('EditPostCard.js props:',props);
                           );
                         })}
                       </select>
+                     
                     </Grid>
-                  
+
                     <Grid item xs={12}>
                       <input
                         placeholder="Zip"
@@ -280,19 +302,49 @@ console.log('EditPostCard.js props:',props);
                       value={user._id}
                       disabled
                     />
+                   
+                     <Grid item xs={12} sm={4}>
+                        <div>
+                        <label className="cardLabel" htmlFor="activationStatus" >Status:</label>
+
+                         <select
+                         name="activationStatus"
+                        className="cardSelect"
+                        value={props.values.activated}
+                        onChange={props.handleChange("activated")}
+                        
+                      >
+                        {activatedOptions.map((item, index) => {
+                          return (
+                            <option key={index} value={index}>
+                              {item}
+                            </option>
+                          );
+                        })}
+                      </select>
+                         <p style={{fontSize:".6em"}}>Will not be seen if deactivated.</p>
+                        </div>
+
+                       
+                      </Grid>
 
                     {/* UPLOAD AN IMAGE: https://www.youtube.com/watch?v=SAUvlkTDMM4 */}
                     <Grid container direction="row">
                       <Grid item xs={12} sm={4}>
-                        <button onClick={props.handleSubmit} style={{color:"green"}}>Update</button>
+                        <button
+                          onClick={props.handleSubmit}
+                          style={{ color: "green" }}
+                        >
+                          Update
+                        </button>
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                         
-                        <AreYouSureModal data={props.values} deleteItem={deleteItem}></AreYouSureModal>
+                        <AreYouSureModal
+                          data={props.values}
+                          deleteItem={deleteItem}
+                        ></AreYouSureModal>
                       </Grid>
-                      <Grid item xs={12} sm={4}>
-                        active/inactive
-                      </Grid>
+                     
                     </Grid>
                   </Grid>
                 </Grid>
@@ -302,10 +354,11 @@ console.log('EditPostCard.js props:',props);
             {/* //end  part 3*/}
           </Grid>
           <Grid item xs={12} sm={1}>
-            <button onClick={props.closeEdit} style={{color:"orange"}}>cancel</button>
+            <button onClick={props.closeEdit} style={{ color: "orange" }}>
+              cancel
+            </button>
           </Grid>
         </Grid>
-      
       </React.Fragment>
     </>
   );
