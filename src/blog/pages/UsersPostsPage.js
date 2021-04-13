@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import * as postAction from "../../redux/actions/postAction";
 import PostDisplayCard from "../cards/PostDisplayCard";
-// import ModalCreatePost from "../components/ModalCreatePost";
-
+ 
 
 const UsersPostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -220,6 +219,7 @@ const UsersPostsPage = (props) => {
   return (
    
       <Paper>
+
          <Grid container direction="column">
         <Grid item>
           <p className="cardDevNote" >UsersPostPage</p>

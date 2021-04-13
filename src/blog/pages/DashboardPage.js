@@ -27,22 +27,6 @@ export default function DashboardPage(props) {
       <Grid container>
         <Grid item xs={10}>
           <h1>Dashboard</h1>
-          <span>
-            PostCreatePage
-            <ul>
-              <li>PostCreateCard</li>
-            </ul>
-            UsersPostPage
-            <ul>
-              <li>PostDisplayCard
-                <ul>
-                  <li>
-                    EditPostCard
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </span>
         </Grid>
         <Grid item sm={2}>
           {auth && <p>Hello, {user.fullName}</p>}

@@ -41,6 +41,8 @@ console.log("STATE---------user:",user)
 const post_categories = ["select one", "looking for work","looking to hire"]
   return (
     <div className="card-plain">
+                    <p className="cardDevNote" >PostCreateCard</p>
+
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
           <Typography variant="h5" component="h2">

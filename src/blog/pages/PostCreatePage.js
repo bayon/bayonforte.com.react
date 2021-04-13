@@ -32,9 +32,12 @@ const PostCreatePage = (props) => {
   
 
   return (
-    <div>        
+    <div>      
+              <p className="cardDevNote" >PostCreatePage</p>
+  
         <PostCreateCard post={post} refresh={getPosts}></PostCreateCard>
         <div style={{ textAlign: "left" }}>
+
           <ul>
             <li>
              USERS POST PAGE:

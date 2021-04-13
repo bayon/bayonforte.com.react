@@ -37,11 +37,7 @@ const EditPostCard = (props) => {
 
 
   
-   
  
-//  const changeStatus = (arg) => {
-//     useStatus(arg)
-//  }
 
   /* props.data.xxx
 category: "1"
