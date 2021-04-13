@@ -122,7 +122,8 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                         console.log("create post result:", result);//good.
                        // ANOTHER dispatch would ONLY be good here for updating state. 
                        // whether taht will update at the users posts list is the question. 
-
+                       //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.
+                        dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
                          
                       })
                       .catch((err) => console.log(err));

@@ -18,25 +18,24 @@ export default function PostStatus() {
       .catch((err) => console.log(err));
   }, [Kolor]);
 
-  const setStatusBlue = () => {
-    dispatch(postAction.setStatusBlue())
-      .then(async () => {
-        // result would be undefined
-      })
-      .catch((err) => console.log("error:", err));
-  };
-  const setStatusGreen = () => {
-    dispatch(postAction.setStatusGreen())
-      .then(async () => {
-        // result would be undefined
-      })
-      .catch((err) => console.log("error:", err));
-  };
+  // const setStatusBlue = () => {
+  //   dispatch(postAction.setStatusBlue())
+  //     .then(async () => {
+  //       // result would be undefined
+  //     })
+  //     .catch((err) => console.log("error:", err));
+  // };
+  // const setStatusGreen = () => {
+  //   dispatch(postAction.setStatusGreen())
+  //     .then(async () => {
+  //       // result would be undefined
+  //     })
+  //     .catch((err) => console.log("error:", err));
+  // };
   return (
     <div>
       <p>COMPONENT Status</p>
-      <button onClick={setStatusGreen}>Green L2</button>
-      <button onClick={setStatusBlue}>Blue L2</button>
+      
       <button style={{background:`${Kolor}`}}>color</button>
     </div>
   );

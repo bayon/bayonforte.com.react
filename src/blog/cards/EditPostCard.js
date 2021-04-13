@@ -75,6 +75,7 @@ console.log('EditPostCard.js props:',props);
     dispatch(postAction.deletePost(props.data._id))
     .then( async (res) => {
       console.log('res:',res)
+      dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
     })
     .catch( (err) => console.error(err))
   }

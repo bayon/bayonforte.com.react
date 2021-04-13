@@ -51,7 +51,7 @@ export default function (state = initialState, action) {
         ...state,
         post: action.payload,
         newPost: true,
-        statusColor: "GREEN"
+        statusColor: "BLUE"
        };
     case CREATE_POST_FAIL:
       return {
@@ -62,7 +62,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: action.payload,
-        statusColor:'GREEN'
+        statusColor:'BLUE'
       };
     case UPDATE_POST_FAIL:
       return {
