@@ -201,20 +201,20 @@ if (!auth) {
 
             <input
               type="radio"
-              id="category1"
+              id="postType1"
               name="sortOption"
-              value="category1"
+              value="postType1"
               onChange={setSortOption}
             />
-            <label htmlFor="category1">Looking For Work</label>
+            <label htmlFor="postType1">Looking For Work</label>
             <input
               type="radio"
-              id="category2"
+              id="postType2"
               name="sortOption"
-              value="category2"
+              value="postType2"
               onChange={setSortOption}
             />
-            <label htmlFor="category2">Looking To Hire</label>
+            <label htmlFor="postType2">Looking To Hire</label>
 
             
           </span>

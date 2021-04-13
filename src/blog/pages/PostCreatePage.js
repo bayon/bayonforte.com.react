@@ -46,21 +46,43 @@ const PostCreatePage = (props) => {
             <li>
             ENTIRE SITE TODOS:
               <ul>
-                
-                <li>switch out 'category' with 'postType',use category for industry vertical.</li>
-                <li>Finish Filters<ul><li>by latest</li><li>by category</li><li>etc.</li></ul></li>
+                db:<ul>
+
+                <li>switch out 'postType' with 'postType',use postType for industry vertical.</li>
                 <li>add website as profile and post info.</li>
+                <li>add 'time-posted field' to be able to search by 'latest' posts.</li>
+
+                </ul>
+                ui:
+                <ul>
+                 
+
+                <li>Finish Filters<ul><li>by latest</li><li>by postType</li><li>etc.</li></ul></li>
+                </ul>
+                api:
+                <ul>
+                  
+
                 <li>Search By Distance from ZipCode.</li>
-                <li>Map Locations</li>
+
                 <li>Tie Payments to Post Creation.</li>
+                <li>Map Locations</li>
+
+
+                </ul>
+                other:
+                <ul>
+                 
+
                 <li>Tag other posts.</li>
                 <li>correct image rotation from droid uploads.</li>
-                <li>add 'time-posted field' to be able to search by 'latest' posts.</li>
                 <li>inner messaging system for privacy concerned users.</li>
                 <li>display 'my tagged posts' in dashboard. </li>
                 <li>IF posts are to have a 'life time of a week' need way to track and check when no longer valid.</li>
                 <li>keep old posts so they can be re-used </li>
                 <li>make a subscription option, to make keeping posts up to date easier for the user.</li>
+                </ul>
+                
                 
               </ul>
             </li>

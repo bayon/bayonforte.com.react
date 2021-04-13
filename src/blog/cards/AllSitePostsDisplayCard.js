@@ -19,8 +19,8 @@ const AllSitePostsDisplayCard = (props) => {
         {props.post.title}
       </Typography>
       
-        {props.post.category === "1" && <p>Looking For Work</p>}
-        {props.post.category === "2" && <p>Looking To Hire</p>}
+        {props.post.postType === "1" && <p>Looking For Work</p>}
+        {props.post.postType === "2" && <p>Looking To Hire</p>}
       
 
       <button

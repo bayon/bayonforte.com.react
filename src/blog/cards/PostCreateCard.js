@@ -38,7 +38,7 @@ console.log("STATE---------user:",user)
 
  
 
-const post_categories = ["select one", "looking for work","looking to hire"]
+const post_types = ["select one", "looking for work","looking to hire"]
   return (
     <div className="card-plain">
                     <p className="cardDevNote" >PostCreateCard</p>
@@ -51,7 +51,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                 POST FIELDS as of 4/11/2021
                 _id: ...
                 userId: { type: String, required: true},
-                category: { type: String, required: true},
+                postType: { type: String, required: true},
                 title: {type:String , required:true},
                 description: {type: String, required: true},
                 email: { type: String, required: true},
@@ -102,7 +102,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                     userId: user.data._id,
                     title: '',
                     description: '',
-                    category: '',
+                    postType: '',
                     email: user.data.email,
                     phone: user.data.phone,
                     address: user.data.address,
@@ -153,13 +153,13 @@ const post_categories = ["select one", "looking for work","looking to hire"]
 
 
                         <Grid item xs={12}>
-                          <label>Category</label>
+                          <label>postType</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select className="cardSelect" value={props.values.category} onChange={props.handleChange("category")} >
+                        <select className="cardSelect" value={props.values.postType} onChange={props.handleChange("postType")} >
                             
                             {
-                              post_categories.map( (item,index ) => {
+                              post_types.map( (item,index ) => {
                                 return(
                                   <option key={index} value={index}  >{item}</option>
                                 )

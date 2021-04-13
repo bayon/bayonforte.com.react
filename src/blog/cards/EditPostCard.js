@@ -34,7 +34,7 @@ const EditPostCard = (props) => {
   }, [Kolor]);
 
   /* props.data.xxx
-category: "1"
+postType: "1"
 city: "asdfasdf"
 description: "will do anything"
 email: "sdf@sdf.com"
@@ -123,7 +123,7 @@ _id: "60730537d09d5d33501fc987"
                 userId: props.data.userId,
                 title: props.data.title,
                 description: props.data.description,
-                category: props.data.category,
+                postType: props.data.postType,
                 email: props.data.email,
                 phone: props.data.phone,
                 address: props.data.address,
@@ -179,8 +179,8 @@ _id: "60730537d09d5d33501fc987"
                     <Grid item xs={12}>
                       <select
                         className="cardSelect"
-                        value={props.values.category}
-                        onChange={props.handleChange("category")}
+                        value={props.values.postType}
+                        onChange={props.handleChange("postType")}
                         style={{
                           border: "none",
                           outline: "none",
