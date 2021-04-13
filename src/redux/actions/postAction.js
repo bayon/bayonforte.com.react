@@ -28,6 +28,9 @@ export const SET_STATUS_GREEN = "SET_STATUS_GREEN"
 export const SET_STATUS_BLUE = "SET_STATUS_BLUE"
 export const GET_STATUS_COLOR = "GET_STATUS_COLOR"
 
+export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
+export const DELETE_POST_FAIL = "DELETE_POST_FAIL";
+
 
 export const allSitePosts = () => {
   return async (dispatch) => {
@@ -310,5 +313,35 @@ export const getStatusColor = () => {
       dispatch({
           type: GET_STATUS_COLOR,
       })
+  }
+}
+
+
+export const deletePost = (key) => {
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/posts/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: DELETE_POST_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: DELETE_POST_FAIL,
+          });
+      }
+      return resultData;  
+    
   }
 }

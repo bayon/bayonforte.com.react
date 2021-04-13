@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import * as postAction from "../../redux/actions/postAction";
+import AreYouSureModal from "../components/AreYouSureModal";
 import PostStatus from "../components/PostStatus";
 import "./card.css";
-
 
 const formSchema = yup.object({
   title: yup.string().required().min(3),
@@ -68,6 +68,16 @@ _id: "60730537d09d5d33501fc987"
 
   
   const post_categories = ["select one", "looking for work", "looking to hire"];
+console.log('EditPostCard.js props:',props);
+  const deleteItem = () => {
+    console.log('delete item ',props.data._id);
+    //call to a redux action. 
+    dispatch(postAction.deletePost(props.data._id))
+    .then( async (res) => {
+      console.log('res:',res)
+    })
+    .catch( (err) => console.error(err))
+  }
 
   return (
     <>
@@ -276,7 +286,8 @@ _id: "60730537d09d5d33501fc987"
                         <button onClick={props.handleSubmit} style={{color:"green"}}>Update</button>
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                        <button onClick={()=>{console.log('code to delete ')}} style={{color:"red"}}>DELETE</button>
+                         
+                        <AreYouSureModal data={props.values} deleteItem={deleteItem}></AreYouSureModal>
                       </Grid>
                       <Grid item xs={12} sm={4}>
                         active/inactive
