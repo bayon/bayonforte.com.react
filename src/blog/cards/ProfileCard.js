@@ -88,6 +88,7 @@ const ProfileCard = (props) => {
                           setInProgress(true);
                         }
                         props.refresh();
+                        setSeeDetails(!seeDetails)
                       })
                       .catch((err) => console.log(err));
                   }}

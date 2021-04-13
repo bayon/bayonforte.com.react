@@ -25,6 +25,8 @@ const PostDisplayCard = (props) => {
 
   return (
     <Grid container spacing={0}>
+            <p className="cardDevNote" >PostDisplayCard</p>
+
       <Grid item xs={12} sm={10}>
         <p>{props.post.title}</p>
       </Grid>

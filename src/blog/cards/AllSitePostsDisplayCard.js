@@ -14,6 +14,8 @@ const AllSitePostsDisplayCard = (props) => {
 
   return (
     <div className="card-plain"  >
+            <p className="cardDevNote" >AllSitesDisplayCard</p>
+
         <span>
       <Typography variant="p" component="p">
         {props.post.title}
