@@ -37,6 +37,7 @@ const ProfilePage = (props) => {
     <div>
       
         
+      <p className="cardDevNote" >ProfilePage</p>
 
         <ProfileCard user={user} refresh={getUserProfile}></ProfileCard>
         <div style={{ textAlign: "left" }}>

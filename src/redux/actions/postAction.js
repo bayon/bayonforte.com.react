@@ -19,9 +19,17 @@ export const FILTER_POSTS_FAIL = "FILTER_POSTS_FAIL";
 export const CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
 export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 
+export const FILTER_OWNERS_POSTS_SUCCESS = "FILTER_OWNERS_POSTS_SUCCESS";
+export const FILTER_OWNERS_POSTS_FAIL = "FILTER_OWNERS_POSTS_FAIL";
+
 const API_URL = config.url.API_URL
  
+export const SET_STATUS_GREEN = "SET_STATUS_GREEN"
+export const SET_STATUS_BLUE = "SET_STATUS_BLUE"
+export const GET_STATUS_COLOR = "GET_STATUS_COLOR"
 
+export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
+export const DELETE_POST_FAIL = "DELETE_POST_FAIL";
 
 
 export const allSitePosts = () => {
@@ -55,7 +63,7 @@ export const createPost = (postData) => {
 
 console.log("CREATE POST ACTION: postData:",postData)
 
-    const { userId,title, description, category,email ,phone , address, city, state, zip, postImage } = postData;
+    const { userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage } = postData;
     return async (dispatch) => {
       const result = await fetch(`${API_URL}/posts/create`, {
         method: "POST",
@@ -66,7 +74,8 @@ console.log("CREATE POST ACTION: postData:",postData)
           userId,
           title,
           description,
-          category,
+          category, 
+          postType,
           email,
           phone,
           address,
@@ -124,7 +133,9 @@ export const getPost = () => {
 
 
 export const updatePost = (postData) => {
-  const { fullName, email, phone , postImage, address, city, state, zip } = postData;
+  console.log('POST ACTION UPDATE POST: postData:',postData)
+  const {  postId,userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage,activated} = postData;
+  //post versus posts in URL 
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/update`, {
       method: "PUT",
@@ -132,14 +143,20 @@ export const updatePost = (postData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fullName,
-        email,
-        phone,
+        postId,
+        userId,
+        title, 
+        description, 
+        category,
+        postType,
+        email ,
+        phone ,
+        address, 
+        city, 
+        state, 
+        zip, 
         postImage,
-        address,
-        city,
-        state,
-        zip
+        activated
       }),
     });
 
@@ -160,7 +177,7 @@ export const updatePost = (postData) => {
   };
 };
 
-// filter 
+// filter : FILTERS ALL POSTS:
 export const filterPosts = (key) => {
   console.log('filter key is ...',key)
   return async (dispatch) => {
@@ -191,6 +208,42 @@ export const filterPosts = (key) => {
   };
 };
 
+// NEED FILTER FOR JUST USERS POST TOO. 
+// LEFT OFF HERE : new action touches: [redux actions(function & definitions), reducers(include defs & make cases),api(endpoint), UI()...]
+//need to send userId parameter too. 
+// OK TEST: 
+
+export const filterOwnersPosts = (key,userId) => {
+  console.log('OWNERS: filter key is ...',key)
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/posts/filterOwners`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+          userId
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: FILTER_OWNERS_POSTS_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: FILTER_OWNERS_POSTS_FAIL,
+          });
+      }
+      return resultData;  
+    
+  };
+};
+//
 export const allUserPosts = (key) => {
   return async (dispatch) => {
     
@@ -243,3 +296,55 @@ export const allUserPosts = (key) => {
     
   // };
 };
+/////////////////////////
+export const setStatusGreen = () => {
+  return async (dispatch) => {
+    dispatch({
+        type: SET_STATUS_GREEN,
+        })
+  }
+}
+export const setStatusBlue = () => {
+  return async (dispatch) => {
+    dispatch({
+        type: SET_STATUS_BLUE,
+        })
+  }
+}
+export const getStatusColor = () => {
+  return async (dispatch) => {
+      dispatch({
+          type: GET_STATUS_COLOR,
+      })
+  }
+}
+
+
+export const deletePost = (key) => {
+  return async (dispatch) => {
+    
+    const result = await fetch(`${API_URL}/posts/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+        }),
+      });
+  
+      const resultData = await result.json();
+      if(resultData.success){
+        dispatch({
+            type: DELETE_POST_SUCCESS,
+            payload: resultData,
+          });
+      } else {
+        dispatch({
+            type: DELETE_POST_FAIL,
+          });
+      }
+      return resultData;  
+    
+  }
+}

@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import * as authAction from "../../redux/actions/authAction";
 import ImageForm from "../components/ImageForm";
@@ -23,11 +23,13 @@ const ProfileCard = (props) => {
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
+  var us_states = useSelector( (state) => state.auth.usstates)
 
-const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
-;
+ 
   return (
     <div className="card-plain">
+            <p className="cardDevNote" >ProfileCard</p>
+
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
           <Typography variant="h5" component="h2">
@@ -69,7 +71,10 @@ const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','Cal
                     city: props.user.city,
                     state: props.user.state,
                     zip: props.user.zip,
-                    profileImage: props.user.profileImage
+                    profileImage: props.user.profileImage,
+                    website: props.user.website,
+                    created: props.user.created,
+                    lastUpdated: props.user.lastUpdated
                   }}
                   validationSchema={formSchema}
                   onSubmit={(values) => {
@@ -83,6 +88,7 @@ const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','Cal
                           setInProgress(true);
                         }
                         props.refresh();
+                        setSeeDetails(!seeDetails)
                       })
                       .catch((err) => console.log(err));
                   }}
@@ -190,6 +196,20 @@ const us_states = ['Alabama','Alaska','American Samoa','Arizona','Arkansas','Cal
                           />
                           <div style={{ color: "salmon" }}>
                             {props.touched.zip && props.errors.zip}
+                          </div>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <label>Website</label>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <input
+                            placeholder="Website"
+                            onChange={props.handleChange("website")}
+                            value={props.values.website}
+                            onBlur={props.handleBlur("website")}
+                          />
+                          <div style={{ color: "salmon" }}>
+                            {props.touched.website && props.errors.website}
                           </div>
                         </Grid>
                         <input

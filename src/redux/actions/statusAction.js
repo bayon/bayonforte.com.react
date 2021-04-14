@@ -1,18 +1,27 @@
-export const FETCH_STATUS = "FETCH_STATUS"
+export const SET_STATUS_GREEN = "SET_STATUS_GREEN"
+export const SET_STATUS_BLUE = "SET_STATUS_BLUE"
+export const GET_STATUS_COLOR = "GET_STATUS_COLOR"
 
-//CONVERTS TO 
-export const fetchStatus = () => {
-    return async dispatch => {
-        //logic to fetch data 
-       // const result = await fetch('http://newsapi.org/v2/everything?q=tesla&from=2021-01-15&sortBy=publishedAt&apiKey=d0d92986ef7c4030b8f6b3746d3aae17')
-       // const resultData = await result.json();
-       const resultData ="app status fetched"
-        dispatch({
-            type: FETCH_STATUS,
-            payload: resultData
-        });
-       
+
+export const setStatusGreen = () => {
+    return async (dispatch) => {
+      dispatch({
+          type: SET_STATUS_GREEN,
+          })
     }
-}
-
+  }
+  export const setStatusBlue = () => {
+    return async (dispatch) => {
+      dispatch({
+          type: SET_STATUS_BLUE,
+          })
+    }
+  }
+ export const getStatusColor = () => {
+    return async (dispatch) => {
+        dispatch({
+            type: GET_STATUS_COLOR,
+        })
+    }
+ }
  

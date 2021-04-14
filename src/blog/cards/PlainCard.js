@@ -18,6 +18,8 @@ const PlainCard = (props) => {
 
   return (
     <div  className="card-plain">
+            <p className="cardDevNote" >PlainCard</p>
+
       <Typography variant="h5" component="h2">
         {props.user.fullName}
       </Typography>

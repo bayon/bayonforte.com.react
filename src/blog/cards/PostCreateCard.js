@@ -7,8 +7,8 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
+import PostStatus from "../components/PostStatus";
 import "./card.css";
-import PostPreviewCard from "./PostPreviewCard";
 
 
 
@@ -23,7 +23,7 @@ const formSchema = yup.object({
   phone: yup.string().min(10),
 });
 
-const PostCard = (props) => {
+const PostCreateCard = (props) => {
    
   const dispatch = useDispatch();
   const [seeDetails, setSeeDetails] = useState(false);
@@ -34,13 +34,15 @@ console.log("STATE---------user:",user)
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
+  var us_states = useSelector( (state) => state.auth.usstates)
+  var categories = useSelector( (state) =>  state.post.categories)
+ 
 
-const us_states = ['Select One','Alabama','Alaska','American Samoa','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Federated States of Micronesia','Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Marshall Islands','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Northern Mariana Islands','Ohio','Oklahoma','Oregon','Palau','Pennsylvania','Puerto Rico','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virgin Island','Virginia','Washington','West Virginia','Wisconsin','Wyoming']
-;
-
-const post_categories = ["select one", "looking for work","looking to hire"]
+const post_types = ["select one", "looking for work","looking to hire"]
   return (
     <div className="card-plain">
+                    <p className="cardDevNote" >PostCreateCard</p>
+
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
           <Typography variant="h5" component="h2">
@@ -49,7 +51,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                 POST FIELDS as of 4/11/2021
                 _id: ...
                 userId: { type: String, required: true},
-                category: { type: String, required: true},
+                postType: { type: String, required: true},
                 title: {type:String , required:true},
                 description: {type: String, required: true},
                 email: { type: String, required: true},
@@ -64,6 +66,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
           </Typography>
         </Grid>
         <Grid item xs={12} sm={3}>
+          <PostStatus></PostStatus >
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
@@ -99,6 +102,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                     userId: user.data._id,
                     title: '',
                     description: '',
+                    postType: '',
                     category: '',
                     email: user.data.email,
                     phone: user.data.phone,
@@ -116,19 +120,18 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
-                        console.log("create post result:", result);
-                        // seeDetails(false);
-                        if (result.success) {
-                          //setInProgress(true);
-                          //seeDetails(false);
-                        }
-                        props.refresh();
+                        console.log("create post result:", result);//good.
+                       // ANOTHER dispatch would ONLY be good here for updating state. 
+                       // whether taht will update at the users posts list is the question. 
+                       //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.
+                        dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
+                         
                       })
                       .catch((err) => console.log(err));
                   }}
                 >
                   {(props) => (
-                    <Grid container className="PostCardForm">
+                    <Grid container className="PostCreateCardForm">
                       <Grid item xs={12} sm={6}>
                         <Grid item xs={12} sm={6}>
                           <label>Post Title</label>
@@ -151,13 +154,13 @@ const post_categories = ["select one", "looking for work","looking to hire"]
 
 
                         <Grid item xs={12}>
-                          <label>Category</label>
+                          <label>postType</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select value={props.values.category} onChange={props.handleChange("category")} style={{border:"none",outline:"none",minWidth:"90px"}}>
+                        <select className="cardSelect" value={props.values.postType} onChange={props.handleChange("postType")} >
                             
                             {
-                              post_categories.map( (item,index ) => {
+                              post_types.map( (item,index ) => {
                                 return(
                                   <option key={index} value={index}  >{item}</option>
                                 )
@@ -181,6 +184,29 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                             {props.touched.description && props.errors.description}
                           </div>
                         </Grid>
+
+
+                        <Grid item xs={12}>
+                          <label>Category</label>
+                        </Grid>
+                        <Grid item xs={12}>
+                        <select value={props.values.category} onChange={props.handleChange("category")} className="cardSelect"  >
+                            
+                            {
+                              categories.map( (item,index ) => {
+                                return(
+                                  <option key={index} value={index} >{item}</option>
+                                )
+                              })
+                            }
+                          </select>
+                        </Grid>
+
+
+
+
+
+
  
                         <Grid item xs={12}>
                           <label>Email</label>
@@ -294,11 +320,7 @@ const post_categories = ["select one", "looking for work","looking to hire"]
                 {/* //end  part 3*/}
               </Grid>
             </Grid>
-            <Grid container>
-                <Grid item xs={12}>
-                    <PostPreviewCard></PostPreviewCard>
-                </Grid>
-            </Grid>
+          
           </React.Fragment>
         </>
       )}
@@ -306,4 +328,4 @@ const post_categories = ["select one", "looking for work","looking to hire"]
   );
 };
 
-export default PostCard;
+export default PostCreateCard;
