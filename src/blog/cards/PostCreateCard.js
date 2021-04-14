@@ -7,7 +7,7 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
-import PostStatus from "../components/PostStatus";
+// import forteworks.com from "../components/forteworks.com";
 import "./card.css";
 
 
@@ -41,7 +41,7 @@ console.log("STATE---------user:",user)
 const post_types = ["select one", "looking for work","looking to hire"]
   return (
     <div className="card-plain">
-                    <p className="cardDevNote" >PostCreateCard</p>
+                    
 
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
@@ -66,7 +66,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
           </Typography>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <PostStatus></PostStatus >
+          {/* <PostStatus></PostStatus > */}
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
@@ -324,6 +324,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
           </React.Fragment>
         </>
       )}
+      <p className="cardDevNote" >PostCreateCard</p>
     </div>
   );
 };

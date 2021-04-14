@@ -25,10 +25,10 @@ const PostDisplayCard = (props) => {
 
   return (
     <Grid container spacing={0}>
-            <p className="cardDevNote" >PostDisplayCard</p>
+            
 
       <Grid item xs={12} sm={10}>
-        <p>{props.post.title}</p>
+        <p className="cardTitle"> {props.post.title}</p>
       </Grid>
       <Grid item xs={12} sm={2}>
         <button
@@ -49,13 +49,13 @@ const PostDisplayCard = (props) => {
                   direction="row"
                   align="center"
                   justify="center"
-                  style={{ textAlign: "left", padding: "10px" }}
+                  className="cardDetailsContainer"
+                   
                 >
-                  <Grid item xs={12} sm={10}>
-                    <p className="cardDevNote">PostDisplayCard</p>
-                    <p>{props.post.title}</p>
-                    <p>{props.post.description}</p>
-                    <div>
+                  <Grid item xs={12} sm={8}>
+                    <p className="cardTitle">{props.post.title}</p>
+                    <p className="cardDescription">{props.post.description}</p>
+                    <div className="cardContactInfo">
                       <a
                         href={"mailto:" + props.post.email}
                         style={{ color: "#222", textDecoration: "none" }}
@@ -65,7 +65,7 @@ const PostDisplayCard = (props) => {
                       </a>
                     </div>
 
-                    <div>
+                    <div className="cardContactInfo">
                       <a
                         href={"tel:" + props.post.phone}
                         style={{ color: "#222", textDecoration: "none" }}
@@ -75,20 +75,17 @@ const PostDisplayCard = (props) => {
                       </a>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={2}>
+                  <Grid item xs={12} sm={4} className="cardImageGrid" >
                     {/* <PostImageForm props={props}></PostImageForm> */}
                     <img
                       src={
                         `${HOST_URL}/public/images/` + user.data.profileImage
                       } //+ props.props.post.postImage
                       alt="img"
-                      style={{
-                        height: "50px",
-                        width: "auto",
-                        borderRadius: "5px",
-                      }}
+                    className="cardImg"
                     />
                   </Grid>
+                  <p className="cardDevNote" >PostDisplayCard</p>
                 </Grid>
               )}
             </Grid>

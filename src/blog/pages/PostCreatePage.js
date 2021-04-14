@@ -31,7 +31,6 @@ const PostCreatePage = (props) => {
 
   return (
     <div>
-      <p className="cardDevNote">PostCreatePage</p>
 
       <PostCreateCard post={post} refresh={getPosts}></PostCreateCard>
       <div style={{ textAlign: "left" }}>
@@ -78,6 +77,8 @@ const PostCreatePage = (props) => {
           </li>
         </ul>
       </div>
+      <p className="cardDevNote">PostCreatePage</p>
+
     </div>
   );
 };

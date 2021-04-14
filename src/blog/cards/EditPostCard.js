@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import * as postAction from "../../redux/actions/postAction";
 import AreYouSureModal from "../components/AreYouSureModal";
-import PostStatus from "../components/PostStatus";
 import "./card.css";
 
 const formSchema = yup.object({
@@ -52,13 +51,11 @@ _id: "60730537d09d5d33501fc987"
   const [seeDetails, setSeeDetails] = useState(false);
   const [inProgress, setInProgress] = useState(false);
 
-  const [activated,setActivated] = useState(false)
- 
+  const [activated, setActivated] = useState(false);
 
   var user = useSelector((state) => state.auth.user);
   var us_states = useSelector((state) => state.auth.usstates);
   var categories = useSelector((state) => state.post.categories);
-
 
   console.log("STATE---------user:", user);
   useEffect(() => {
@@ -66,7 +63,7 @@ _id: "60730537d09d5d33501fc987"
   }, [inProgress]);
 
   const post_categories = ["select one", "looking for work", "looking to hire"];
-  const activatedOptions = ["Set Activation","activated","deactivated"];
+  const activatedOptions = ["Set Activation", "activated", "deactivated"];
   console.log("EditPostCard.js props:", props);
   const deleteItem = () => {
     console.log("delete item ", props.data._id);
@@ -81,48 +78,22 @@ _id: "60730537d09d5d33501fc987"
       .catch((err) => console.error(err));
   };
 
-  // const setActivated = (arg) => {
-  //   console.log("setActivated arg:", arg);
-  // };
-  // // const clearSortOptions = () => {
-  // //   setSortName(false);
-  // //   setSortEmail(false);
-
-  // // };
-  // const activateOptions = (e) => {
-  //   const key = e.target.value;
-  //   // clearSortOptions();
-  //   switch (key) {
-  //     case "active":
-  //       setActivated(true);
-  //       break;
-  //     case "inactive":
-  //       setActivated(false);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
   return (
     <>
       <React.Fragment>
-      <p className="cardDevNote" >EditPostCard</p>
-
         <Grid
           container
-          spacing={1}
-          align="center"
-          justify="center"
+          spacing={0}
+          // align="center"
+          // justify="center"
           direction="row"
-          style={{ padding: "1em" }}
+          className="cardGridContainer"
         >
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={10}  >
             {/* //FORM AND REDUX  part 3 JSX*/}
-            <PostStatus></PostStatus>
-            {/* <button onClick={changeStatus("blue")}>hook blue</button>
-    <button onClick={changeStatus("green")}>hook green</button> */}
+ 
             <Formik
+            style={{border:"solid 1px purple"}}
               initialValues={{
                 postId: props.data._id,
                 userId: props.data.userId,
@@ -137,9 +108,8 @@ _id: "60730537d09d5d33501fc987"
                 state: props.data.state,
                 zip: props.data.zip,
                 postImage: props.data.profileImage,
-                activated: props.data.activated
+                activated: props.data.activated,
               }}
-             
               // !PostImage REQUIRED here so as to not get deleted accidentally.
               validationSchema={formSchema}
               onSubmit={(values) => {
@@ -164,17 +134,16 @@ _id: "60730537d09d5d33501fc987"
               }}
             >
               {(props) => (
-                
                 <Grid container className="EditPostCardForm">
-                  <Grid item xs={12} sm={8}>
-                    <p className="cardDevNote">EditPostCard</p>
-
+                  <Grid item xs={12} sm={12}   >
                     <Grid item xs={12}>
                       <input
+                      className="cardInput"
                         placeholder="Post Title"
                         onChange={props.handleChange("title")}
                         value={props.values.title}
                         onBlur={props.handleBlur("title")}
+                         
                       />
 
                       <div style={{ color: "salmon" }}>
@@ -203,7 +172,7 @@ _id: "60730537d09d5d33501fc987"
                       </select>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                       <input
                         placeholder="Description"
                         onChange={props.handleChange("description")}
@@ -213,15 +182,28 @@ _id: "60730537d09d5d33501fc987"
                       <div style={{ color: "salmon" }}>
                         {props.touched.description && props.errors.description}
                       </div>
-                    </Grid>
+                    </Grid> */}
 
+                    <Grid item xs={12}>
+                      <textarea
+                        className="cardTextarea"
+                        placeholder="Description"
+                        onChange={props.handleChange("description")}
+                        value={props.values.description}
+                        onBlur={props.handleBlur("description")}
+                      >
+                        {props.values.description}
+                      </textarea>
+                      <div style={{ color: "salmon" }}>
+                        {props.touched.description && props.errors.description}
+                      </div>
+                    </Grid>
 
                     <Grid item xs={12}>
                       <select
                         className="cardSelect"
                         value={props.values.category}
                         onChange={props.handleChange("category")}
-                        
                       >
                         {categories.map((item, index) => {
                           return (
@@ -231,16 +213,11 @@ _id: "60730537d09d5d33501fc987"
                           );
                         })}
                       </select>
-                     
                     </Grid>
-
-
-
-
-
 
                     <Grid item xs={12}>
                       <input
+                       className="cardInput"
                         placeholder="Email"
                         onChange={props.handleChange("email")}
                         value={props.values.email}
@@ -253,6 +230,7 @@ _id: "60730537d09d5d33501fc987"
 
                     <Grid item xs={12}>
                       <input
+                       className="cardInput"
                         placeholder="Phone"
                         onChange={props.handleChange("phone")}
                         value={props.values.phone}
@@ -265,6 +243,7 @@ _id: "60730537d09d5d33501fc987"
 
                     <Grid item xs={12}>
                       <input
+                       className="cardInput"
                         placeholder="Address"
                         onChange={props.handleChange("address")}
                         value={props.values.address}
@@ -277,6 +256,7 @@ _id: "60730537d09d5d33501fc987"
 
                     <Grid item xs={12}>
                       <input
+                       className="cardInput"
                         placeholder="City"
                         onChange={props.handleChange("city")}
                         value={props.values.city}
@@ -306,11 +286,11 @@ _id: "60730537d09d5d33501fc987"
                           );
                         })}
                       </select>
-                     
                     </Grid>
 
                     <Grid item xs={12}>
                       <input
+                       className="cardInput"
                         placeholder="Zip"
                         onChange={props.handleChange("zip")}
                         value={props.values.zip}
@@ -332,36 +312,38 @@ _id: "60730537d09d5d33501fc987"
                       value={user._id}
                       disabled
                     />
-                   
-                     <Grid item xs={12} sm={4}>
-                        <div>
-                        <label className="cardLabel" htmlFor="activationStatus" >Status:</label>
 
-                         <select
-                         name="activationStatus"
-                        className="cardSelect"
-                        value={props.values.activated}
-                        onChange={props.handleChange("activated")}
-                        
-                      >
-                        {activatedOptions.map((item, index) => {
-                          return (
-                            <option key={index} value={index}>
-                              {item}
-                            </option>
-                          );
-                        })}
-                      </select>
-                         <p style={{fontSize:".6em"}}>Will not be seen if deactivated.</p>
-                        </div>
+                    <Grid item xs={12} sm={4}>
+                      <div>
+                        <label className="cardLabel" htmlFor="activationStatus">
+                          Status:
+                        </label>
 
-                       
-                      </Grid>
+                        <select
+                          name="activationStatus"
+                          className="cardSelect"
+                          value={props.values.activated}
+                          onChange={props.handleChange("activated")}
+                        >
+                          {activatedOptions.map((item, index) => {
+                            return (
+                              <option key={index} value={index}>
+                                {item}
+                              </option>
+                            );
+                          })}
+                        </select>
+                        <p style={{ fontSize: ".6em" }}>
+                          Will not be seen if deactivated.
+                        </p>
+                      </div>
+                    </Grid>
 
                     {/* UPLOAD AN IMAGE: https://www.youtube.com/watch?v=SAUvlkTDMM4 */}
                     <Grid container direction="row">
                       <Grid item xs={12} sm={4}>
                         <button
+                         className="cardButton"
                           onClick={props.handleSubmit}
                           style={{ color: "green" }}
                         >
@@ -374,7 +356,6 @@ _id: "60730537d09d5d33501fc987"
                           deleteItem={deleteItem}
                         ></AreYouSureModal>
                       </Grid>
-                     
                     </Grid>
                   </Grid>
                 </Grid>
@@ -384,11 +365,12 @@ _id: "60730537d09d5d33501fc987"
             {/* //end  part 3*/}
           </Grid>
           <Grid item xs={12} sm={1}>
-            <button onClick={props.closeEdit} style={{ color: "orange" }}>
+            <button  className="cardButton" onClick={props.closeEdit} style={{ color: "orange" }}>
               cancel
             </button>
           </Grid>
         </Grid>
+        <p className="cardDevNote">EditPostCard</p>
       </React.Fragment>
     </>
   );

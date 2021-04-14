@@ -83,6 +83,8 @@ export default function AreYouSureModal(props) {
         aria-describedby="simple-modal-description"
       >
         {body}
+       
+
       </Modal>
     </div>
   );

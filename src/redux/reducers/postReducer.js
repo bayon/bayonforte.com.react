@@ -16,9 +16,10 @@ const initialState = {
   errors: {},
   newPost: false,
   statusColor:'undefined',
-  categories: ["construction","remodeling","plumbing","painting","carpentry","siding","drywall","concrete","frameing","cabinetry","tile","decks","landscaping"]
+  postType: ["select type","Looking For Work","Hiring","Advertising"],
+  categories: ["select category", "construction","remodeling","plumbing","painting","carpentry","siding","drywall","concrete","frameing","cabinetry","tile","decks","excavating","appliances","landscaping"]
 };
-//!!!!: The order of there 'categories' is important !!!
+//!!!!: The order of there 'categories' is important !!! And I just changed it !!!
  
 
 

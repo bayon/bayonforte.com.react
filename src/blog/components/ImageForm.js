@@ -86,7 +86,7 @@ const ImageForm = (props) => {
             name="profileImage"
             type="file"
             id="file"
-            accept=".jpg"
+            accept=".jpg , .png"
             multiple
             onChange={handleFileChange}
             style={{ outline: "none", border: "none" }}
