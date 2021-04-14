@@ -44,12 +44,13 @@ const PostImageForm = (props) => {
     axios.post(`${API_URL}/uploadPostImage`, data).then((res) => {
       console.log('post image upload results: ',res)
       const postImage = res.data;
-      props.data.postImage = postImage;
+      props.props.data.postImage = postImage;
       // const values = user.data;
       const values = props.props.data
       console.log('values to update the post with...',values)
       dispatch(postAction.updatePost(values))
         .then(async (result) => {
+          console.log('update post result:',result)
           if (result.success) {
             //code
             console.log('success response ')

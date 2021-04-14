@@ -11,7 +11,7 @@ const PostCreatePage = (props) => {
   useEffect(() => {
     dispatch(postAction.getPost())
       .then(async (result) => {
-        console.log("result:", result);
+        //console.log("result:", result);
         setPost(result.data);
       })
       .catch((err) => console.log(err));

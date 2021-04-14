@@ -32,7 +32,7 @@ const PostCreateCard = (props) => {
 
 
  var user = useSelector((state) => state.auth.user);
-console.log("STATE---------user:",user)
+//console.log("STATE---------user:",user)
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
@@ -106,9 +106,10 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
-                        setSumbitComplete(true)
+                       
                         console.log("create post result:", result);//good.
-                        setCurrentPost(result);
+                        await setCurrentPost(result);
+                       await  setSumbitComplete(true)
                        // ANOTHER dispatch would ONLY be good here for updating state. 
                        // whether taht will update at the users posts list is the question. 
                        //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.

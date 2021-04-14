@@ -12,13 +12,13 @@ const PostDisplayCard = (props) => {
   // const [inProgress, setInProgress] = useState(false);
   const HOST_URL = config.url.HOST_URL;
   console.log("PostDisplayCard - props:", props); //good to here.
-  console.log("HOST_URL:", HOST_URL);
+  //console.log("HOST_URL:", HOST_URL);
   const closeEdit = () => {
     setAllowEdit(!allowEdit);
   };
 
   var user = useSelector((state) => state.auth.user);
-  console.log("STATE---------user:", user);
+  //console.log("STATE---------user:", user);
   // useEffect(() => {
   //   setInProgress(inProgress);
   // }, [inProgress]);

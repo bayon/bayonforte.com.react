@@ -30,7 +30,7 @@ const LinkStyle = styled.section`
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  console.log("initial auth is:", auth);
+  //console.log("initial auth is:", auth);
   const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
 
   //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
@@ -40,7 +40,7 @@ function Navigation(props) {
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
-        console.log("AUTH CHECK: profile to check auth ...result:", result);
+       // console.log("AUTH CHECK: profile to check auth ...result:", result);
         setUser(result.data);
       })
       .catch((err) => console.log(err));

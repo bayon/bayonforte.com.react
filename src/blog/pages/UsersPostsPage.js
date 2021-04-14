@@ -17,7 +17,7 @@ const UsersPostsPage = (props) => {
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
-        console.log("AUTH CHECK: profile to check auth ...result:", result);
+        //console.log("AUTH CHECK: profile to check auth ...result:", result);
         setUser(result.data);
       })
       .catch((err) => console.log(err));
@@ -170,7 +170,10 @@ const UsersPostsPage = (props) => {
   };
 
   const displayPosts = () => {
-    console.log("DISPLAY currentPosts:",currentPosts);
+    //console.log("DISPLAY currentPosts:",currentPosts);
+    if(currentPosts.length > 0){
+      //console.log("UsersPostsPage.js currentPosts:",currentPosts);
+    }
     if (haveCurrentPosts) {
       if (sortName) {
         return currentPosts
