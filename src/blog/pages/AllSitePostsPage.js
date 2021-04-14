@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as postAction from "../../redux/actions/postAction";
 import AllSitePostsDisplayCard from "../cards/AllSitePostsDisplayCard";
+import PostDisplayCard from "../cards/PostDisplayCard";
 
 const AllSitePostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -64,12 +65,15 @@ const AllSitePostsPage = (props) => {
     posts
       .sort((a, b) => (a.title > b.title ? 1 : -1))
       .map((post, i) => {
-        return (
-          <AllSitePostsDisplayCard
-            key={i}
-            post={post}
-          ></AllSitePostsDisplayCard>
-        );
+        return(
+          <PostDisplayCard key={i} post={post} ></PostDisplayCard>
+        )
+        // return (
+        //   <AllSitePostsDisplayCard
+        //     key={i}
+        //     post={post}
+        //   ></AllSitePostsDisplayCard>
+        // );
       });
   };
   const clearSortOptions = () => {
@@ -132,6 +136,7 @@ const AllSitePostsPage = (props) => {
           .sort((a, b) => (a.title > b.title ? 1 : -1))
           .map((post, i) => {
             return (
+              // <PostDisplayCard key={i} post={post} ></PostDisplayCard>
               <AllSitePostsDisplayCard
                 key={i}
                 post={post}
