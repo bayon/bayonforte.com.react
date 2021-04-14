@@ -6,9 +6,9 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
+import PostImageForm from "../components/PostImageForm";
 // import forteworks.com from "../components/forteworks.com";
 import "./card.css";
-
 
 
 
@@ -27,6 +27,9 @@ const PostCreateCard = (props) => {
   const dispatch = useDispatch();
   const [seeDetails, setSeeDetails] = useState(false);
   const [inProgress, setInProgress] = useState(false);
+  const [submitComplete,setSumbitComplete] = useState(false);
+  const [currentPost, setCurrentPost] = useState(false); 
+
 
  var user = useSelector((state) => state.auth.user);
 console.log("STATE---------user:",user)
@@ -93,7 +96,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     city: user.data.city,
                     state: user.state,
                     zip: user.data.zip,
-                    postImage: user.data.profileImage
+                    //postImage: user.data.profileImage
                   }}
                   // !PostImage REQUIRED here so as to not get deleted accidentally.
                   validationSchema={formSchema}
@@ -103,7 +106,9 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
+                        setSumbitComplete(true)
                         console.log("create post result:", result);//good.
+                        setCurrentPost(result);
                        // ANOTHER dispatch would ONLY be good here for updating state. 
                        // whether taht will update at the users posts list is the question. 
                        //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.
@@ -286,12 +291,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.zip && props.errors.zip}
                           </div>
                         </Grid>
-                        <input
+                        {/* <input
                              type="hidden"
                             onChange={()=>{}}
                             value={props.values.postImage}
                             disabled
-                          />
+                          /> */}
                            <input
                             type="hidden"
                             onChange={()=>{}}
@@ -311,11 +316,19 @@ const post_types = ["select one", "looking for work","looking to hire"]
 
                 {/* //end  part 3*/}
               </Grid>
+            
             </Grid>
           
           </React.Fragment>
         </>
       )}
+
+<Grid>
+                {submitComplete && 
+                
+                <PostImageForm props={currentPost}></PostImageForm>
+                }
+              </Grid>
       <p className="cardDevNote" >PostCreateCard</p>
     </div>
   );

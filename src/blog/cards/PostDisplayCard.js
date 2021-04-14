@@ -11,7 +11,7 @@ const PostDisplayCard = (props) => {
   const [allowEdit, setAllowEdit] = useState(false);
   // const [inProgress, setInProgress] = useState(false);
   const HOST_URL = config.url.HOST_URL;
-  console.log("PostDisplayCard - props:", props);
+  console.log("PostDisplayCard - props:", props); //good to here.
   console.log("HOST_URL:", HOST_URL);
   const closeEdit = () => {
     setAllowEdit(!allowEdit);
@@ -81,7 +81,7 @@ const PostDisplayCard = (props) => {
                     {/* <PostImageForm props={props}></PostImageForm> */}
                     <img
                       src={
-                        `${HOST_URL}/public/images/` + user.data.profileImage
+                        `${HOST_URL}/public/images/posts/` + props.post.postImage
                       } //+ props.props.post.postImage
                       alt="img"
                     className="cardImg"

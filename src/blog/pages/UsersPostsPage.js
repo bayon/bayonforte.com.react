@@ -170,7 +170,7 @@ const UsersPostsPage = (props) => {
   };
 
   const displayPosts = () => {
-    console.log("DISPALY POSTS.....");
+    console.log("DISPLAY currentPosts:",currentPosts);
     if (haveCurrentPosts) {
       if (sortName) {
         return currentPosts

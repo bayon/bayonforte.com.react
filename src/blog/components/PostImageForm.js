@@ -6,14 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
 
+
+
 const PostImageForm = (props) => {
   const dispatch = useDispatch();
-  console.log("PROPS: ", props);
+  console.log("PostImageForm PROPS: ", props);
+
+
 
   const [file, setFile] = useState(null);
   // const [imgFile, setImgFile] = useState(null);
-  //const [id, setId] = useState(props.props.post._id);
-  var post = useSelector((state) => state.post);
+  //const [id, setId] = useState(props.props.user._id);
+  var user = useSelector((state) => state.auth.user);
   const handleFileChange = (event) => {
     setFile(event.target.files);
     console.log(file);
@@ -28,27 +32,42 @@ const PostImageForm = (props) => {
       return false;
     }
     const data = new FormData();
-    data.append("_id", props.props.post._id);
+    console.log('PROPS:',props);
+    console.log('PROPS PROPS:',props.props);
+    console.log('PROPS PROPS DATA:',props.props.data);
+    data.append("postId", props.props.data.id);//props.props 2x
     for (var x = 0; x < file.length; x++) {
       data.append("file", file[x]);
     }
-    axios.post(`${API_URL}/upload`, data).then((res) => {
-      // setImgFile(`${HOST_URL}/public/images/` + res.data);
+    console.log("DATA getting sent to API: data:",data)
+    
+    axios.post(`${API_URL}/uploadPostImage`, data).then((res) => {
+      console.log('post image upload results: ',res)
       const postImage = res.data;
-      post.data.postImage = postImage;
-      const values = post.data;
+      props.data.postImage = postImage;
+      // const values = user.data;
+      const values = props.props.data
+      console.log('values to update the post with...',values)
       dispatch(postAction.updatePost(values))
         .then(async (result) => {
           if (result.success) {
             //code
+            console.log('success response ')
           }
+          console.log('success or fail dispatch response ?! ')
           props.props.refresh();
         })
         .catch((err) => console.log(err));
     });
   };
-
+  // {!props.props.post && 
+  //   return(
+  //   <p>add an image after you create your post.</p>
+  //   )
+  // }
+  
   return (
+    
     <Grid
       container
       spacing={0}
@@ -72,9 +91,9 @@ const PostImageForm = (props) => {
               
             )}   */}
 
-          {
+          {props.props.post &&
             <img
-              src={`${HOST_URL}/public/images/` } //+ props.props.post.postImage
+              src={`${HOST_URL}/public/images/posts/` + props.props.post.postImage}
               alt="img"
               style={{ height: "200px", width: "auto", borderRadius: "15px" }}
             />
@@ -86,7 +105,7 @@ const PostImageForm = (props) => {
             name="postImage"
             type="file"
             id="file"
-            accept=".jpg"
+            accept=".jpg , .png"
             multiple
             onChange={handleFileChange}
             style={{ outline: "none", border: "none" }}
@@ -98,6 +117,8 @@ const PostImageForm = (props) => {
           </button>
         </Grid>
       </form>
+      <p className="cardDevNote" >PostImageForm</p>
+
     </Grid>
   );
 };

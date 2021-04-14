@@ -32,7 +32,11 @@ const ImageForm = (props) => {
     for (var x = 0; x < file.length; x++) {
       data.append("file", file[x]);
     }
-    axios.post(`${API_URL}/upload`, data).then((res) => {
+    //TODO: 
+    // MAKE separate User and Post images. 
+    // try to use multer code within a scope. 
+    
+    axios.post(`${API_URL}/uploadUserImage`, data).then((res) => {
       // setImgFile(`${HOST_URL}/public/images/` + res.data);
       const profileImage = res.data;
       user.data.profileImage = profileImage;
@@ -99,6 +103,8 @@ const ImageForm = (props) => {
           </button>
         </Grid>
       </form>
+      <p className="cardDevNote" >ImageForm</p>
+
     </Grid>
   );
 };
