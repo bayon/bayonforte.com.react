@@ -216,7 +216,8 @@ const UsersPostsPage = (props) => {
     <Grid container direction="column" className="card-plain">
         <Grid item>
           <span>
-            Sort Options:
+            <h2>Current Posts</h2>
+            {/* Sort Options:
             <input
               type="radio"
               id="name"
@@ -224,27 +225,13 @@ const UsersPostsPage = (props) => {
               value="name"
               onChange={setSortOption}
             />
-            <label htmlFor="name">Name</label>
-            <input
-              type="radio"
-              id="email"
-              name="sortOption"
-              value="email"
-              onChange={setSortOption}
-            />
-            <label htmlFor="email">Email</label>
-            <input
-              type="radio"
-              id="id"
-              name="sortOption"
-              value="id"
-              onChange={setSortOption}
-            />
-            <label htmlFor="id">Id</label>
+            <label htmlFor="name">Name</label> */}
+        
+           
           </span>
         </Grid>
         <Grid item>
-          <span>
+          {/* <span>
             Filter:
             <input
               type="text"
@@ -253,7 +240,7 @@ const UsersPostsPage = (props) => {
               onBlur={setFilterOption}
             />
             <button>Search</button>
-          </span>
+          </span> */}
         </Grid>
 
         {haveCurrentPosts && displayPosts()}

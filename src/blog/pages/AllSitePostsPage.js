@@ -1,9 +1,10 @@
-import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as postAction from "../../redux/actions/postAction";
 import AllSitePostsDisplayCard from "../cards/AllSitePostsDisplayCard";
 import PostDisplayCard from "../cards/PostDisplayCard";
+
 
 const AllSitePostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -218,11 +219,11 @@ const AllSitePostsPage = (props) => {
   }
 
   return (
-    <div>
-      <Paper>
-        <p className="cardDevNote">AllSitePostsPage</p>
+    <Grid container spacing={0}>
 
-        <div>
+        <p className="cardDevNote">AllSitePostsPage</p>
+        <Grid item xs={12}>
+        
           <span>
             Sort Options:
             <input
@@ -266,8 +267,8 @@ const AllSitePostsPage = (props) => {
             />
             <label htmlFor="category">Category</label>
           </span>
-        </div>
-        <div>
+          </Grid>
+          <Grid item xs={12}>
           <span>
             Filter:
             <input
@@ -280,11 +281,11 @@ const AllSitePostsPage = (props) => {
             <button>Search</button>
             <button onClick={resetAll}>Reset</button>
           </span>
-        </div>
+        </Grid>
 
         {haveCurrentPosts && displayPosts()}
-      </Paper>
-    </div>
+     
+    </Grid>
   );
 };
 

@@ -49,6 +49,7 @@ const PostCreatePage = (props) => {
               </ul>
               api:
               <ul>
+                <li>Separate Image for Posts.*currently using the users profile image.</li>
                 <li>Search By Distance from ZipCode.</li>
 
                 <li>Tie Payments to Post Creation.</li>

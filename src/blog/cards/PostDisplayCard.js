@@ -52,7 +52,9 @@ const PostDisplayCard = (props) => {
                   className="cardDetailsContainer"
                    
                 >
-                  <Grid item xs={12} sm={8}>
+
+                  
+                  <Grid item xs={12} sm={8} style={{textAlign:"left",padding:"1em"}}>
                     <p className="cardTitle">{props.post.title}</p>
                     <p className="cardDescription">{props.post.description}</p>
                     <div className="cardContactInfo">

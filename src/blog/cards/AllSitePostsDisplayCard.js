@@ -1,11 +1,15 @@
-import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { config } from "../../Constants";
 import "./card.css";
 
 const AllSitePostsDisplayCard = (props) => {
+  const HOST_URL = config.url.HOST_URL;
+  var auth = useSelector((state) => state.auth.authorized);
+  var user = useSelector((state) => state.auth.user);
+
   const [seeDetails, setSeeDetails] = useState(false);
 
   const [inProgress, setInProgress] = useState(false);
@@ -23,39 +27,58 @@ const AllSitePostsDisplayCard = (props) => {
   }, []);
 
   return (
-    <div className="card-plain">
-      <p className="cardDevNote">AllSitesDisplayCard</p>
-      <Grid container direction="row">
+    <>
+      <Grid container direction="row" className="card-plain">
         <Grid item xs={12} sm={3}>
-          <Typography variant="p" component="p">
-            {props.post.title}
-          </Typography>
-          {props.post.postType === "1" && <p>Looking For Work</p>}
-          {props.post.postType === "2" && <p>Looking To Hire</p>}
-          <p>{currentCategory} </p>
+          <p className="cardTitle">{props.post.title}</p>
+
+          {props.post.postType === "1" && (
+            <p classname="cardPostType">"Looking For Work" </p>
+          )}
+          {props.post.postType === "2" && (
+            <p classname="cardPostType">"Hiring" </p>
+          )}
+
+          <p className="cardCategory">{currentCategory} </p>
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={3} style={{ border: "dotted 1px red" }}>
           {seeDetails && (
             <>
-              <div style={{ marginTop: 15 }}>
-                <div>{props.post.description}</div>
-                <a
-                  href={"mailto:" + props.post.email}
-                  style={{ color: "#222", textDecoration: "none" }}
-                >
-                  {props.post.email} <Icon>email</Icon>
-                </a>
-              </div>
+              <Grid item xs={12} style={{ border: "dotted 1px blue" }}>
+                <div className="cardDescription">{props.post.description}</div>
+                <div className="cardContactInfo">
+                  <a
+                    href={"mailto:" + props.post.email}
+                    style={{ color: "#222", textDecoration: "none" }}
+                  >
+                    {props.post.email} <Icon className="cardIcon">email</Icon>
+                  </a>
+                </div>
 
-              <div>{props.post.phone}</div>
-              <div>{props.post.postImage}</div>
+                <div className="cardContactInfo">
+                  <a
+                    href={"tel:" + props.post.phone}
+                    style={{ color: "#222", textDecoration: "none" }}
+                  >
+                    {props.post.phone}
+                    <Icon className="cardIcon">phone</Icon>
+                  </a>
+                </div>
+              </Grid>
             </>
           )}
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <img src={props.post.postImage} style={{height:"100px"}} />
+        <Grid item xs={12} sm={3} style={{ border: "dotted 1px orange" }}>
+          
+            {/* <PostImageForm props={props}></PostImageForm> */}
+            <img
+              src={`${HOST_URL}/public/images/` + props.post.postImage} //+ props.props.post.postImage
+              alt="img"
+              className="cardImg"
+            />
+           
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={1} style={{ border: "dotted 1px purple" }}>
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
@@ -65,7 +88,8 @@ const AllSitePostsDisplayCard = (props) => {
           </button>
         </Grid>
       </Grid>
-    </div>
+      <p className="cardDevNote">AllSitesDisplayCard</p>
+    </>
   );
 };
 
