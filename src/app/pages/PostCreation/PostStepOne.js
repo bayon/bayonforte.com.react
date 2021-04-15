@@ -1,12 +1,14 @@
 import Grid from "@material-ui/core/Grid";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import styled from "styled-components";
 import { config } from "../../../Constants";
+import * as postAction from "../../../redux/actions/postAction";
 import PostCreateCard from "../../cards/PostCreateCard";
 import PostStepTwo from "./PostStepTwo";
 const HOST_URL = config.url.HOST_URL;
+
 const LinkStyle = styled.section`
   padding: 0.3em;
   height: 35px;
@@ -17,12 +19,23 @@ const LinkStyle = styled.section`
 const PostStepOne = () => {
   var auth = useSelector((state) => state.auth.authorized);
   var user = useSelector((state) => state.auth.user);
+  var post = useSelector((state) => state.post);
+console.log("Post Step One: post:",post)
+  const dispatch = useDispatch();
+
+  useEffect( () => {
+//dispatch to post zero
+dispatch(postAction.initPost()).catch((err) => console.error(err))
+
+  },[])
 
   return (
     <>
-      Post Step 1
-      {!auth && <div>Not Authorized.</div>}
-      {auth && <div>Authorized</div>}
+     
+      
+
+      {post.postStepZero &&
+      
       <Router>
         <Grid item xs={12} sm={12}>
             <PostCreateCard></PostCreateCard>
@@ -39,6 +52,7 @@ const PostStepOne = () => {
 
         <Route path="/postStepTwo" component={PostStepTwo}  />
       </Router>
+    }
     </>
   );
 };

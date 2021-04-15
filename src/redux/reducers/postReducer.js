@@ -1,9 +1,12 @@
 import {
-  ALL_SITE_POSTS_FAIL,
+  ACCEPT_POST_FAIL, ACCEPT_POST_SUCCESS, ALL_SITE_POSTS_FAIL,
+
   ALL_SITE_POSTS_SUCCESS,
   ALL_USER_POSTS_FAIL,
   ALL_USER_POSTS_SUCCESS,
-  CREATE_POST_FAIL,
+
+
+  CANCEL_POST_FAIL, CANCEL_POST_SUCCESS, CREATE_POST_FAIL,
   CREATE_POST_SUCCESS,
   DELETE_POST_FAIL,
   DELETE_POST_SUCCESS,
@@ -11,7 +14,21 @@ import {
   FILTER_OWNERS_POSTS_SUCCESS,
   FILTER_POSTS_FAIL,
   FILTER_POSTS_SUCCESS,
-  GET_STATUS_COLOR,
+  GET_STATUS_COLOR, INIT_POST_FAIL, INIT_POST_SUCCESS,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   SET_STATUS_BLUE,
   SET_STATUS_GREEN,
   UPDATE_POST_FAIL,
@@ -27,8 +44,8 @@ const initialState = {
   errors: {},
   newPost: false,
   statusColor: "undefined",
+  postStepZero: false,
   postStepOne: false,
-  postStepOneId:'',
   postStepTwo: false,
   postStepThree: false,
   postType: ["select type", "Looking For Work", "Hiring", "Advertising"],
@@ -135,6 +152,52 @@ export default function (state = initialState, action) {
         ...state,
         errors: true,
       };
+
+      case ACCEPT_POST_SUCCESS:
+        return {
+          ...state,
+          post: action.payload,
+          statusColor: "GREEN",
+          postStepZero: false,
+          postStepOne: false,
+          postStepTwo: false,
+        };
+      case ACCEPT_POST_FAIL:
+        return {
+          ...state,
+          errors: true,
+        };
+
+        case CANCEL_POST_SUCCESS:
+          return {
+            ...state,
+            post: action.payload,
+            statusColor: "GREEN",
+            postStepZero: false,
+            postStepOne: false,
+            postStepTwo: false,
+          };
+        case CANCEL_POST_FAIL:
+          return {
+            ...state,
+            errors: true,
+          };
+
+          case INIT_POST_SUCCESS:
+            return {
+              ...state,
+              post: action.payload,
+              statusColor: "GREEN",
+              postStepZero: true,
+              
+            };
+          case INIT_POST_FAIL:
+            return {
+              ...state,
+              errors: true,
+            };
+
+
     //====STATUS: GREEN = editable, BLUE = being edited.
     //used to refresh data after a record is created or edited.
     case SET_STATUS_BLUE:

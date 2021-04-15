@@ -21,6 +21,17 @@ export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 export const FILTER_OWNERS_POSTS_SUCCESS = "FILTER_OWNERS_POSTS_SUCCESS";
 export const FILTER_OWNERS_POSTS_FAIL = "FILTER_OWNERS_POSTS_FAIL";
 
+
+export const ACCEPT_POST_SUCCESS = "ACCEPT_POST_SUCCESS";
+export const ACCEPT_POST_FAIL = "ACCEPT_POST_FAIL";
+
+export const CANCEL_POST_SUCCESS = "CANCEL_POST_SUCCESS";
+export const CANCEL_POST_FAIL = "CANCEL_POST_FAIL";
+
+export const INIT_POST_SUCCESS = "INIT_POST_SUCCESS";
+export const INIT_POST_FAIL = "INIT_POST_FAIL";
+
+
 const API_URL = config.url.API_URL;
 
 export const SET_STATUS_GREEN = "SET_STATUS_GREEN";
@@ -316,6 +327,92 @@ export const deletePost = (key) => {
 };
 
 
+
+export const initPost = (key) => {
+  return async (dispatch) => {
+    const result = await fetch(`${API_URL}/posts/initPost`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: INIT_POST_SUCCESS,
+        payload: resultData,
+      });
+    } else {
+      dispatch({
+        type: INIT_POST_FAIL,
+      });
+    }
+    return resultData;
+  };
+  
+};
+
+
+export const acceptPost = (key) => {
+  return async (dispatch) => {
+    const result = await fetch(`${API_URL}/posts/acceptPost`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: ACCEPT_POST_SUCCESS,
+        payload: resultData,
+      });
+    } else {
+      dispatch({
+        type: ACCEPT_POST_FAIL,
+      });
+    }
+    return resultData;
+  };
+  
+};
+
+
+export const cancelPost = (key) => {
+  return async (dispatch) => {
+    const result = await fetch(`${API_URL}/posts/cancelPost`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: CANCEL_POST_SUCCESS,
+        payload: resultData,
+      });
+    } else {
+      dispatch({
+        type: CANCEL_POST_FAIL,
+      });
+    }
+    return resultData;
+  };
+  
+};
 /////////////////////////
 export const setStatusGreen = () => {
   return async (dispatch) => {

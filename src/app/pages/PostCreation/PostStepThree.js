@@ -21,9 +21,7 @@ const PostStepThree = (props) => {
 
   return (
     <>
-      Post Step 3
-      {!auth && <div>Not AUthorized.</div>}
-      {auth && <div>Authorized</div>}
+      
       {
         post && 
         <CreatePostDisplayCard props={post}></CreatePostDisplayCard>

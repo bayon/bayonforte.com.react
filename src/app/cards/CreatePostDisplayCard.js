@@ -113,6 +113,9 @@ const CreatePostDisplayCard = (props) => {
                   onClick={() => {
                      //initEdit()
                      console.log("ACCEPT THE NEW POST")
+                     //dispatch to new post action postAccepted
+                     // set postStepone and postStepTwo back to false. call it good.
+                     dispatch(postAction.acceptPost(currentPost._id)).catch((err) => console.error(err))
                   }}
                   style={{ color: "blue" }}
                 >
@@ -122,6 +125,10 @@ const CreatePostDisplayCard = (props) => {
                   onClick={() => {
                      //initEdit()
                      console.log("CANCEL THE NEW POST")
+                      //dispatch to new post action postCanceled
+                      dispatch(postAction.cancelPost(currentPost._id)).catch((err) => console.error(err))
+                      // delete the post and remove the image. 
+                      
                   }}
                   style={{ color: "blue" }}
                 >

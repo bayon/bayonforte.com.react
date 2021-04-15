@@ -24,8 +24,7 @@ const PostStepTwo = () => {
 
   return (
     <>
-      Post Step 2{!auth && <div>Not AUthorized.</div>}
-      {auth && <div>Authorized</div>}
+      
       <Router>
         <Grid item xs={12} sm={12}>
           {/* props={currentPost} */}
