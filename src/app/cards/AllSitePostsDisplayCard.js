@@ -39,10 +39,10 @@ const AllSitePostsDisplayCard = (props) => {
 
           <p className="cardCategory">{currentCategory} </p>
         </Grid>
-        <Grid item xs={12} sm={3} style={{ border: "dotted 1px red" }}>
+        <Grid item xs={12} sm={3}  >
           {seeDetails && (
             <>
-              <Grid item xs={12} style={{ border: "dotted 1px blue" }}>
+              <Grid item xs={12}  >
                 <div className="cardDescription">{props.post.description}</div>
                 <div className="cardContactInfo">
                   <a
@@ -66,7 +66,7 @@ const AllSitePostsDisplayCard = (props) => {
             </>
           )}
         </Grid>
-        <Grid item xs={12} sm={3} style={{ border: "dotted 1px orange" }}>
+        <Grid item xs={12} sm={3}  >
           {/* <PostImageForm props={props}></PostImageForm> */}
           <img
             src={`${HOST_URL}/public/images/posts/` + props.post.postImage} //+ props.props.post.postImage
@@ -74,7 +74,7 @@ const AllSitePostsDisplayCard = (props) => {
             className="cardImg"
           />
         </Grid>
-        <Grid item xs={12} sm={1} style={{ border: "dotted 1px purple" }}>
+        <Grid item xs={12} sm={1}    >
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);

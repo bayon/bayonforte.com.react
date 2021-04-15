@@ -11,7 +11,7 @@ const HOST_URL = config.url.HOST_URL;
 const LinkStyle = styled.section`
   padding: 0.3em;
   height: 35px;
-  background: #fff;
+  background: blue;
   color: #333;
 `;
 
@@ -24,11 +24,12 @@ const PostStepTwo = () => {
 
   return (
     <>
-      
+      <PostImageForm props={post}></PostImageForm>
+      {post.postStepTwo &&
       <Router>
         <Grid item xs={12} sm={12}>
           {/* props={currentPost} */}
-          {!post.postStepTwo && <PostImageForm props={post}></PostImageForm>}
+         
           <Link
             style={{
               textDecoration: "none",
@@ -41,6 +42,7 @@ const PostStepTwo = () => {
 
         <Route path="/postStepThree" component={PostStepThree} post={post} />
       </Router>
+}
     </>
   );
 };

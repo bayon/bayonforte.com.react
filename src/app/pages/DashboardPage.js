@@ -13,7 +13,7 @@ const HOST_URL = config.url.HOST_URL;
 const LinkStyle = styled.section`
   padding: 0.3em;
   height: 35px;
-  background: #fff;
+  background: orange;
   color: #333;
 `;
 

@@ -9,7 +9,7 @@ import "./card.css";
 
 const CreatePostDisplayCard = (props) => {
 
-  const [seeDetails, setSeeDetails] = useState(false);
+  // const [seeDetails, setSeeDetails] = useState(false);
   const [readyToComplete, setAllowEdit] = useState(false);
    //const Kolor = useSelector((state) => state.post.statusColor);
   const dispatch = useDispatch();
@@ -58,15 +58,9 @@ const CreatePostDisplayCard = (props) => {
         }
       </Grid>
       <Grid item xs={12} sm={2}>
-        <button
-          onClick={() => {
-            setSeeDetails(!seeDetails);
-          }}
-        >
-          {seeDetails ? "close" : "details"}
-        </button>
+       
       </Grid>
-      {seeDetails &&   (
+      {true &&   (
         <Grid item xs={12} sm={12} style={{ background: "#eee" }}>
           <Grid container spacing={0} direction="row">
             <Grid item sm={10}>

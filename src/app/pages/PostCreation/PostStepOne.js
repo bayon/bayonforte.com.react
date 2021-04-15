@@ -12,7 +12,7 @@ const HOST_URL = config.url.HOST_URL;
 const LinkStyle = styled.section`
   padding: 0.3em;
   height: 35px;
-  background: #fff;
+  background: orange;
   color: #333;
 `;
 
@@ -26,8 +26,8 @@ console.log("Post Step One: post:",post)
   useEffect( () => {
 //dispatch to post zero
 dispatch(postAction.initPost()).catch((err) => console.error(err))
-
-  },[])
+    console.log("init zero ... ")
+  },[post.postStepZero])
 
   return (
     <>

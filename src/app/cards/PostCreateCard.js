@@ -125,7 +125,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     phone: user.data.phone,
                     address: user.data.address,
                     city: user.data.city,
-                    state: user.state,
+                    state: user.data.state,
                     zip: user.data.zip,
                     //postImage: user.data.profileImage
                   }}
