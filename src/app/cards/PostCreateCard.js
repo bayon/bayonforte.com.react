@@ -39,6 +39,18 @@ const PostCreateCard = (props) => {
   var us_states = useSelector( (state) => state.auth.usstates)
   var categories = useSelector( (state) =>  state.post.categories)
  
+  const initEdit = () => {
+    console.log('. . . . . . . .init edit ')
+    dispatch(postAction.setStatusBlue()).catch((err) => console.error(err))
+    //setAllowEdit(!allowEdit);
+    setSeeDetails(!seeDetails);
+  }
+  const closeEdit = () => {
+    //setAllowEdit(!allowEdit);
+    setSeeDetails(!seeDetails);
+    dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
+
+  };
 
 const post_types = ["select one", "looking for work","looking to hire"]
   return (
@@ -54,7 +66,10 @@ const post_types = ["select one", "looking for work","looking to hire"]
           {/* <PostStatus></PostStatus > */}
           <button
             onClick={() => {
-              setSeeDetails(!seeDetails);
+             // setSeeDetails(!seeDetails);
+             console.log("seeDetails:",seeDetails)
+              if(!seeDetails){initEdit()}
+              if(seeDetails){closeEdit()}
             }}
           >
             {seeDetails ? "close" : "create"}
@@ -110,9 +125,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
                         console.log("create post result:", result);//good.
                         await setCurrentPost(result);
                        await  setSumbitComplete(true)
-                       // ANOTHER dispatch would ONLY be good here for updating state. 
-                       // whether taht will update at the users posts list is the question. 
-                       //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.
+                       
                         dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
                          
                       })
