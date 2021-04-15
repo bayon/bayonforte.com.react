@@ -35,7 +35,7 @@ const PostImageForm = (props) => {
     console.log('PROPS:',props);
     console.log('PROPS PROPS:',props.props);
     console.log('PROPS PROPS DATA:',props.props.data);
-    data.append("postId", props.props.data.id);//props.props 2x
+    data.append("postId", props.props.post.data.id);//props.props 2x
     for (var x = 0; x < file.length; x++) {
       data.append("file", file[x]);
     }
@@ -44,9 +44,9 @@ const PostImageForm = (props) => {
     axios.post(`${API_URL}/uploadPostImage`, data).then((res) => {
       console.log('post image upload results: ',res)
       const postImage = res.data;
-      props.props.data.postImage = postImage;
+      props.props.post.data.postImage = postImage;
       // const values = user.data;
-      const values = props.props.data
+      const values = props.props.post.data
       console.log('values to update the post with...',values)
       dispatch(postAction.updatePost(values))
         .then(async (result) => {
@@ -56,7 +56,7 @@ const PostImageForm = (props) => {
             console.log('success response ')
           }
           console.log('success or fail dispatch response ?! ')
-          props.props.refresh();
+          //props.props.refresh();
         })
         .catch((err) => console.log(err));
     });

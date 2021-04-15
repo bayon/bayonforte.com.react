@@ -137,7 +137,7 @@ export const getPost = () => {
 export const updatePost = (postData) => {
   console.log("POST ACTION UPDATE POST: postData:", postData);
   const {
-    postId,
+    id,
     userId,
     title,
     description,
@@ -154,13 +154,14 @@ export const updatePost = (postData) => {
   } = postData;
   //post versus posts in URL
   return async (dispatch) => {
+    // ? why getting a 404 for posts/update ? 
     const result = await fetch(`${API_URL}/posts/update`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        postId,
+        id,
         userId,
         title,
         description,
@@ -178,6 +179,7 @@ export const updatePost = (postData) => {
     });
 
     const resultData = await result.json();
+    console.log("post update resultData:",resultData);
     if (resultData.success) {
       dispatch({
         type: UPDATE_POST_SUCCESS,

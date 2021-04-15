@@ -6,11 +6,16 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
-import PostImageForm from "../components/PostImageForm";
 // import forteworks.com from "../components/forteworks.com";
 import "./card.css";
 
+/*
+TO GO: 
+import PostImageForm from "../components/PostImageForm";
 
+ <PostImageForm props={currentPost}></PostImageForm>
+
+*/
 
 const HOST_URL = config.url.HOST_URL;
 
@@ -32,6 +37,11 @@ const PostCreateCard = (props) => {
 
 
  var user = useSelector((state) => state.auth.user);
+ var post = useSelector((state)=> state.post);
+ useEffect( () => {
+    console.log('post data changed:',post)
+    
+ },[post])
 //console.log("STATE---------user:",user)
   useEffect(() => {
     setInProgress(inProgress);
@@ -57,13 +67,13 @@ const post_types = ["select one", "looking for work","looking to hire"]
     <div className="card-plain">
                     
 
-      <Grid container spacing={0} direction="row">
+      {/* <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
           
           <h2>Create A Post</h2>
         </Grid>
         <Grid item xs={12} sm={3}>
-          {/* <PostStatus></PostStatus > */}
+          {/* <PostStatus></PostStatus > 
           <button
             onClick={() => {
              // setSeeDetails(!seeDetails);
@@ -75,11 +85,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
             {seeDetails ? "close" : "create"}
           </button>
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      {seeDetails && (
+      
         <>
           <React.Fragment>
+          {!post.postStepOne &&
             <Grid
               container
               spacing={1}
@@ -88,6 +99,11 @@ const post_types = ["select one", "looking for work","looking to hire"]
               direction="row"
                
             >
+
+
+            
+              
+            
               {/* <Grid item xs={12} sm={6}>
                  <PostImageForm props={props}></PostImageForm>  
                  <img
@@ -332,16 +348,16 @@ const post_types = ["select one", "looking for work","looking to hire"]
               </Grid>
             
             </Grid>
-          
+          }
           </React.Fragment>
         </>
-      )}
+      
 
 <Grid>
-                {submitComplete && 
+                {/* {submitComplete && 
                 
                 <PostImageForm props={currentPost}></PostImageForm>
-                }
+                } */}
               </Grid>
       <p className="cardDevNote" >PostCreateCard</p>
     </div>

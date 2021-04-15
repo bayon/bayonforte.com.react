@@ -27,6 +27,10 @@ const initialState = {
   errors: {},
   newPost: false,
   statusColor: "undefined",
+  postStepOne: false,
+  postStepOneId:'',
+  postStepTwo: false,
+  postStepThree: false,
   postType: ["select type", "Looking For Work", "Hiring", "Advertising"],
   categories: [
     "select category",
@@ -78,6 +82,7 @@ export default function (state = initialState, action) {
         ...state,
         post: action.payload,
         newPost: true,
+        postStepOne: true,
         statusColor: "BLUE",
       };
     case CREATE_POST_FAIL:
@@ -90,6 +95,7 @@ export default function (state = initialState, action) {
         ...state,
         post: action.payload,
         statusColor: "BLUE",
+        postStepTwo: true,
       };
     case UPDATE_POST_FAIL:
       return {
