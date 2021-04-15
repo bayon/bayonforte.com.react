@@ -11,7 +11,7 @@ const PostCreatePage = (props) => {
   useEffect(() => {
     dispatch(postAction.getPost())
       .then(async (result) => {
-        console.log("result:", result);
+        //console.log("result:", result);
         setPost(result.data);
       })
       .catch((err) => console.log(err));
@@ -31,13 +31,20 @@ const PostCreatePage = (props) => {
 
   return (
     <div>
-      <p className="cardDevNote">PostCreatePage</p>
 
       <PostCreateCard post={post} refresh={getPosts}></PostCreateCard>
       <div style={{ textAlign: "left" }}>
         <ul>
           <li>USERS POST PAGE:</li>
-
+            Required:<ul>
+              <li>rearrange how user creates a post. Make it a stepped process.</li>
+              <ul>
+                <li>Step 1: *create </li>
+                <li>Step 2: *update</li>
+                <li>Step 3: *update with Image</li>
+                <li>Success, return to Dashboard.</li>
+              </ul>
+            </ul>
           <li>
             ENTIRE SITE TODOS:
             <ul>
@@ -50,6 +57,7 @@ const PostCreatePage = (props) => {
               </ul>
               api:
               <ul>
+                <li>Separate Image for Posts.*currently using the users profile image.</li>
                 <li>Search By Distance from ZipCode.</li>
 
                 <li>Tie Payments to Post Creation.</li>
@@ -78,6 +86,8 @@ const PostCreatePage = (props) => {
           </li>
         </ul>
       </div>
+      <p className="cardDevNote">PostCreatePage</p>
+
     </div>
   );
 };

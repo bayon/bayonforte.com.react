@@ -18,8 +18,8 @@ import * as yup from "yup";
 import { config } from '../../Constants';
 import * as authAction from "../../redux/actions/authAction";
 import logo from "../assets/img/pexels-pixabay-159201.jpg";
-import Blog from "../Blog";
 import CardInput from '../components/CardInput';
+import Home from "../Home";
 
 
 
@@ -337,7 +337,7 @@ if (!inProgress) {
 } else {
   return (
     <Router>
-    <Route  path="/register" component={Blog} />
+    <Route  path="/register" component={Home} />
   </Router>
   )
 }

@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -7,9 +6,9 @@ import * as yup from "yup";
 // import PostImageForm from "../components/PostImageForm";
 import { config } from "../../Constants";
 import * as postAction from "../../redux/actions/postAction";
-import PostStatus from "../components/PostStatus";
+import PostImageForm from "../components/PostImageForm";
+// import forteworks.com from "../components/forteworks.com";
 import "./card.css";
-
 
 
 
@@ -28,48 +27,49 @@ const PostCreateCard = (props) => {
   const dispatch = useDispatch();
   const [seeDetails, setSeeDetails] = useState(false);
   const [inProgress, setInProgress] = useState(false);
+  const [submitComplete,setSumbitComplete] = useState(false);
+  const [currentPost, setCurrentPost] = useState(false); 
+
 
  var user = useSelector((state) => state.auth.user);
-console.log("STATE---------user:",user)
+//console.log("STATE---------user:",user)
   useEffect(() => {
     setInProgress(inProgress);
   }, [inProgress]);
   var us_states = useSelector( (state) => state.auth.usstates)
   var categories = useSelector( (state) =>  state.post.categories)
  
+  const initEdit = () => {
+    console.log('. . . . . . . .init edit ')
+    dispatch(postAction.setStatusBlue()).catch((err) => console.error(err))
+    //setAllowEdit(!allowEdit);
+    setSeeDetails(!seeDetails);
+  }
+  const closeEdit = () => {
+    //setAllowEdit(!allowEdit);
+    setSeeDetails(!seeDetails);
+    dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
+
+  };
 
 const post_types = ["select one", "looking for work","looking to hire"]
   return (
     <div className="card-plain">
-                    <p className="cardDevNote" >PostCreateCard</p>
+                    
 
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
-          <Typography variant="h5" component="h2">
-              Create a post
-            {/*  
-                POST FIELDS as of 4/11/2021
-                _id: ...
-                userId: { type: String, required: true},
-                postType: { type: String, required: true},
-                title: {type:String , required:true},
-                description: {type: String, required: true},
-                email: { type: String, required: true},
-                phone: { type: String} ,
-                postImage: { type: String },  
-                city: { type: String },
-                state: { type: String },
-                zip: { type: String },
-                website: { type: String }
-            
-            */}
-          </Typography>
+          
+          <h2>Create A Post</h2>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <PostStatus></PostStatus >
+          {/* <PostStatus></PostStatus > */}
           <button
             onClick={() => {
-              setSeeDetails(!seeDetails);
+             // setSeeDetails(!seeDetails);
+             console.log("seeDetails:",seeDetails)
+              if(!seeDetails){initEdit()}
+              if(seeDetails){closeEdit()}
             }}
           >
             {seeDetails ? "close" : "create"}
@@ -82,20 +82,21 @@ const post_types = ["select one", "looking for work","looking to hire"]
           <React.Fragment>
             <Grid
               container
-              spacing={0}
+              spacing={1}
               align="center"
               justify="center"
               direction="row"
+               
             >
-              <Grid item xs={12} sm={6}>
-                {/* <PostImageForm props={props}></PostImageForm> */}
-                <img
+              {/* <Grid item xs={12} sm={6}>
+                 <PostImageForm props={props}></PostImageForm>  
+                 <img
               src={`${HOST_URL}/public/images/`+ user.data.profileImage } //+ props.props.post.postImage
               alt="img"
               style={{ height: "100px", width: "auto", borderRadius: "15px" }}
-            />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+            /> 
+              </Grid> */}
+              <Grid item xs={12}    >
                 {/* //FORM AND REDUX  part 3 JSX*/}
                 <Formik
                   initialValues={{
@@ -110,7 +111,7 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     city: user.data.city,
                     state: user.state,
                     zip: user.data.zip,
-                    postImage: user.data.profileImage
+                    //postImage: user.data.profileImage
                   }}
                   // !PostImage REQUIRED here so as to not get deleted accidentally.
                   validationSchema={formSchema}
@@ -120,10 +121,11 @@ const post_types = ["select one", "looking for work","looking to hire"]
                     setSeeDetails(!seeDetails);
                      dispatch(postAction.createPost(values))
                       .then(async (result) => {
+                       
                         console.log("create post result:", result);//good.
-                       // ANOTHER dispatch would ONLY be good here for updating state. 
-                       // whether taht will update at the users posts list is the question. 
-                       //TRY TO RESET STATUS COLOR TO GREEN AFTER SUCCESSFUL CREATE.
+                        await setCurrentPost(result);
+                       await  setSumbitComplete(true)
+                       
                         dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
                          
                       })
@@ -131,13 +133,14 @@ const post_types = ["select one", "looking for work","looking to hire"]
                   }}
                 >
                   {(props) => (
-                    <Grid container className="PostCreateCardForm">
-                      <Grid item xs={12} sm={6}>
-                        <Grid item xs={12} sm={6}>
-                          <label>Post Title</label>
+                    <Grid container className="PostCreateCardForm"   >
+                      <Grid item xs={12} sm={12}  >
+                        <Grid item xs={12} className="cardLabelContainer" >
+                          <label className="cardLabel">Post Title</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                            className="appInput"
                             placeholder="Post Title"
                             onChange={props.handleChange("title")}
                             value={props.values.title}
@@ -153,11 +156,11 @@ const post_types = ["select one", "looking for work","looking to hire"]
 
 
 
-                        <Grid item xs={12}>
-                          <label>postType</label>
+                        <Grid item xs={12} className="cardLabelContainer">
+                          <label className="cardLabel">postType</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select className="cardSelect" value={props.values.postType} onChange={props.handleChange("postType")} >
+                        <select className="appSelect" value={props.values.postType} onChange={props.handleChange("postType")} >
                             
                             {
                               post_types.map( (item,index ) => {
@@ -172,9 +175,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
 
 
 
- 
+                        <Grid item xs={12} className="cardLabelContainer">
+                          <label className="cardLabel">Description</label>
+                        </Grid>
                         <Grid item xs={12}>
                           <input
+                            className="appInput"
                             placeholder="Description"
                             onChange={props.handleChange("description")}
                             value={props.values.description}
@@ -186,11 +192,11 @@ const post_types = ["select one", "looking for work","looking to hire"]
                         </Grid>
 
 
-                        <Grid item xs={12}>
-                          <label>Category</label>
+                        <Grid item xs={12} className="cardLabelContainer">
+                          <label className="cardLabel">Category</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select value={props.values.category} onChange={props.handleChange("category")} className="cardSelect"  >
+                        <select value={props.values.category} onChange={props.handleChange("category")} className="appSelect"  >
                             
                             {
                               categories.map( (item,index ) => {
@@ -208,11 +214,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
 
 
  
-                        <Grid item xs={12}>
-                          <label>Email</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">Email</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Email"
                             onChange={props.handleChange("email")}
                             value={props.values.email}
@@ -223,11 +230,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.email && props.errors.email}
                           </div>
                         </Grid>
-                        <Grid item xs={12}>
-                          <label>Phone</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">Phone</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Phone"
                             onChange={props.handleChange("phone")}
                             value={props.values.phone}
@@ -237,11 +245,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.phone && props.errors.phone}
                           </div>
                         </Grid>
-                        <Grid item xs={12}>
-                          <label>Address</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">Address</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Address"
                             onChange={props.handleChange("address")}
                             value={props.values.address}
@@ -251,11 +260,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.address && props.errors.address}
                           </div>
                         </Grid>
-                        <Grid item xs={12}>
-                          <label>City</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">City</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="City"
                             onChange={props.handleChange("city")}
                             value={props.values.city}
@@ -265,11 +275,11 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.city && props.errors.city}
                           </div>
                         </Grid>
-                        <Grid item xs={12}>
-                          <label>State</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">State</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select value={props.values.state} onChange={props.handleChange("state")} style={{border:"none",outline:"none",minWidth:"90px"}}>
+                        <select value={props.values.state} onChange={props.handleChange("state")}  className="appSelect"  >
                             
                             {
                               us_states.map( (item,index ) => {
@@ -280,11 +290,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             }
                           </select>
                         </Grid>
-                        <Grid item xs={12}>
-                          <label>Zip</label>
+                        <Grid item xs={12}  className="cardLabelContainer">
+                          <label className="cardLabel">Zip</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Zip"
                             onChange={props.handleChange("zip")}
                             value={props.values.zip}
@@ -294,12 +305,12 @@ const post_types = ["select one", "looking for work","looking to hire"]
                             {props.touched.zip && props.errors.zip}
                           </div>
                         </Grid>
-                        <input
-                            type="hidden"
+                        {/* <input
+                             type="hidden"
                             onChange={()=>{}}
                             value={props.values.postImage}
                             disabled
-                          />
+                          /> */}
                            <input
                             type="hidden"
                             onChange={()=>{}}
@@ -319,11 +330,20 @@ const post_types = ["select one", "looking for work","looking to hire"]
 
                 {/* //end  part 3*/}
               </Grid>
+            
             </Grid>
           
           </React.Fragment>
         </>
       )}
+
+<Grid>
+                {submitComplete && 
+                
+                <PostImageForm props={currentPost}></PostImageForm>
+                }
+              </Grid>
+      <p className="cardDevNote" >PostCreateCard</p>
     </div>
   );
 };

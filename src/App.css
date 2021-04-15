@@ -1,6 +1,40 @@
 .App {
   text-align: center;
 }
- .appSelect{
-   color: red;
- }
+ 
+
+ button{
+  margin:1em;
+
+  border: none;
+  outline: none;
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  font-size:.8em;
+
+}
+
+.appInput{
+  margin-top:15px;
+  border: none;
+  outline: none;
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  font-size:.8em;
+ 
+  width:100%;
+
+}
+
+.appSelect{
+  padding: .5em;
+  border: none;
+  outline: none;
+  margin-top: 1em;
+  min-width:90px;
+  border: solid 1px #ddd !important;
+  border-radius: 4px;
+  width:100%;
+}

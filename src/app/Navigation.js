@@ -8,17 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 //import { Provider } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import styled from "styled-components";
-import "./App.css";
-//import logo from "./blog/assets/img/blue-cottage-840-464-widened-to-1024.png";
-import Blog from "./blog/Blog";
-import AllSitePostsPage from "./blog/pages/AllSitePostsPage";
-import DashboardPage from "./blog/pages/DashboardPage";
-import LoginPage from "./blog/pages/LoginPage";
-import ProfilePage from "./blog/pages/ProfilePage";
-import RegisterPage from "./blog/pages/RegisterPage";
-// import UsersPage from "./blog/pages/UsersPage";
+import "../App.css";
+import * as authAction from "../redux/actions/authAction";
+import PostStatus from "./components/PostStatus";
+//import logo from "./app/assets/img/blue-cottage-840-464-widened-to-1024.png";
+import Home from "./Home";
+// import UsersPage from "./app/pages/UsersPage";
 import "./navigation.css";
-import * as authAction from "./redux/actions/authAction";
+import AllSitePostsPage from "./pages/AllSitePostsPage";
+import DashboardPage from "./pages/DashboardPage";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage";
 
 
 const LinkStyle = styled.section`
@@ -30,7 +31,7 @@ const LinkStyle = styled.section`
 
 function Navigation(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  console.log("initial auth is:", auth);
+  //console.log("initial auth is:", auth);
   const [user, setUser] = useState({}); //user is not 'used' but the call to userProfile is needed for ? auth ? 
 
   //GOES FALSE AFTER REFRESH: IS THAT DESIRED ?
@@ -40,7 +41,7 @@ function Navigation(props) {
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
-        console.log("AUTH CHECK: profile to check auth ...result:", result);
+       // console.log("AUTH CHECK: profile to check auth ...result:", result);
         setUser(result.data);
       })
       .catch((err) => console.log(err));
@@ -127,6 +128,9 @@ function Navigation(props) {
                   <LinkStyle>Profile</LinkStyle>
                 </Link>
               </Grid>
+              <Grid item xs={12} sm={1}  >
+                  <PostStatus></PostStatus>
+                </Grid>
 
 
               {/* <Grid item xs={12} sm={1}>
@@ -188,8 +192,8 @@ function Navigation(props) {
         </Grid>
       </Toolbar>
 
-      <Route exact path="/" component={Blog} />
-      <Route exact path="/build" component={Blog} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/build" component={Home} />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/dashboard" component={DashboardPage} />
@@ -197,7 +201,7 @@ function Navigation(props) {
       <Route path="/profile" component={ProfilePage} />
       {/* <Route path="/users" component={UsersPage} /> */}
       <Route path="/allSitePosts" component={AllSitePostsPage} />
-      <Route path="/logout" component={Blog} />
+      <Route path="/logout" component={Home} />
     </Router>
   );
 }

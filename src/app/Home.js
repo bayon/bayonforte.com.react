@@ -7,7 +7,7 @@ import DatabaseAnimatedCard from "./cards/DatabaseAnimatedCard";
 import FrontEndAnimatedCard from "./cards/FrontEndAnimatedCard";
 import Footer from "./Footer";
 
-export default function Blog(props) {
+export default function Home(props) {
  
   return (
     <React.Fragment>

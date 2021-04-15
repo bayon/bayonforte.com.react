@@ -18,25 +18,10 @@ export default function PostStatus() {
       .catch((err) => console.log(err));
   }, [Kolor]);
 
-  // const setStatusBlue = () => {
-  //   dispatch(postAction.setStatusBlue())
-  //     .then(async () => {
-  //       // result would be undefined
-  //     })
-  //     .catch((err) => console.log("error:", err));
-  // };
-  // const setStatusGreen = () => {
-  //   dispatch(postAction.setStatusGreen())
-  //     .then(async () => {
-  //       // result would be undefined
-  //     })
-  //     .catch((err) => console.log("error:", err));
-  // };
+  
   return (
     <div>
-      <p>COMPONENT Status</p>
-      
-      <button style={{background:`${Kolor}`}}>color</button>
+      <button style={{background:`${Kolor}`, height:"15px", fontSize:".5em",color:"white",padding:"0 .5em 0 .5em"}} >status</button>
     </div>
   );
 }

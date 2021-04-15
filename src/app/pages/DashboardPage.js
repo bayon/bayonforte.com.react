@@ -1,23 +1,18 @@
 import Grid from "@material-ui/core/Grid";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as authAction from "../../redux/actions/authAction";
+import React from "react";
+import { useSelector } from "react-redux";
+import { config } from "../../Constants";
+import StatusChecker from "../components/StatusChecker";
 import PostCreatePage from "./PostCreatePage";
 import UsersPostsPage from "./UsersPostsPage";
 
+const HOST_URL = config.url.HOST_URL;
+
+
 export default function DashboardPage(props) {
   var auth = useSelector((state) => state.auth.authorized);
-  const [user, setUser] = useState({});
-  const dispatch = useDispatch();
+  var user = useSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    dispatch(authAction.userProfile())
-      .then(async (result) => {
-        console.log("result:", result);
-        setUser(result.data);
-      })
-      .catch((err) => console.log(err));
-  }, [auth]);
 
   if (!auth) {
     return <div>not authorized.</div>;
@@ -27,9 +22,15 @@ export default function DashboardPage(props) {
       <Grid container>
         <Grid item xs={10}>
           <h1>Dashboard</h1>
+          <StatusChecker></StatusChecker>
         </Grid>
         <Grid item sm={2}>
-          {auth && <p>Hello, {user.fullName}</p>}
+          {auth && <p>Hello, {user.data.fullName}</p>}
+          <img
+              src={`${HOST_URL}/public/images/`+ user.data.profileImage } //+ props.props.post.postImage
+              alt="img"
+              style={{ height: "100px", width: "auto", borderRadius: "15px" }}
+            />
         </Grid>
       </Grid>
       <Grid container>

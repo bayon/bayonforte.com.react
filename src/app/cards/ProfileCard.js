@@ -28,7 +28,6 @@ const ProfileCard = (props) => {
  
   return (
     <div className="card-plain">
-            <p className="cardDevNote" >ProfileCard</p>
 
       <Grid container spacing={0} direction="row">
         <Grid item xs={12} sm={9}>
@@ -235,6 +234,8 @@ const ProfileCard = (props) => {
           </React.Fragment>
         </>
       )}
+                  <p className="cardDevNote" >ProfileCard</p>
+
     </div>
   );
 };

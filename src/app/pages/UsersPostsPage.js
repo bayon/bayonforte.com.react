@@ -1,11 +1,9 @@
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as authAction from "../../redux/actions/authAction";
 import * as postAction from "../../redux/actions/postAction";
 import PostDisplayCard from "../cards/PostDisplayCard";
- 
 
 const UsersPostsPage = (props) => {
   var auth = useSelector((state) => state.auth.authorized);
@@ -14,20 +12,12 @@ const UsersPostsPage = (props) => {
   const dispatch = useDispatch();
   const Kolor = useSelector((state) => state.post.statusColor);
 
-
-
-// I NEED A USE EFFECT TO LISTEN FOR CHANGES ON LOWER COMPONENTS. 
-
-
-
-
-
-
+  // I NEED A USE EFFECT TO LISTEN FOR CHANGES ON LOWER COMPONENTS.
 
   useEffect(() => {
     dispatch(authAction.userProfile())
       .then(async (result) => {
-        console.log("AUTH CHECK: profile to check auth ...result:", result);
+        //console.log("AUTH CHECK: profile to check auth ...result:", result);
         setUser(result.data);
       })
       .catch((err) => console.log(err));
@@ -74,7 +64,7 @@ const UsersPostsPage = (props) => {
         setHaveCurrentPosts(true);
       })
       .catch((err) => console.log(err));
-  }, [user]); // user or post post broke something ? yes. 
+  }, [user]); // user or post post broke something ? yes.
 
   useEffect(() => {
     dispatch(postAction.allUserPosts(user._id))
@@ -83,7 +73,7 @@ const UsersPostsPage = (props) => {
         setHaveCurrentPosts(true);
       })
       .catch((err) => console.log(err));
-  }, [Kolor]);  
+  }, [Kolor]);
 
   useEffect(() => {
     //initial gets all users posts once.
@@ -93,20 +83,17 @@ const UsersPostsPage = (props) => {
         setHaveCurrentPosts(true);
       })
       .catch((err) => console.log(err));
-  }, [newPost]); // get new ones when posted...did NOT solve the problem .... 
-  
-
+  }, [newPost]); // get new ones when posted...did NOT solve the problem ....
 
   //HERE?
   // whenever currentPosts update I'd like to update state posts as well. (havePost and posts)
-  // ? I creates userPosts array in reducer...now how does AllSitePostsPage page do it. ? 
-  
+  // ? I creates userPosts array in reducer...now how does AllSitePostsPage page do it. ?
+
   // FLOW: currentPosts -> post to PostDisplayCard  props.post -> EditPostCard as 'data' THEN upon update...
-  //  dispatch(postAction.updatePost(values)) -> props.refresh() ? 
+  //  dispatch(postAction.updatePost(values)) -> props.refresh() ?
 
-  //NOW: whenever a new post is created, ALL the posts need to be re-queried to get it included. 
+  //NOW: whenever a new post is created, ALL the posts need to be re-queried to get it included.
   // useEffect based on state.post
-
 
   const sortByTitle = (posts) => {
     posts
@@ -165,22 +152,28 @@ const UsersPostsPage = (props) => {
     setOpen(false);
   };
 
-
   const refreshUserPosts = () => {
-    console.log('should refresh users posts here and now immediately after changing....')
-    //to do this...need to requery 
+    console.log(
+      "should refresh users posts here and now immediately after changing...."
+    );
+    //to do this...need to requery
     dispatch(postAction.allUserPosts(user._id))
-    .then(async (result) => {
-      setCurrentPosts(result);
-      setHaveCurrentPosts(true);
-    })
-    .catch((err) => console.log(err));
+      .then(async (result) => {
+        setCurrentPosts(result);
+        setHaveCurrentPosts(true);
+      })
+      .catch((err) => console.log(err));
 
-    console.log("Question now is does this refreshed data continue down to the bottom component. YES SUCCESS!")
-  }
+    console.log(
+      "Question now is does this refreshed data continue down to the bottom component. YES SUCCESS!"
+    );
+  };
 
   const displayPosts = () => {
-    console.log("DISPALY POSTS.....");
+    //console.log("DISPLAY currentPosts:",currentPosts);
+    if(currentPosts.length > 0){
+      //console.log("UsersPostsPage.js currentPosts:",currentPosts);
+    }
     if (haveCurrentPosts) {
       if (sortName) {
         return currentPosts
@@ -206,7 +199,13 @@ const UsersPostsPage = (props) => {
 
       if (noSort) {
         return currentPosts.map((post, i) => {
-          return <PostDisplayCard key={i} post={post} refresh={refreshUserPosts} ></PostDisplayCard>;
+          return (
+            <PostDisplayCard
+              key={i}
+              post={post}
+              refresh={refreshUserPosts}
+            ></PostDisplayCard>
+          );
         });
       }
     }
@@ -217,14 +216,11 @@ const UsersPostsPage = (props) => {
   }
 
   return (
-   
-      <Paper>
-
-         <Grid container direction="column">
+    <Grid container direction="column" className="card-plain">
         <Grid item>
-          <p className="cardDevNote" >UsersPostPage</p>
           <span>
-            Sort Options:
+            <h2>Current Posts</h2>
+            {/* Sort Options:
             <input
               type="radio"
               id="name"
@@ -232,27 +228,13 @@ const UsersPostsPage = (props) => {
               value="name"
               onChange={setSortOption}
             />
-            <label htmlFor="name">Name</label>
-            <input
-              type="radio"
-              id="email"
-              name="sortOption"
-              value="email"
-              onChange={setSortOption}
-            />
-            <label htmlFor="email">Email</label>
-            <input
-              type="radio"
-              id="id"
-              name="sortOption"
-              value="id"
-              onChange={setSortOption}
-            />
-            <label htmlFor="id">Id</label>
+            <label htmlFor="name">Name</label> */}
+        
+           
           </span>
         </Grid>
         <Grid item>
-          <span>
+          {/* <span>
             Filter:
             <input
               type="text"
@@ -261,13 +243,12 @@ const UsersPostsPage = (props) => {
               onBlur={setFilterOption}
             />
             <button>Search</button>
-          </span>
+          </span> */}
         </Grid>
 
         {haveCurrentPosts && displayPosts()}
-        </Grid>
-      </Paper>
-   
+        <p className="cardDevNote">UsersPostPage</p>
+    </Grid>
   );
 };
 
