@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import styled from "styled-components";
 import "../App.css";
 import * as authAction from "../redux/actions/authAction";
+import * as postAction from "../redux/actions/postAction";
 import PostStatus from "./components/PostStatus";
 //import logo from "./app/assets/img/blue-cottage-840-464-widened-to-1024.png";
 import Home from "./Home";
@@ -20,6 +21,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+
 
 
 const LinkStyle = styled.section`
@@ -180,7 +182,17 @@ function Navigation(props) {
                   dispatch(authAction.logoutUser())
                     .then(async (result) => {
                       console.log("result:", result);
+                      //PURGE post step vars: 
+                      
                       localStorage.removeItem("forteworksToken");
+                      dispatch(postAction.clearPost())
+                      .then(async (result) => {
+                          console.log('logout and cancel to purge post vars: result:',result)
+                      })
+                      .catch((err) => console.log(err));
+
+
+
                     })
                     .catch((err) => console.log(err));
                 }}

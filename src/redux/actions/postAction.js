@@ -31,6 +31,8 @@ export const CANCEL_POST_FAIL = "CANCEL_POST_FAIL";
 export const INIT_POST_SUCCESS = "INIT_POST_SUCCESS";
 export const INIT_POST_FAIL = "INIT_POST_FAIL";
 
+export const CLEAR_POST_SUCCESS = "CLEAR_POST_SUCCESS";
+export const CLEAR_POST_FAIL = "CLEAR_POST_FAIL";
 
 const API_URL = config.url.API_URL;
 
@@ -407,6 +409,34 @@ export const cancelPost = (key) => {
     } else {
       dispatch({
         type: CANCEL_POST_FAIL,
+      });
+    }
+    return resultData;
+  };
+  
+};
+
+export const clearPost = (key) => {
+  return async (dispatch) => {
+    const result = await fetch(`${API_URL}/posts/clearPost`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: CLEAR_POST_SUCCESS,
+        payload: resultData,
+      });
+    } else {
+      dispatch({
+        type: CLEAR_POST_FAIL,
       });
     }
     return resultData;

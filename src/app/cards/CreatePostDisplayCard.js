@@ -11,21 +11,30 @@ const CreatePostDisplayCard = (props) => {
 
   const [seeDetails, setSeeDetails] = useState(false);
   const [readyToComplete, setAllowEdit] = useState(false);
-  //const Kolor = useSelector((state) => state.post.statusColor);
+   //const Kolor = useSelector((state) => state.post.statusColor);
   const dispatch = useDispatch();
 
   // const [inProgress, setInProgress] = useState(false);
   const HOST_URL = config.url.HOST_URL;
-  console.log("CreatePostDisplayCard - props:", props); //good to here.
-  const currentPost = props.props.post.post;
+  var currentPost = {}
   //console.log("HOST_URL:", HOST_URL);
- 
-
   var user = useSelector((state) => state.auth.user);
+
+ try {
+  console.log("CreatePostDisplayCard - props:", props); //good to here.
+  currentPost = props.props.post.post
+  
+ } catch (error) {
+   console.log('error:',error)
+   return (
+     <div>EPIC FAIL</div>
+   )
+ }
+
   //console.log("STATE---------user:", user);
   // useEffect(() => {
   //   setInProgress(inProgress);
-  // }, [inProgress]);
+  // }, [inProgress]); post.postStepThree && 
 
   const initEdit = () => {
     console.log('. . . . . . . .init edit ')
@@ -43,7 +52,10 @@ const CreatePostDisplayCard = (props) => {
             
 
       <Grid item xs={12} sm={10}>
-        <p className="cardTitle"> {currentPost.title}</p>
+        {props.postStepThree && 
+        
+        <p className="cardTitle"> {currentPost && currentPost.title}</p>
+        }
       </Grid>
       <Grid item xs={12} sm={2}>
         <button
@@ -54,7 +66,7 @@ const CreatePostDisplayCard = (props) => {
           {seeDetails ? "close" : "details"}
         </button>
       </Grid>
-      {seeDetails && (
+      {seeDetails &&   (
         <Grid item xs={12} sm={12} style={{ background: "#eee" }}>
           <Grid container spacing={0} direction="row">
             <Grid item sm={10}>

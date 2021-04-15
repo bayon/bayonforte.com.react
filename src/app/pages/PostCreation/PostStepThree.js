@@ -21,7 +21,7 @@ const PostStepThree = (props) => {
 
   return (
     <>
-      
+        
       {
         post && 
         <CreatePostDisplayCard props={post}></CreatePostDisplayCard>
