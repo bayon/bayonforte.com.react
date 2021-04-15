@@ -23,6 +23,7 @@ const ImageForm = (props) => {
   const HOST_URL = config.url.HOST_URL;
 
   const handleSubmit = async (event) => {
+   
     event.preventDefault();
     if (!file) {
       return false;
@@ -47,6 +48,7 @@ const ImageForm = (props) => {
             //code
           }
           props.props.refresh();
+          props.close()
         })
         .catch((err) => console.log(err));
     });
@@ -55,13 +57,16 @@ const ImageForm = (props) => {
   return (
     <Grid
       container
-      spacing={0}
+      spacing={1}
       align="center"
       justify="center"
       direction="column"
+      
+       
     >
+      <Grid item xs={12}>
       <form name="fileinfo" encType="multipart/form-data">
-        <Grid xs={12}>
+        <Grid item xs={12}  >
           {/* {imgFile && (
               
                 <img
@@ -85,7 +90,7 @@ const ImageForm = (props) => {
           }
         </Grid>
 
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <input
             name="profileImage"
             type="file"
@@ -94,17 +99,17 @@ const ImageForm = (props) => {
             multiple
             onChange={handleFileChange}
             style={{ outline: "none", border: "none" }}
-            innerHTML="jack"
+            
           />
         </Grid>
-        <Grid xs={12}>
-          <button className="btn btn-primary mt-3" onClick={handleSubmit}>
-            Change Profile Image
+        <Grid item xs={12}>
+          <button className="appButton" onClick={handleSubmit} style={{width:"90%"}}>
+            Update Your Profile Image
           </button>
         </Grid>
       </form>
       <p className="cardDevNote" >ImageForm</p>
-
+      </Grid>
     </Grid>
   );
 };

@@ -9,13 +9,11 @@ const AllSitePostsDisplayCard = (props) => {
   const HOST_URL = config.url.HOST_URL;
   var auth = useSelector((state) => state.auth.authorized);
   var user = useSelector((state) => state.auth.user);
-
-  const [seeDetails, setSeeDetails] = useState(false);
-
-  const [inProgress, setInProgress] = useState(false);
-
   const categories = useSelector((state) => state.post.categories);
+
   const [currentCategory, setCurrentCategory] = useState("");
+  const [seeDetails, setSeeDetails] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
 
   console.log("inProgress:", inProgress);
   useEffect(() => {
@@ -41,10 +39,10 @@ const AllSitePostsDisplayCard = (props) => {
 
           <p className="cardCategory">{currentCategory} </p>
         </Grid>
-        <Grid item xs={12} sm={3} style={{ border: "dotted 1px red" }}>
+        <Grid item xs={12} sm={3}  >
           {seeDetails && (
             <>
-              <Grid item xs={12} style={{ border: "dotted 1px blue" }}>
+              <Grid item xs={12}  >
                 <div className="cardDescription">{props.post.description}</div>
                 <div className="cardContactInfo">
                   <a
@@ -68,17 +66,15 @@ const AllSitePostsDisplayCard = (props) => {
             </>
           )}
         </Grid>
-        <Grid item xs={12} sm={3} style={{ border: "dotted 1px orange" }}>
-          
-            {/* <PostImageForm props={props}></PostImageForm> */}
-            <img
-              src={`${HOST_URL}/public/images/` + props.post.postImage} //+ props.props.post.postImage
-              alt="img"
-              className="cardImg"
-            />
-           
+        <Grid item xs={12} sm={3}  >
+          {/* <PostImageForm props={props}></PostImageForm> */}
+          <img
+            src={`${HOST_URL}/public/images/posts/` + props.post.postImage} //+ props.props.post.postImage
+            alt="img"
+            className="cardImg"
+          />
         </Grid>
-        <Grid item xs={12} sm={1} style={{ border: "dotted 1px purple" }}>
+        <Grid item xs={12} sm={1}    >
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
@@ -88,7 +84,7 @@ const AllSitePostsDisplayCard = (props) => {
           </button>
         </Grid>
       </Grid>
-      <p className="cardDevNote">AllSitesDisplayCard</p>
+      <p className="cardDevNote">AllSitePostsDisplayCard</p>
     </>
   );
 };

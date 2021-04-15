@@ -24,18 +24,20 @@ const ProfileCard = (props) => {
     setInProgress(inProgress);
   }, [inProgress]);
   var us_states = useSelector( (state) => state.auth.usstates)
-
+  const close = () => {
+    setSeeDetails(!seeDetails);
+  }
  
   return (
     <div className="card-plain">
 
-      <Grid container spacing={0} direction="row">
-        <Grid item xs={12} sm={9}>
+      <Grid container spacing={0} direction="row"  >
+        <Grid item xs={12} sm={9}  >
           <Typography variant="h5" component="h2">
             {props.user.fullName}
           </Typography>
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={3}  >
           <button
             onClick={() => {
               setSeeDetails(!seeDetails);
@@ -55,11 +57,12 @@ const ProfileCard = (props) => {
               align="center"
               justify="center"
               direction="row"
+               
             >
-              <Grid item xs={12} sm={6}>
-                <ImageForm props={props}></ImageForm>
+              <Grid item xs={12} sm={5} >
+                <ImageForm props={props} close={close}></ImageForm>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={5}>
                 {/* //FORM AND REDUX  part 3 JSX*/}
                 <Formik
                   initialValues={{
@@ -93,13 +96,17 @@ const ProfileCard = (props) => {
                   }}
                 >
                   {(props) => (
-                    <Grid container className="ProfileCardForm">
-                      <Grid item xs={12} sm={6}>
+                    <Grid container spacing={2} className="ProfileCardForm" 
+                    align="center"
+                    justify="center"
+                    >
+                      <Grid item xs={12} sm={12} >
                         <Grid item xs={12} sm={6}>
                           <label>Ful Name</label>
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Full Name"
                             onChange={props.handleChange("fullName")}
                             value={props.values.fullName}
@@ -116,6 +123,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Email"
                             onChange={props.handleChange("email")}
                             value={props.values.email}
@@ -131,6 +139,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Phone"
                             onChange={props.handleChange("phone")}
                             value={props.values.phone}
@@ -145,6 +154,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Address"
                             onChange={props.handleChange("address")}
                             value={props.values.address}
@@ -159,6 +169,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="City"
                             onChange={props.handleChange("city")}
                             value={props.values.city}
@@ -172,7 +183,7 @@ const ProfileCard = (props) => {
                           <label>State</label>
                         </Grid>
                         <Grid item xs={12}>
-                        <select value={props.values.state} onChange={props.handleChange("state")} style={{border:"none",outline:"none",minWidth:"90px"}}>
+                        <select value={props.values.state} onChange={props.handleChange("state")} className="appSelect"  >
                             
                             {
                               us_states.map( (item,index ) => {
@@ -188,6 +199,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Zip"
                             onChange={props.handleChange("zip")}
                             value={props.values.zip}
@@ -202,6 +214,7 @@ const ProfileCard = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <input
+                          className="appInput"
                             placeholder="Website"
                             onChange={props.handleChange("website")}
                             value={props.values.website}
