@@ -128,9 +128,11 @@ _id: "60730537d09d5d33501fc987"
                     console.log(
                       "IT ALL STARTS HERE WITH REFRESH POSTS FOR USER."
                     );
-                    props.refresh();
+                    dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
+                    props.refresh(); //?
                   })
                   .catch((err) => console.log(err));
+                 
               }}
             >
               {(props) => (

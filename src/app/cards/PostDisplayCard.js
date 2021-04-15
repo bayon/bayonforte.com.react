@@ -1,20 +1,27 @@
 import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { config } from "../../Constants";
+import * as postAction from "../../redux/actions/postAction";
 import "./card.css";
 import EditPostCard from "./EditPostCard";
+
 
 const PostDisplayCard = (props) => {
   const [seeDetails, setSeeDetails] = useState(false);
   const [allowEdit, setAllowEdit] = useState(false);
+  //const Kolor = useSelector((state) => state.post.statusColor);
+  const dispatch = useDispatch();
+
   // const [inProgress, setInProgress] = useState(false);
   const HOST_URL = config.url.HOST_URL;
   console.log("PostDisplayCard - props:", props); //good to here.
   //console.log("HOST_URL:", HOST_URL);
   const closeEdit = () => {
     setAllowEdit(!allowEdit);
+    dispatch(postAction.setStatusGreen()).catch((err) => console.error(err))
+
   };
 
   var user = useSelector((state) => state.auth.user);
@@ -22,6 +29,13 @@ const PostDisplayCard = (props) => {
   // useEffect(() => {
   //   setInProgress(inProgress);
   // }, [inProgress]);
+
+  const initEdit = () => {
+    console.log('. . . . . . . .init edit ')
+    dispatch(postAction.setStatusBlue()).catch((err) => console.error(err))
+
+    setAllowEdit(!allowEdit);
+  }
 
   return (
     <Grid container spacing={0}>
@@ -95,7 +109,8 @@ const PostDisplayCard = (props) => {
               {!allowEdit && (
                 <button
                   onClick={() => {
-                    setAllowEdit(!allowEdit);
+                    //setAllowEdit(!allowEdit);
+                    initEdit()
                   }}
                   style={{ color: "blue" }}
                 >

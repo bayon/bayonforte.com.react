@@ -128,7 +128,7 @@ function Navigation(props) {
                   <LinkStyle>Profile</LinkStyle>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={1}>
+              <Grid item xs={12} sm={1}  >
                   <PostStatus></PostStatus>
                 </Grid>
 
