@@ -1,6 +1,5 @@
-import { config } from '../../Constants';
+import { config } from "../../Constants";
 
-//
 export const ALL_USER_POSTS_SUCCESS = "ALL_USER_POSTS_SUCCESS";
 export const ALL_USER_POSTS_FAIL = "ALL_USER_POSTS_FAIL";
 
@@ -22,120 +21,138 @@ export const CREATE_POST_FAIL = "CREATE_POST_FAIL";
 export const FILTER_OWNERS_POSTS_SUCCESS = "FILTER_OWNERS_POSTS_SUCCESS";
 export const FILTER_OWNERS_POSTS_FAIL = "FILTER_OWNERS_POSTS_FAIL";
 
-const API_URL = config.url.API_URL
- 
-export const SET_STATUS_GREEN = "SET_STATUS_GREEN"
-export const SET_STATUS_BLUE = "SET_STATUS_BLUE"
-export const GET_STATUS_COLOR = "GET_STATUS_COLOR"
+const API_URL = config.url.API_URL;
+
+export const SET_STATUS_GREEN = "SET_STATUS_GREEN";
+export const SET_STATUS_BLUE = "SET_STATUS_BLUE";
+export const GET_STATUS_COLOR = "GET_STATUS_COLOR";
 
 export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
 export const DELETE_POST_FAIL = "DELETE_POST_FAIL";
 
-
 export const allSitePosts = () => {
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/site/posts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-     
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const resultData = await result.json();
+    if (resultData) {
+      dispatch({
+        type: ALL_SITE_POSTS_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if(resultData){
-        dispatch({
-            type: ALL_SITE_POSTS_SUCCESS,
-            payload: resultData,
-            
-          });
-      } else {
-        dispatch({
-            type: ALL_SITE_POSTS_FAIL,
-          });
-      }
-      return resultData;  
-    
+    } else {
+      dispatch({
+        type: ALL_SITE_POSTS_FAIL,
+      });
+    }
+    return resultData;
   };
 };
 
 export const createPost = (postData) => {
+  //console.log("CREATE POST ACTION: postData:", postData);
 
-console.log("CREATE POST ACTION: postData:",postData)
+  const {
+    userId,
+    title,
+    description,
+    category,
+    postType,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zip,
+    postImage,
+  } = postData;
+  return async (dispatch) => {
+    const result = await fetch(`${API_URL}/posts/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        title,
+        description,
+        category,
+        postType,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zip,
+        postImage,
+      }),
+    });
 
-    const { userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage } = postData;
-    return async (dispatch) => {
-      const result = await fetch(`${API_URL}/posts/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          title,
-          description,
-          category, 
-          postType,
-          email,
-          phone,
-          address,
-          city,
-          state,
-          zip,
-          postImage
-          
-        }),
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: CREATE_POST_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if (resultData.success){
-          dispatch({
-              type: CREATE_POST_SUCCESS,
-              payload: resultData,
-            });
-      } else {
-          dispatch({
-              type: CREATE_POST_FAIL,
-            });
-      }
-     
-      return resultData;
-  
-    };
+    } else {
+      dispatch({
+        type: CREATE_POST_FAIL,
+      });
+    }
+
+    return resultData;
   };
+};
 
 export const getPost = () => {
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/post`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token":localStorage.getItem('forteworksToken')
-        },
-     
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("forteworksToken"),
+      },
+    });
+
+    const resultData = await result.json();
+    if (resultData) {
+      dispatch({
+        type: POST_GET_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if(resultData){
-        dispatch({
-            type: POST_GET_SUCCESS,
-            payload: resultData,
-          });
-      } else {
-        dispatch({
-            type: POST_GET_FAIL,
-          });
-      }
-      return resultData;  
-    
+    } else {
+      dispatch({
+        type: POST_GET_FAIL,
+      });
+    }
+    return resultData;
   };
 };
 
-
 export const updatePost = (postData) => {
-  console.log('POST ACTION UPDATE POST: postData:',postData)
-  const {  postId,userId,title, description, category, postType,email ,phone , address, city, state, zip, postImage,activated} = postData;
-  //post versus posts in URL 
+  console.log("POST ACTION UPDATE POST: postData:", postData);
+  const {
+    postId,
+    userId,
+    title,
+    description,
+    category,
+    postType,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zip,
+    postImage,
+    activated,
+  } = postData;
+  //post versus posts in URL
   return async (dispatch) => {
     const result = await fetch(`${API_URL}/posts/update`, {
       method: "PUT",
@@ -145,206 +162,178 @@ export const updatePost = (postData) => {
       body: JSON.stringify({
         postId,
         userId,
-        title, 
-        description, 
+        title,
+        description,
         category,
         postType,
-        email ,
-        phone ,
-        address, 
-        city, 
-        state, 
-        zip, 
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zip,
         postImage,
-        activated
+        activated,
       }),
     });
 
     const resultData = await result.json();
-    if (resultData.success){
-        dispatch({
-            type: UPDATE_POST_SUCCESS,
-            payload: resultData,
-          });
+    if (resultData.success) {
+      dispatch({
+        type: UPDATE_POST_SUCCESS,
+        payload: resultData,
+      });
     } else {
-        dispatch({
-            type: UPDATE_POST_FAIL,
-          });
+      dispatch({
+        type: UPDATE_POST_FAIL,
+      });
     }
-   
-    return resultData;
 
+    return resultData;
   };
 };
 
 // filter : FILTERS ALL POSTS:
 export const filterPosts = (key) => {
-  console.log('filter key is ...',key)
+  console.log("filter key is ...", key);
   return async (dispatch) => {
-    
     const result = await fetch(`${API_URL}/posts/filter`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          key,
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: FILTER_POSTS_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if(resultData.success){
-        dispatch({
-            type: FILTER_POSTS_SUCCESS,
-            payload: resultData,
-          });
-      } else {
-        dispatch({
-            type: FILTER_POSTS_FAIL,
-          });
-      }
-      return resultData;  
-    
+    } else {
+      dispatch({
+        type: FILTER_POSTS_FAIL,
+      });
+    }
+    return resultData;
   };
 };
 
-// NEED FILTER FOR JUST USERS POST TOO. 
-// LEFT OFF HERE : new action touches: [redux actions(function & definitions), reducers(include defs & make cases),api(endpoint), UI()...]
-//need to send userId parameter too. 
-// OK TEST: 
+ 
 
-export const filterOwnersPosts = (key,userId) => {
-  console.log('OWNERS: filter key is ...',key)
+export const filterOwnersPosts = (key, userId) => {
+  console.log("OWNERS: filter key is ...", key);
   return async (dispatch) => {
-    
     const result = await fetch(`${API_URL}/posts/filterOwners`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          key,
-          userId
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+        userId,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: FILTER_OWNERS_POSTS_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if(resultData.success){
-        dispatch({
-            type: FILTER_OWNERS_POSTS_SUCCESS,
-            payload: resultData,
-          });
-      } else {
-        dispatch({
-            type: FILTER_OWNERS_POSTS_FAIL,
-          });
-      }
-      return resultData;  
-    
+    } else {
+      dispatch({
+        type: FILTER_OWNERS_POSTS_FAIL,
+      });
+    }
+    return resultData;
   };
 };
-//
+
+
 export const allUserPosts = (key) => {
   return async (dispatch) => {
-    
     const result = await fetch(`${API_URL}/posts/user/posts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          key,
-        }),
-      });
-  
-      const resultData = await result.json();
-      if(resultData.success){
-        dispatch({
-            type: ALL_USER_POSTS_SUCCESS,
-            payload: resultData,
-          });
-      } else {
-        dispatch({
-            type: ALL_USER_POSTS_FAIL,
-          });
-      }
-      return resultData;  
-    
-  };
-  // return async (dispatch) => {
-  //   const result = await fetch(`${API_URL}/posts/user/posts`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-     
-  //     });
-  
-  //     const resultData = await result.json();
-  //     if(resultData){
-  //       dispatch({
-  //           type: ALL_USER_POSTS_SUCCESS,
-  //           payload: resultData,
-            
-  //         });
-  //     } else {
-  //       dispatch({
-  //           type: ALL_USER_POSTS_FAIL,
-  //         });
-  //     }
-  //     return resultData;  
-    
-  // };
-};
-/////////////////////////
-export const setStatusGreen = () => {
-  return async (dispatch) => {
-    dispatch({
-        type: SET_STATUS_GREEN,
-        })
-  }
-}
-export const setStatusBlue = () => {
-  return async (dispatch) => {
-    dispatch({
-        type: SET_STATUS_BLUE,
-        })
-  }
-}
-export const getStatusColor = () => {
-  return async (dispatch) => {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
       dispatch({
-          type: GET_STATUS_COLOR,
-      })
-  }
-}
+        type: ALL_USER_POSTS_SUCCESS,
+        payload: resultData,
+      });
+    } else {
+      dispatch({
+        type: ALL_USER_POSTS_FAIL,
+      });
+    }
+    return resultData;
+  };
+  
+};
+
+
+
 
 
 export const deletePost = (key) => {
   return async (dispatch) => {
-    
     const result = await fetch(`${API_URL}/posts/delete`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          key,
-        }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+      }),
+    });
+
+    const resultData = await result.json();
+    if (resultData.success) {
+      dispatch({
+        type: DELETE_POST_SUCCESS,
+        payload: resultData,
       });
-  
-      const resultData = await result.json();
-      if(resultData.success){
-        dispatch({
-            type: DELETE_POST_SUCCESS,
-            payload: resultData,
-          });
-      } else {
-        dispatch({
-            type: DELETE_POST_FAIL,
-          });
-      }
-      return resultData;  
-    
-  }
-}
+    } else {
+      dispatch({
+        type: DELETE_POST_FAIL,
+      });
+    }
+    return resultData;
+  };
+};
+
+
+/////////////////////////
+export const setStatusGreen = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_GREEN,
+    });
+  };
+};
+export const setStatusBlue = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_STATUS_BLUE,
+    });
+  };
+};
+export const getStatusColor = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_STATUS_COLOR,
+    });
+  };
+};
+//////////////////////////////////

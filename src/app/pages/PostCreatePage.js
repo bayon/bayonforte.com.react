@@ -36,7 +36,15 @@ const PostCreatePage = (props) => {
       <div style={{ textAlign: "left" }}>
         <ul>
           <li>USERS POST PAGE:</li>
-
+            Required:<ul>
+              <li>rearrange how user creates a post. Make it a stepped process.</li>
+              <ul>
+                <li>Step 1: *create </li>
+                <li>Step 2: *update</li>
+                <li>Step 3: *update with Image</li>
+                <li>Success, return to Dashboard.</li>
+              </ul>
+            </ul>
           <li>
             ENTIRE SITE TODOS:
             <ul>

@@ -2,6 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import React from "react";
 import { useSelector } from "react-redux";
 import { config } from "../../Constants";
+import StatusChecker from "../components/StatusChecker";
 import PostCreatePage from "./PostCreatePage";
 import UsersPostsPage from "./UsersPostsPage";
 
@@ -21,6 +22,7 @@ export default function DashboardPage(props) {
       <Grid container>
         <Grid item xs={10}>
           <h1>Dashboard</h1>
+          <StatusChecker></StatusChecker>
         </Grid>
         <Grid item sm={2}>
           {auth && <p>Hello, {user.data.fullName}</p>}
