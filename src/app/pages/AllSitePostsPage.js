@@ -272,6 +272,7 @@ const AllSitePostsPage = (props) => {
           <span>
             Filter:
             <input
+            className="appInputAuto"
               type="text"
               id="filterKey"
               name="filterKey"

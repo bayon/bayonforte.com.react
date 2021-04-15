@@ -1,4 +1,13 @@
 
+
+
+ .cardDevNote{
+  font-size:.7em;
+  font-style: italic;
+  display:none;
+}
+
+
 .card {
     width: auto;
     height: auto;
@@ -94,10 +103,7 @@
     margin-left:.8em;
   }
 
-  .cardDevNote{
-    font-size:.7em;
-    font-style: italic;
-  }
+ 
 
   .cardImageGrid{
     display:flex;
