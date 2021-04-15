@@ -35,7 +35,7 @@ const PostImageForm = (props) => {
     console.log('PROPS:',props);
     console.log('PROPS PROPS:',props.props);
     console.log('PROPS PROPS DATA:',props.props.data);
-    data.append("postId", props.props.post.data.id);//props.props 2x
+    data.append("id", props.props.post.data.id);//props.props 2x
     for (var x = 0; x < file.length; x++) {
       data.append("file", file[x]);
     }

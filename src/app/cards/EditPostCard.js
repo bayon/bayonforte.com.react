@@ -15,6 +15,8 @@ const formSchema = yup.object({
 
 const EditPostCard = (props) => {
   console.log("EDIT POST CARD props:", props);
+  const currentPost = props.data
+
   const Kolor = useSelector((state) => state.post.statusColor);
 
   useEffect(() => {
@@ -32,7 +34,7 @@ const EditPostCard = (props) => {
       */
   }, [Kolor]);
 
-  /* props.data.xxx
+  /* currentPost.xxx
 postType: "1"
 city: "asdfasdf"
 description: "will do anything"
@@ -66,9 +68,9 @@ _id: "60730537d09d5d33501fc987"
   const activatedOptions = ["Set Activation", "activated", "deactivated"];
   console.log("EditPostCard.js props:", props);
   const deleteItem = () => {
-    console.log("delete item ", props.data._id);
+    console.log("delete item ", currentPost._id);
     //call to a redux action.
-    dispatch(postAction.deletePost(props.data._id))
+    dispatch(postAction.deletePost(currentPost._id))
       .then(async (res) => {
         console.log("res:", res);
         dispatch(postAction.setStatusGreen()).catch((err) =>
@@ -95,20 +97,20 @@ _id: "60730537d09d5d33501fc987"
             <Formik
             style={{border:"solid 1px purple"}}
               initialValues={{
-                postId: props.data._id,
-                userId: props.data.userId,
-                title: props.data.title,
-                description: props.data.description,
-                category: props.data.category,
-                postType: props.data.postType,
-                email: props.data.email,
-                phone: props.data.phone,
-                address: props.data.address,
-                city: props.data.city,
-                state: props.data.state,
-                zip: props.data.zip,
-                postImage: props.data.profileImage,
-                activated: props.data.activated,
+                id: currentPost._id,
+                userId: currentPost.userId,
+                title: currentPost.title,
+                description: currentPost.description,
+                category: currentPost.category,
+                postType: currentPost.postType,
+                email: currentPost.email,
+                phone: currentPost.phone,
+                address: currentPost.address,
+                city: currentPost.city,
+                state: currentPost.state,
+                zip: currentPost.zip,
+                postImage: currentPost.postImage,
+                activated: currentPost.activated,
               }}
               // !PostImage REQUIRED here so as to not get deleted accidentally.
               validationSchema={formSchema}

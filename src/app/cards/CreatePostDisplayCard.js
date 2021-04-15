@@ -8,14 +8,16 @@ import "./card.css";
 
 
 const CreatePostDisplayCard = (props) => {
+
   const [seeDetails, setSeeDetails] = useState(false);
   const [readyToComplete, setAllowEdit] = useState(false);
   //const Kolor = useSelector((state) => state.post.statusColor);
   const dispatch = useDispatch();
-const currentPost = props.props.post.post;
+
   // const [inProgress, setInProgress] = useState(false);
   const HOST_URL = config.url.HOST_URL;
   console.log("CreatePostDisplayCard - props:", props); //good to here.
+  const currentPost = props.props.post.post;
   //console.log("HOST_URL:", HOST_URL);
  
 
