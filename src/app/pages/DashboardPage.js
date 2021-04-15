@@ -8,11 +8,10 @@ import UsersPostsPage from "./UsersPostsPage";
 
 const HOST_URL = config.url.HOST_URL;
 
-
 export default function DashboardPage(props) {
   var auth = useSelector((state) => state.auth.authorized);
   var user = useSelector((state) => state.auth.user);
-
+  var haveUser = useSelector((state) => state.auth.haveUser);
 
   if (!auth) {
     return <div>not authorized.</div>;
@@ -25,12 +24,16 @@ export default function DashboardPage(props) {
           <StatusChecker></StatusChecker>
         </Grid>
         <Grid item sm={2}>
-          {auth && <p>Hello, {user.data.fullName}</p>}
-          <img
-              src={`${HOST_URL}/public/images/`+ user.data.profileImage } //+ props.props.post.postImage
-              alt="img"
-              style={{ height: "100px", width: "auto", borderRadius: "15px" }}
-            />
+          {haveUser && (
+            <>
+              <p>Hello, {user.data.fullName}</p>
+              <img
+                src={`${HOST_URL}/public/images/` + user.data.profileImage} //+ props.props.post.postImage
+                alt="img"
+                style={{ height: "100px", width: "auto", borderRadius: "15px" }}
+              />
+            </>
+          )}
         </Grid>
       </Grid>
       <Grid container>
