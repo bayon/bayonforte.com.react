@@ -59,7 +59,7 @@ export default function Footer(props) {
               <div style={{ marginTop: 15 }}>
                 <a
                 className="appAnchor"
-                  href="http://www.bayonforte.com/Forte_2021_gmail.pdf"
+                  href="http://www.forteworks.com/Forte_2021_gmail.pdf"
                   target="blank"
                   style={{ textDecoration: "none", color: "#222",fontWeight:"bold" }}
                   download
